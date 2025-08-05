@@ -30,8 +30,8 @@ jobs:
         run: pip install -r requirements.txt
 
       # 4. Hämta alla evenemang via REST-API:t
-      - name: Run scraper
-        run: python fetch_events.py
+      - name: Run inspector  # tillfälligt
+        run: python inspect_api.py
 
       # 5. Bygg HTML-listan och märk “Nytt”
       - name: Build HTML
