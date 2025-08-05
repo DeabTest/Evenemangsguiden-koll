@@ -2,39 +2,34 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8">
-  <title>Eskilstuna Evenemang – uppdaterad {{ STAMP_TIME }}</title>
+  <title>Eskilstuna Evenemang – uppdaterad {{ STAMP }}</title>
   <style>
     body{font-family:system-ui,Arial,sans-serif;margin:2rem;max-width:62rem}
     h1{font-size:1.8rem;margin-bottom:1.2rem}
     ul{list-style:none;padding:0}
-    li{margin:.6rem 0;padding:.4rem .2rem;border-bottom:1px solid #eee}
-    time{font-weight:600;margin-right:.6rem;color:#005eb8}
-    .time{font-weight:400;margin:0 .4rem;color:#333}
-    .location{margin:0 .4rem;color:#666}
-    .new{background:#ff0;padding:0 .4rem;border-radius:.25rem;font-size:.8rem;margin-left:.6rem}
-    a{text-decoration:none;color:#005eb8}
+    li{margin:.6rem 0;padding:.4rem .2rem;border-bottom:1px solid #eee;display:flex;flex-wrap:wrap;align-items:center}
+    time.date{font-weight:600;margin-right:.6rem;color:#005eb8}
+    time.time{font-weight:400;margin-right:.6rem;color:#333}
+    span.location{margin-right:.6rem;color:#666}
+    .new{background:#ff0;padding:0 .4rem;border-radius:.25rem;font-size:.8rem;margin-left:auto}
+    a{text-decoration:none;color:#005eb8;margin-right:.6rem}
     a:hover{text-decoration:underline}
   </style>
 </head>
 <body>
-  <h1>Evenemang ({{ COUNT }} st, uppdaterad {{ STAMP_TIME }})</h1>
+  <h1>Evenemang ({{ COUNT }} st, uppdaterad {{ STAMP }})</h1>
 
   <ul>
   {% for ev in events %}
     <li>
-      <!-- datum -->
-      <time datetime="{{ ev.date }}">{{ ev.date }}</time>
-      <!-- tid om tillgänglig -->
+      <time class="date" datetime="{{ ev.date }}">{{ ev.date }}</time>
       {% if ev.time %}
         <time class="time">{{ ev.time }}</time>
       {% endif %}
-      <!-- plats om tillgänglig -->
       {% if ev.location %}
         <span class="location">{{ ev.location }}</span>
       {% endif %}
-      <!-- titel+länk -->
       <a href="{{ ev.url }}">{{ ev.title }}</a>
-      <!-- ny-badge -->
       {% if ev.new %}
         <span class="new">Nytt</span>
       {% endif %}
@@ -43,7 +38,7 @@
   </ul>
 
   <p style="margin-top:2rem;font-size:.85rem;color:#666">
-    Genererad automatiskt {{ STAMP_TIME }} av GitHub Actions.
+    Genererad automatiskt {{ STAMP }} av GitHub Actions.
   </p>
 </body>
 </html>
