@@ -1,84 +1,63 @@
 #!/usr/bin/env python3
 """
-Hämtar alla evenemang från Eskilstunas REST-API och sparar dagens lista som
-data/events_YYYY-MM-DD.json. Letar automatiskt upp den lista som innehåller
-events (d.v.s. dict-objekt med 'title'-fält) – robust mot ändrat format.
+Scrapar Evenemangsguidens söksida med Playwright (headless-Chromium).
+
+• Öppnar sidan
+• Klickar ”Ladda fler” tills knappen försvinner
+• Plockar titel, datum och länk från varje kort
+• Sparar data/events_YYYY-MM-DD.json
 """
-import json, datetime, pathlib, hashlib, requests, sys, itertools
 
-API_URL   = "https://visiteskilstuna.se/rest-api/Evenemang"
-PAGE_SIZE = 100
-HEADERS   = {"Accept": "application/json", "User-Agent": "GitHub-Action/1.0"}
+import json, datetime, pathlib, hashlib, asyncio, re
+from playwright.async_api import async_playwright
 
-def find_event_list(js, _depth=0):
-    """Går rekursivt igenom JSON och returnerar första listan av event-dictar."""
-    if isinstance(js, list):
-        if js and isinstance(js[0], dict) and "title" in js[0]:
-            return js
-        for item in js:
-            found = find_event_list(item, _depth+1)
-            if found:
-                return found
-    elif isinstance(js, dict):
-        for v in js.values():
-            found = find_event_list(v, _depth+1)
-            if found:
-                return found
-    return None
+URL = "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/sok-evenemang"
 
-def fmt_time(iso: str) -> str:
-    return iso[11:16] if iso and len(iso) >= 16 else ""
+# regex för YYYY-MM-DD i kortens text
+DATE_RX = re.compile(r"\d{4}-\d{2}-\d{2}")
 
-def fetch_page(page: int):
-    r = requests.get(
-        API_URL,
-        params={"page": page, "size": PAGE_SIZE, "lang": "sv"},
-        headers=HEADERS,
-        timeout=30,
-    )
-    r.raise_for_status()
-    js = r.json()
-    events = find_event_list(js)
-    if events is None:
-        raise RuntimeError(f"Kunde inte hitta event-lista i JSON (sid {page})")
-    return events
+async def scrape():
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch()
+        page = await browser.new_page()
+        await page.goto(URL, wait_until="networkidle")
 
-def fetch_all():
-    events, page = [], 0
-    while True:
-        chunk = fetch_page(page)
-        if not chunk:
-            break
-        for ev in chunk:
-            uid  = hashlib.sha1(str(ev.get("id") or ev.get("guid") or "").encode()).hexdigest()[:12]
-            cats = ev.get("categories") or ev.get("category") or ev.get("tags") or []
+        # Klicka ”Ladda fler” tills knappen försvinner/inte är klickbar
+        while True:
+            btn = await page.query_selector("button:has-text('Ladda fler')")
+            if not btn:
+                break
+            try:
+                await btn.click()
+                await page.wait_for_timeout(700)  # låt innehåll laddas
+            except Exception:
+                break
+
+        cards = await page.query_selector_all("article, li, div.hiq-event-card")
+        events = []
+        for c in cards:
+            title = (await c.inner_text()).split("\n")[0].strip()
+            if not title:
+                continue
+            url = await c.eval_on_selector("a", "e=>e.href") or URL
+            raw = await c.inner_text()
+            m   = DATE_RX.search(raw)
+            date = m.group(0) if m else ""
+
             events.append({
-                "id":   uid,
-                "title": ev.get("title") or ev.get("name") or "",
-                "date":  (ev.get("startDate") or ev.get("date") or "")[:10],
-                "time":  fmt_time(ev.get("startDate") or ev.get("date") or ""),
-                "end":   fmt_time(ev.get("endDate") or ""),
-                "location": ev.get("location") or ev.get("place") or "",
-                "cats": ", ".join(cats) if isinstance(cats, list) else str(cats),
-                "url":  "https://visiteskilstuna.se" + (ev.get("presentationUrl") or ev.get("url") or ""),
+                "id":   hashlib.sha1(url.encode()).hexdigest()[:12],
+                "title": title,
+                "date":  date,
+                "url":   url
             })
-        if len(chunk) < PAGE_SIZE:
-            break
-        page += 1
-    return events
 
-def main():
-    try:
-        evts = fetch_all()
-    except Exception as exc:
-        print(f"API-fel: {exc}", file=sys.stderr)
-        sys.exit(1)
+        await browser.close()
 
-    stamp = datetime.date.today().isoformat()
-    out_dir = pathlib.Path("data"); out_dir.mkdir(exist_ok=True)
-    outfile = out_dir / f"events_{stamp}.json"
-    outfile.write_text(json.dumps(evts, ensure_ascii=False, indent=2))
-    print(f"Fetched {len(evts)} events  →  {outfile}")
+        stamp = datetime.date.today().isoformat()
+        outdir = pathlib.Path("data"); outdir.mkdir(exist_ok=True)
+        outfile = outdir / f"events_{stamp}.json"
+        outfile.write_text(json.dumps(events, ensure_ascii=False, indent=2))
+        print(f"Fetched {len(events)} events  →  {outfile}")
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(scrape())
