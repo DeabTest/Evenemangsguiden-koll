@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
 UI-scraping av Evenemangsguiden:
-– Navigerar till söksidan
-– Väntar på att korten laddas
-– Klickar “Ladda fler” + scrollar tills inga fler kort
-– Extraherar datum, titel & URL från varje <li class="hiq-events-search__search-results--hits__hit">
-– Filtrerar bort “Utställningar”
-– Sparar JSON i data/events_YYYY-MM-DD.json
+
+1) Navigerar till söksidan
+2) Klickar “Ladda fler” tills knappen försvinner
+3) Scrollar för att trigga rendering
+4) Extraherar datum, titel & URL från varje kort
+5) Filtrerar bort Utställningar
+6) Sparar data/events_YYYY-MM-DD.json
 """
 import hashlib
 import json
@@ -18,21 +19,16 @@ from playwright.sync_api import sync_playwright
 
 START_URL          = "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/sok-evenemang"
 LOAD_MORE_SELECTOR = "button:has-text('Ladda fler')"
-CARD_SELECTOR      = "li.hiq-events-search__search-results--hits__hit"
-LINK_SELECTOR      = "a.hiq-events-search__search-results--hits__hit-link"
-DATE_SELECTOR      = "time"
+CARD_SELECTOR      = "article, li, .hiq-event-card"
 
 def fetch_events():
-    events = []
+    results = []
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page()
-        # 1) Gå till sidan och vänta på nätverksaktivitet
         page.goto(START_URL, wait_until="networkidle")
-        # 2) Vänta tills minst ett kort syns (upp till 10 s)
-        page.wait_for_selector(CARD_SELECTOR, timeout=10000)
 
-        # 3) Klicka “Ladda fler” tills knappen försvinner
+        # Klicka “Ladda fler” tills knappen försvinner
         while True:
             btn = page.query_selector(LOAD_MORE_SELECTOR)
             if not btn:
@@ -42,50 +38,40 @@ def fetch_events():
             page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
             page.wait_for_timeout(2000)
 
-        # 4) Extrahera alla kort
+        # Extrahera event-korten
         cards = page.query_selector_all(CARD_SELECTOR)
-        for card in cards:
-            a = card.query_selector(LINK_SELECTOR)
-            if not a:
+        for el in cards:
+            a       = el.query_selector("a")
+            time_el = el.query_selector("time")
+            title   = a.text_content().strip() if a else ""
+            url     = a.get_attribute("href")           if a else ""
+            date    = (time_el.get_attribute("datetime") or time_el.text_content().strip()) if time_el else ""
+
+            # Filtrera bort Utställningar
+            category = el.get_attribute("data-category") or ""
+            if "Utställningar" in category:
                 continue
 
-            # URL och titel
-            href = a.get_attribute("href") or ""
-            title_attr = a.get_attribute("title")
-            text = a.text_content() or ""
-            title = (title_attr or text).strip()
-
-            # Datum
-            date = ""
-            time_el = card.query_selector(DATE_SELECTOR)
-            if time_el:
-                date = (time_el.get_attribute("datetime") or time_el.text_content() or "").strip()
-
-            # Filtrera bort Utställningar om relevant
-            if "Utställningar" in (card.get_attribute("data-category") or ""):
+            if not (title and url and date):
                 continue
 
-            if not (href and title and date):
-                continue
+            # Gör URL absolut om det behövs
+            if url.startswith("/"):
+                url = "https://evenemang.eskilstuna.se" + url
 
-            # Absolut URL
-            if href.startswith("/"):
-                href = "https://evenemang.eskilstuna.se" + href
-
-            # Generera ID
-            ev_id = hashlib.sha1(href.encode()).hexdigest()[:12]
-            events.append({
+            ev_id = hashlib.sha1(url.encode()).hexdigest()[:12]
+            results.append({
                 "id":    ev_id,
                 "title": title,
                 "date":  date,
-                "url":   href,
+                "url":   url,
             })
 
         browser.close()
 
     # Ta bort dubbletter
     seen, dedup = set(), []
-    for ev in events:
+    for ev in results:
         if ev["id"] not in seen:
             seen.add(ev["id"])
             dedup.append(ev)
@@ -93,17 +79,16 @@ def fetch_events():
 
 def main():
     try:
-        evs = fetch_events()
+        events = fetch_events()
     except Exception as e:
         print("Scraping-fel:", e, file=sys.stderr)
         sys.exit(1)
 
     today = datetime.date.today().isoformat()
-    outdir = pathlib.Path("data")
-    outdir.mkdir(exist_ok=True)
+    outdir = pathlib.Path("data"); outdir.mkdir(exist_ok=True)
     path = outdir / f"events_{today}.json"
-    path.write_text(json.dumps(evs, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Fetched {len(evs)} events → {path}")
+    path.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Fetched {len(events)} events → {path}")
 
 if __name__ == "__main__":
     main()
