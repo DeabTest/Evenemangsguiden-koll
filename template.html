@@ -7,24 +7,18 @@
  ul{list-style:none;padding:0}
  li{margin:.6rem 0;padding:.4rem .2rem;border-bottom:1px solid #eee}
  time{font-weight:600;margin-right:.6rem;color:#005eb8}
- .meta{font-size:.9rem;color:#555}
  .new{background:#ff0;padding:0 .4rem;border-radius:.25rem;font-size:.8rem;margin-left:.6rem}
  a{text-decoration:none;color:#005eb8}
  a:hover{text-decoration:underline}
 </style>
 
-<h1>Evenemang (uppdaterad {{ STAMP }})</h1>
+<h1>Evenemang ({{ COUNT }} st, uppdaterad {{ STAMP }})</h1>
+
 <ul>
 {% for ev in events %}
   <li>
     <time datetime="{{ ev.date }}">{{ ev.date }}</time>
-    <a href="{{ ev.url }}">{{ ev.title }}</a>
-    {% if ev.new %}<span class="new">Nytt</span>{% endif %}<br>
-    <span class="meta">
-      {{ ev.time }}{% if ev.end %}–{{ ev.end }}{% endif %}
-      {% if ev.location %} · {{ ev.location }}{% endif %}
-      {% if ev.cats %} · {{ ev.cats }}{% endif %}
-    </span>
+    <a href="{{ ev.url }}">{{ ev.title }}</a>{% if ev.new %}<span class="new">Nytt</span>{% endif %}
   </li>
 {% endfor %}
 </ul>
