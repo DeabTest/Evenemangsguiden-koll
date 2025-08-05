@@ -1,44 +1,49 @@
 #!/usr/bin/env python3
 """
-Hämtar alla evenemang via /rest-api/Evenemang/events
+Hämtar alla evenemang via webbläsar-fetch i Playwright.
 
-• Börjar på page=0
-• count=250 (max per sida)
-• Loopar sida för sida tills listan blir tom
+• Startar en headless Chrome-session
+• Navigerar till söksidan (så rätt cookies sätts)
+• Kör page.evaluate() som anropar fetch() i sidans JS-kontext
+• Loopar page=0,1,2… med size=250 tills inga fler event återstår
+• Filtrerar bort “Utställningar”
 • Sparar data/events_YYYY-MM-DD.json
 """
-import json
+import asyncio
 import datetime
-import pathlib
 import hashlib
-import requests
-import time
+import json
+import pathlib
 import sys
 
-BASE_URL = "https://visiteskilstuna.se/rest-api/Evenemang/events"
-HEADERS = {
-    "Accept": "application/json",
-    "Referer": "https://evenemang.eskilstuna.se",
-    "User-Agent": "GitHub-Action/1.0",
+from playwright.async_api import async_playwright
+
+START_URL = "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/sok-evenemang"
+API_JS = """
+async () => {
+  const all = [];
+  let page = 0;
+  const size = 250;
+  while (true) {
+    // Bygg URL: använder samma domän, cookies och CORS som webappen
+    const url = new URL('/rest-api/Evenemang/events', window.location.origin);
+    url.searchParams.set('filters', '{}');
+    url.searchParams.set('page', page);
+    url.searchParams.set('count', size);
+    url.searchParams.set('query', '');
+    url.searchParams.set('timestamp', Date.now());
+    const res = await fetch(url.href, { credentials: 'same-origin' });
+    if (!res.ok) throw new Error(`API ${res.status} på page=${page}`);
+    const chunk = await res.json();
+    if (!Array.isArray(chunk) || chunk.length === 0) break;
+    all.push(...chunk);
+    page++;
+  }
+  return all;
 }
-
-PAGE_SIZE = 250  # Max antal poster per sida
-
-def fetch_page(page: int):
-    params = {
-        "count": PAGE_SIZE,
-        "filters": "{}",           # tomt filter = alla evenemang
-        "page": page,
-        "query": "",
-        "timestamp": int(time.time() * 1000),
-    }
-    r = requests.get(BASE_URL, params=params, headers=HEADERS, timeout=30)
-    if r.status_code != 200:
-        raise RuntimeError(f"API {r.status_code} på page={page}")
-    return r.json()  # förväntat: lista med event-objekt
+"""
 
 def normalize(item: dict):
-    """Plocka ut de fält vi vill ha & hoppa över Utställningar."""
     if item.get("categoryName") == "Utställningar":
         return None
     title = item.get("title") or item.get("name") or ""
@@ -55,32 +60,29 @@ def normalize(item: dict):
         "url": url,
     }
 
-def fetch_all():
-    events = []
-    page = 0
-    while True:
-        chunk = fetch_page(page)
-        if not chunk:  # tom lista → klart
-            break
-        for raw in chunk:
-            ev = normalize(raw)
-            if ev:
-                events.append(ev)
-        if len(chunk) < PAGE_SIZE:
-            break  # sista sidan
-        page += 1
+async def fetch_events():
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch()
+        page = await browser.new_page()
+        # Navigera till sidan för att få rätt cookies/session
+        await page.goto(START_URL, wait_until="networkidle")
+        # Kör JS-anropet i webbläsaren
+        raw = await page.evaluate(API_JS)
+        await browser.close()
+    events = [normalize(ev) for ev in raw]
+    events = [e for e in events if e]
     return events
 
 def main():
     try:
-        events = fetch_all()
+        events = asyncio.run(fetch_events())
     except Exception as e:
         print("API-fel:", e, file=sys.stderr)
         sys.exit(1)
 
-    stamp = datetime.date.today().isoformat()
-    out = pathlib.Path("data"); out.mkdir(exist_ok=True)
-    path = out / f"events_{stamp}.json"
+    today = datetime.date.today().isoformat()
+    outdir = pathlib.Path("data"); outdir.mkdir(exist_ok=True)
+    path = outdir / f"events_{today}.json"
     path.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Fetched {len(events)} events → {path}")
 
