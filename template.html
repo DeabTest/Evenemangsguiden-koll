@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Eskilstuna Evenemang – senast uppdaterad {{ STAMP }}</title>
+<style>
+ body{font-family:system-ui,Arial,sans-serif;margin:2rem;max-width:60rem}
+ h1{font-size:1.7rem;margin-bottom:1rem}
+ li{margin:.4rem 0}
+ time{font-weight:bold;margin-right:.4rem}
+</style>
+
+<h1>Evenemang (uppdaterad {{ STAMP }})</h1>
+<ul>
+{% for ev in events %}
+  <li><time>{{ ev.date }}</time><a href="{{ ev.url }}">{{ ev.title }}</a></li>
+{% endfor %}
+</ul>
+<p style="margin-top:2rem;font-size:.85rem;color:#666">
+  Genererad automatiskt {{ STAMP }} av GitHub Actions.
+</p>
