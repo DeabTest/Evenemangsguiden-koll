@@ -1,28 +1,66 @@
-name: Eskilstuna events – API-inspektör
+name: Eskilstuna events watcher
+
+# Workflow-tokenen behöver kunna pusha ny data och deploya Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 on:
-  workflow_dispatch:         # startas manuellt från Actions-fliken
-
-permissions:
-  contents: read             # vi läser bara koden, pushar inget
+  # Schemalagd körning – vardagar 07:00 UTC (08:00 svensk vintertid / 09:00 sommartid)
+  schedule:
+    - cron: '0 7 * * 1-5'
+  # Manuell start via Actions-fliken
+  workflow_dispatch:
 
 jobs:
-  inspect:
+  scrape:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Klona repo:t
-      - uses: actions/checkout@v4
+      #######################################################################
+      # 1. Checka ut repo:t
+      #######################################################################
+      - name: Check out code
+        uses: actions/checkout@v4
 
+      #######################################################################
       # 2. Installera Python 3.11
-      - uses: actions/setup-python@v5
+      #######################################################################
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Installera beroende (requests)
-      - name: Install requests
-        run: pip install requests
+      #######################################################################
+      # 3. Installera beroenden + Playwright-Chromium
+      #######################################################################
+      - name: Install Python deps and browser
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
 
-      # 4. Kör inspektions­skriptet
-      - name: Run inspector
-        run: python inspect_events.py
+      #######################################################################
+      # 4. Kör scrapern (Playwright)
+      #######################################################################
+      - name: Run scraper
+        run: python fetch_events.py
+
+      #######################################################################
+      # 5. Bygg HTML-sidan från dagens JSON
+      #######################################################################
+      - name: Build HTML list
+        run: |
+          python - <<'PY'
+          import json, datetime, pathlib, jinja2
+          stamp  = datetime.date.today().isoformat()
+          events = json.load(open(f"data/events_{stamp}.json", encoding="utf-8"))
+          env    = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
+          html   = env.get_template("template.html").render(STAMP=stamp, events=events)
+          pubdir = pathlib.Path("public"); pubdir.mkdir(exist_ok=True)
+          pubdir.joinpath("index.html").write_text(html, encoding="utf-8")
+          PY
+
+      #######################################################################
+      # 6. Commit + push om data/-katalogen ändrats
+      #########################
