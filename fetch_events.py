@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 """
-Scrapar alla evenemang via webbläsar-fetch i Playwright – men anropar
-https://visiteskilstuna.se/rest-api/Evenemang/events direkt för att
-samma kontext, cookies och CORS-rättigheter som UI:t.
+Scrapar alla evenemang genom att köra fetch() inifrån sidan i Playwright.
 
-• Börjar på page=0 med count=250
-• Loopar sida för sida tills listan är tom
-• Filtrerar bort “Utställningar”
+• Navigerar till söksidan (samma origin = inga CORS-problem)
+• Kör JS som loopar page=0,1,2… med count=250 tills tom lista
+• Filtrerar bort Utställningar
 • Sparar data/events_YYYY-MM-DD.json
 """
 import asyncio
@@ -25,15 +23,14 @@ async () => {
   const all = [];
   let page = 0;
   const size = 250;
-  const base = "https://visiteskilstuna.se/rest-api/Evenemang/events";
   while (true) {
-    const url = new URL(base);
-    url.searchParams.set("filters", "{}");
-    url.searchParams.set("page", page);
-    url.searchParams.set("count", size);
-    url.searchParams.set("query", "");
-    url.searchParams.set("timestamp", Date.now());
-    const res = await fetch(url.toString(), { credentials: "include" });
+    // Bygg relativ URL mot samma origin
+    const url = `/rest-api/Evenemang/events?count=${size}` +
+                `&filters={}` +
+                `&page=${page}` +
+                `&query=` +
+                `&timestamp=${Date.now()}`;
+    const res = await fetch(url, { credentials: 'same-origin' });
     if (!res.ok) {
       throw new Error(`API ${res.status} på page=${page}`);
     }
@@ -67,9 +64,8 @@ async def fetch_events():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()
         page = await browser.new_page()
-        # Navigera till söksidan så att cookies/session sätts
+        # Navigera till sidan för att få rätt cookies/origin
         await page.goto(START_URL, wait_until="networkidle")
-        # Kör fetch-anropet inifrån sidan mot rätt domän
         raw = await page.evaluate(API_JS)
         await browser.close()
     return [normalize(ev) for ev in raw if normalize(ev)]
@@ -81,10 +77,13 @@ def main():
         print("API-fel:", e, file=sys.stderr)
         sys.exit(1)
 
-    stamp = datetime.date.today().isoformat()
-    out = pathlib.Path("data"); out.mkdir(exist_ok=True)
-    path = out / f"events_{stamp}.json"
-    path.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
+    today = datetime.date.today().isoformat()
+    outdir = pathlib.Path("data"); outdir.mkdir(exist_ok=True)
+    path = outdir / f"events_{today}.json"
+    path.write_text(
+        json.dumps(events, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
     print(f"Fetched {len(events)} events → {path}")
 
 if __name__ == "__main__":
