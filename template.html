@@ -1,71 +1,56 @@
-# fetch_events.py
-import json
-import re
-import time
-from pathlib import Path
-from datetime import date
-from playwright.sync_api import sync_playwright
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>Eskilstuna Evenemang – uppdaterad {{ STAMP_TIME }}</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 2rem; max-width: 62rem; }
+    h1   { font-size: 1.8rem; margin-bottom: 1.2rem; }
+    ul   { list-style: none; padding: 0; }
+    li   {
+      margin: .6rem 0;
+      padding: .4rem .2rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+    time.date      { font-weight: 600; margin-right: .6rem; color: #005eb8; }
+    a.title        { margin-right: .6rem; color: #005eb8; text-decoration: none; }
+    a.title:hover  { text-decoration: underline; }
+    span.time      { font-weight: 400; margin-right: .6rem; color: #333; }
+    span.location  { margin-right: .6rem; color: #666; }
+    .new           { background: #ff0; padding: 0 .4rem; border-radius: .25rem; font-size: .8rem; margin-left: auto; }
+  </style>
+</head>
+<body>
+  <h1>Evenemang ({{ COUNT }} st, uppdaterad {{ STAMP_TIME }})</h1>
 
-TIME_RX = re.compile(r"\b\d{1,2}[:.]\d{2}\b")
+  <ul>
+  {% for ev in events %}
+    <li>
+      <!-- Datum -->
+      <time class="date" datetime="{{ ev.date }}">{{ ev.date }}</time>
+      <!-- Titel -->
+      <a class="title" href="{{ ev.url }}">{{ ev.title }}</a>
+      <!-- Tid -->
+      {% if ev.time %}
+        <span class="time">{{ ev.time }}</span>
+      {% endif %}
+      <!-- Plats -->
+      {% if ev.location %}
+        <span class="location">{{ ev.location }}</span>
+      {% endif %}
+      <!-- “Nytt”-badge -->
+      {% if ev.new %}
+        <span class="new">Nytt</span>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
 
-def fetch():
-    items = []
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
-        page.goto("https://eskilstuna.nu/evenemang/")
-
-        # Klicka på "Ladda fler" tills den försvinner
-        while page.locator("button.load-more-button").is_visible():
-            page.click("button.load-more-button")
-            time.sleep(1.5)
-
-        # Extrahera varje kort
-        for card in page.locator(".event-card").all():
-            url = card.locator("a.event-card-inner").get_attribute("href")
-            url = f"https://eskilstuna.nu{url}"
-
-            date_text = card.locator(".event-card-date").inner_text().strip()
-            title = card.locator("h3").inner_text().strip()
-            details = card.locator(".event-card-details").inner_text().strip()
-
-            # Extrahera tid
-            time_str = ""
-            m_time = TIME_RX.search(details)
-            if m_time:
-                time_str = m_time.group(0)
-
-            # Extrahera plats
-            location = ""
-            if m_time:
-                lines = details[m_time.end():].strip().splitlines()
-                for line in lines:
-                    line = line.strip()
-                    if line and not TIME_RX.search(line):
-                        location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", line)
-                        break
-
-            # Skapa ID
-            eid = f"{date_text}_{title}_{time_str}_{location}".replace(" ", "_")
-
-            items.append({
-                "id": eid,
-                "date": date_text,
-                "title": title,
-                "time": time_str,
-                "location": location,
-                "url": url
-            })
-
-        browser.close()
-    return items
-
-
-if __name__ == "__main__":
-    events = fetch()
-    output = Path("data")
-    output.mkdir(exist_ok=True)
-    file = output / f"events_{date.today().isoformat()}.json"
-    with file.open("w", encoding="utf-8") as f:
-        json.dump(events, f, ensure_ascii=False, indent=2)
-    print(f"Fetched {len(events)} events → {file}")
+  <p style="margin-top:2rem;font-size:.85rem;color:#666">
+    Genererad automatiskt {{ STAMP_TIME }} av GitHub Actions.
+  </p>
+</body>
+</html>
