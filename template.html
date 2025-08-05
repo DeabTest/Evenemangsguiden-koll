@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Eskilstuna Evenemang – senast uppdaterad {{ STAMP }}</title>
+<title>Eskilstuna Evenemang – uppdaterad {{ STAMP }}</title>
 <style>
- body{font-family:system-ui,Arial,sans-serif;margin:2rem;max-width:60rem}
- h1{font-size:1.7rem;margin-bottom:1rem}
- li{margin:.4rem 0}
- time{font-weight:bold;margin-right:.4rem}
+ body{font-family:system-ui,Arial,sans-serif;margin:2rem;max-width:62rem}
+ h1{font-size:1.8rem;margin-bottom:1.2rem}
+ ul{list-style:none;padding:0}
+ li{margin:.6rem 0;padding:.4rem .2rem;border-bottom:1px solid #eee}
+ time{font-weight:600;margin-right:.4rem;color:#005eb8}
+ .meta{font-size:.9rem;color:#555}
+ a{text-decoration:none;color:#005eb8}
+ a:hover{text-decoration:underline}
 </style>
 
 <h1>Evenemang (uppdaterad {{ STAMP }})</h1>
 <ul>
 {% for ev in events %}
-  <li><time>{{ ev.date }}</time><a href="{{ ev.url }}">{{ ev.title }}</a></li>
+  <li>
+    <time datetime="{{ ev.date }}">{{ ev.date }}</time>
+    <a href="{{ ev.url }}">{{ ev.title }}</a><br>
+    <span class="meta">
+      {{ ev.time }}{% if ev.end %}–{{ ev.end }}{% endif %}
+      {% if ev.location %} · {{ ev.location }}{% endif %}
+      {% if ev.cats %} · {{ ev.cats }}{% endif %}
+    </span>
+  </li>
 {% endfor %}
 </ul>
+
 <p style="margin-top:2rem;font-size:.85rem;color:#666">
   Genererad automatiskt {{ STAMP }} av GitHub Actions.
 </p>
