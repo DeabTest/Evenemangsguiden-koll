@@ -1,10 +1,8 @@
 name: Eskilstuna events watcher
 
 on:
-  # Kör 07:00 UTC varje vardag  (08:00 svensk vintertid, 09:00 sommartid)
   schedule:
-    - cron: '0 7 * * 1-5'
-  # Gör det möjligt att starta manuellt från GitHub-gränssnittet
+    - cron: '0 7 * * 1-5'        # 07:00 UTC = 08:00 CET / 09:00 CEST
   workflow_dispatch:
 
 jobs:
@@ -12,27 +10,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Hämta repo:t
-      - name: Check out repo
-        uses: actions/checkout@v4
+      # 1. Klona repo:t
+      - uses: actions/checkout@v4
 
-      # 2. Installera Python 3.11
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      # 2. Python 3.11
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Installera Playwright + beroenden
+      # 3. Installera beroenden + Chromium
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          playwright install chromium          # <— utan --with-deps
+          playwright install chromium
 
       # 4. Kör scraperskriptet
       - name: Run scraper
         run: python play_scrape_events.py
 
-      # 5. Kolla om något ändrats i data/-katalogen
+      # 5. Bygg HTML-sida av dagens JSON
+      - name: Build HTML list
+        env:
+          TODAY: ${{ steps.date.outputs.today }}
+        run: |
+          stamp=$(date -u +'%Y-%m-%d')
+          python - <<'PY'
+          import json, datetime, pathlib, jinja2
+          stamp = datetime.date.today().isoformat()
+          data  = json.load(open(f"data/events_{stamp}.json", encoding="utf-8"))
+          env   = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
+          tpl   = env.get_template("template.html")
+          html  = tpl.render(STAMP=stamp, events=data)
+          pathlib.Path("public").mkdir(exist_ok=True)
+          pathlib.Path("public/index.html").write_text(html, encoding="utf-8")
+          PY
+
+      # 6. Git-commit JSON om något ändrats
       - name: Detect changes
         id: diff
         run: |
@@ -46,20 +59,15 @@ jobs:
             echo "changed=no" >> $GITHUB_OUTPUT
           fi
 
-      # 6. Skicka upp nya JSON-filer till GitHub om något förändrats
-      - name: Push commit (if changed)
-        if: steps.diff.outputs.changed == 'yes'
+      # 7. Skicka commit (om ändrat)
+      - if: steps.diff.outputs.changed == 'yes'
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 7. (Valfritt) Skicka Slack-meddelande när nya evenemang hittas
-      - name: Notify Slack (only when changed)
-        if: steps.diff.outputs.changed == 'yes' && env.SLACK_WEBHOOK != ''
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        run: |
-          NEW_COUNT=$(jq length data/events_$(date -u +'%Y-%m-%d').json)
-          curl -X POST -H 'Content-type: application/json' \
-               --data "{\"text\":\"$NEW_COUNT nya evenemang hittades i Eskilstuna-guiden\"}" \
-               $SLACK_WEBHOOK
+      # 8. Deploya HTML till gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
