@@ -8,9 +8,8 @@ extraherar korrekt datum, tid och plats med rätt mellanslag.
 • Väntar 1,5 s efter varje klick
 • Plockar titel via <a>
 • Plockar datum via DATE_RX, tid via TIME_RX
-• Plockar plats som text efter tid (rensad)
+• Plockar plats som text efter tid
 • Sparar data/events_YYYY-MM-DD.json
-• Skriver bara ut hur många evenemang som hämtats
 """
 import json
 import datetime
@@ -26,7 +25,7 @@ URL = (
     "evenemangsguiden/evenemangsguiden/sok-evenemang"
 )
 DATE_RX = re.compile(r"\d{4}-\d{2}-\d{2}")   # YYYY-MM-DD
-TIME_RX = re.compile(r"\d{1,2}[.:]\d{2}")    # hh:mm eller h.mm
+TIME_RX = re.compile(r"\d{1,2}[.:]\d{2}")     # hh:mm eller h.mm
 
 async def scrape():
     async with async_playwright() as pw:
@@ -79,10 +78,6 @@ async def scrape():
                 # Ta bort eventuell inledande icke-bokstav (t.ex. punkter eller mellanslag)
                 location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", loc_part)
 
-                # Om tiden och platsen klibbat ihop → ta bort duplicerad tid
-                if time_str and location.startswith(time_str):
-                    location = location[len(time_str):].strip()
-
             # Filtrera bort Utställningar
             cat = await c.get_attribute("data-category") or ""
             if "Utställningar" in cat:
@@ -109,7 +104,6 @@ async def scrape():
     path = out_dir / f"events_{today}.json"
     with path.open("w", encoding="utf-8") as f:
         json.dump(events, f, ensure_ascii=False, indent=2)
-
     print(f"Fetched {len(events)} events → {path}")
 
 if __name__ == "__main__":
