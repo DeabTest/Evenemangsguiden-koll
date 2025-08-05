@@ -25,7 +25,7 @@ jobs:
 
       # 4. Kör scraperskriptet
       - name: Run scraper
-        run: fetch_events.py
+        run: python fetch_events.py
 
       # 5. Bygg HTML-sida av dagens JSON
       - name: Build HTML list
