@@ -1,10 +1,13 @@
-name: Eskilstuna events watcher
+name: Evenemangsguiden-koll
+
+permissions:
+  contents: write
+  pages:    write
+  id-token: write
 
 on:
-  # Kör 07:00 UTC varje vardag  (08:00 svensk normaltid, 09:00 sommartid)
   schedule:
-    - cron: '0 7 * * 1-5'
-  # Gör det möjligt att starta manuellt från GitHub-gränssnittet
+    - cron: '0 7 * * 1-5'     # kör 08:00 CEST vardagar
   workflow_dispatch:
 
 jobs:
@@ -12,54 +15,80 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Hämta repo:t
-      - name: Check out repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Installera Python 3.11
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Installera Playwright + beroenden
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install -r requirements.txt
-          playwright install --with-deps chromium
+          playwright install chromium
 
-      # 4. Kör scraperskriptet
       - name: Run scraper
-        run: python play_scrape_events.py
+        run: python fetch_events.py
 
-      # 5. Kolla om något ändrats i data/-katalogen
-      - name: Detect changes
-        id: diff
+      - name: Build HTML list
+        run: |
+          python - <<'PY'
+          import json, datetime, pathlib, jinja2
+
+          # Tider för stämpel
+          now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+          today     = datetime.date.today().isoformat()
+          yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+
+          data_dir   = pathlib.Path("data")
+          cur_file   = data_dir / f"events_{today}.json"
+          prev_file  = data_dir / f"events_{yesterday}.json"
+
+          # Läs in dagens evenemang
+          events = json.load(cur_file.open(encoding="utf-8"))
+          # Läs gårdagens om den finns, annars tom
+          if prev_file.exists():
+              prev_ids = {e["id"] for e in json.load(prev_file.open(encoding="utf-8"))}
+          else:
+              prev_ids = set()
+
+          # Märk "new"
+          for ev in events:
+              ev["new"] = ev["id"] not in prev_ids
+
+          # Rendera med både datum och tid, och med plats+mellanslag
+          tpl = jinja2.Environment(
+              loader=jinja2.FileSystemLoader("."),
+              autoescape=True
+          ).get_template("template.html")
+
+          html = tpl.render(
+              STAMP_TIME=now,
+              COUNT=len(events),
+              events=events
+          )
+
+          # Skriv ut till public/
+          pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
+          pub.joinpath("index.html").write_text(html, encoding="utf-8")
+          PY
+
+      - name: Commit data
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name  "github-actions[bot]"
-          if [[ $(git status --porcelain=data/ | wc -l) -gt 0 ]]; then
-            git add data/
-            git commit -m "data: update $(date -u +'%Y-%m-%d')"
-            echo "changed=yes" >> $GITHUB_OUTPUT
-          else
-            echo "changed=no" >> $GITHUB_OUTPUT
-          fi
+          git add data/
+          git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')" || echo "nothing to commit"
 
-      # 6. Skicka upp nya JSON-filer till GitHub om något förändrats
-      - name: Push commit (if changed)
-        if: steps.diff.outputs.changed == 'yes'
+      - name: Push changes
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 7. (Valfritt) Skicka Slack-meddelande när nya evenemang hittas
-      - name: Notify Slack (only when changed)
-        if: steps.diff.outputs.changed == 'yes' && env.SLACK_WEBHOOK != ''
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        run: |
-          NEW_COUNT=$(jq length data/events_$(date -u +'%Y-%m-%d').json)
-          curl -X POST -H 'Content-type: application/json' \
-               --data "{\"text\":\"$NEW_COUNT nya evenemang hittades i Eskilstuna-guiden\"}" \
-               $SLACK_WEBHOOK
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
