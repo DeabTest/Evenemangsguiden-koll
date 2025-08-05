@@ -1,93 +1,66 @@
 #!/usr/bin/env python3
 """
-Scrapar alla evenemangskort på Evenemangsguidens söksida.
+Hämtar alla evenemang via SiteVisions REST-API istället för att skrapa UI.
 
-• Klickar ”Ladda fler” tills två hela rundor i rad inte ger fler kort
-• Efter varje klick väntar den högst 30 s (pollar var 0,5 s) på att kortantalet ökar
+• Loopar page=0,1,2 … tills svaret är tomt
+• page-storlek 250 → oftast bara två anrop
+• Titeln, datum och länk plockas direkt ur JSON
 • Sparar data/events_YYYY-MM-DD.json
 """
-import json, datetime, pathlib, hashlib, asyncio, time, re
-from playwright.async_api import async_playwright, TimeoutError as PWTimeout
+import json, datetime, pathlib, hashlib, sys, requests
 
-URL = (
-    "https://evenemang.eskilstuna.se/"
-    "evenemangsguiden/evenemangsguiden/sok-evenemang"
-)
-DATE_RX = re.compile(r"\d{4}-\d{2}-\d{2}")   # YYYY-MM-DD
+API = "https://visiteskilstuna.se/rest-api/Evenemang"
+HEADERS = {
+    "Accept": "application/json",
+    "Referer": "https://evenemang.eskilstuna.se/",
+    "X-Requested-With": "XMLHttpRequest",
+    "User-Agent": "Github-Action/1.0",
+}
+SIZE = 250        # max items per sida
 
-async def scrape():
-    async with async_playwright() as pw:
-        browser = await pw.chromium.launch()
-        page = await browser.new_page()
-        await page.goto(URL, wait_until="networkidle")
-
-        prev_count, stable_rounds, clicks = 0, 0, 0
-
-        while True:
-            # 1. Leta efter knappen ”Ladda fler”
-            try:
-                btn = await page.wait_for_selector("button:has-text('Ladda fler')",
-                                                   timeout=5000)
-            except PWTimeout:
-                break                     # ingen knapp på sidan
-            if await btn.get_attribute("disabled") is not None:
-                break                     # knappen finns men är grå
-
-            # 2. Klicka och vänta in borttag + inladdning
-            await btn.scroll_into_view_if_needed()
-            await btn.click()
-            clicks += 1
-            await page.wait_for_selector("button:has-text('Ladda fler')",
-                                         state="detached")
-
-            # 3. Vänta upp till 30 s på att antalet kort ökar
-            t0 = time.time()
-            while True:
-                curr_count = len(await page.query_selector_all(
-                    "article, li, div.hiq-event-card"))
-                if curr_count > prev_count:
-                    prev_count = curr_count
-                    stable_rounds = 0
-                    break
-                if time.time() - t0 > 30:
-                    stable_rounds += 1
-                    break
-                await page.wait_for_timeout(500)
-
-            if stable_rounds >= 2:
-                break   # två rundor i rad utan fler kort → klart
-
-        # 4. Samla slutlig lista av kort
-        cards = await page.query_selector_all("article, li, div.hiq-event-card")
-        events = []
-        for c in cards:
-            a = await c.query_selector("a")
-            if not a:
-                continue
-            title = (await a.inner_text()).strip()
+def fetch_all():
+    events, page = [], 0
+    while True:
+        r = requests.get(API,
+                         params={"page": page, "size": SIZE, "lang": "sv"},
+                         headers=HEADERS,
+                         timeout=30)
+        if r.status_code != 200:
+            raise RuntimeError(f"API status {r.status_code} på sida {page}")
+        js = r.json()
+        chunk = js if isinstance(js, list) else js.get("content", [])
+        if not chunk:
+            break
+        for ev in chunk:
+            title = ev.get("title") or ev.get("name") or ""
             if not title:
                 continue
-            url = await a.get_attribute("href") or ""
+            url = ev.get("presentationUrl") or ev.get("url") or ""
             if url and not url.startswith("http"):
-                url = "https://evenemang.eskilstuna.se" + url
-            raw = await c.inner_text()
-            m = DATE_RX.search(raw)
-            date = m.group(0) if m else ""
-
+                url = "https://visiteskilstuna.se" + url
             events.append({
-                "id":   hashlib.sha1(url.encode()).hexdigest()[:12],
+                "id": hashlib.sha1(url.encode()).hexdigest()[:12],
                 "title": title,
-                "date":  date,
-                "url":   url,
+                "date": (ev.get("startDate") or ev.get("date") or "")[:10],
+                "url": url,
             })
+        if len(chunk) < SIZE:
+            break
+        page += 1
+    return events
 
-        await browser.close()
+def main():
+    try:
+        events = fetch_all()
+    except Exception as e:
+        print("API-fel:", e, file=sys.stderr)
+        sys.exit(1)
 
-        stamp = datetime.date.today().isoformat()
-        out_dir = pathlib.Path("data"); out_dir.mkdir(exist_ok=True)
-        outfile = out_dir / f"events_{stamp}.json"
-        outfile.write_text(json.dumps(events, ensure_ascii=False, indent=2))
-        print(f"Clicks: {clicks}  |  Fetched {len(events)} events → {outfile}")
+    stamp = datetime.date.today().isoformat()
+    out = pathlib.Path("data"); out.mkdir(exist_ok=True)
+    path = out / f"events_{stamp}.json"
+    path.write_text(json.dumps(events, ensure_ascii=False, indent=2))
+    print(f"Fetched {len(events)} events → {path}")
 
 if __name__ == "__main__":
-    asyncio.run(scrape())
+    main()
