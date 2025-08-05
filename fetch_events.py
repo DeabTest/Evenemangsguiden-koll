@@ -1,31 +1,33 @@
 #!/usr/bin/env python3
 """
 Hämtar alla evenemang från Eskilstunas REST-API och sparar dagens lista som
-data/events_YYYY-MM-DD.json – inkl. start/sluttid, plats och kategorier.
-
-Om API-svaret har okänt format loggas de första 500 tecknen i Actions-loggen
-så vi kan felsöka utan att skriptet kraschar på syntaxfel.
+data/events_YYYY-MM-DD.json. Letar automatiskt upp den lista som innehåller
+events (d.v.s. dict-objekt med 'title'-fält) – robust mot ändrat format.
 """
-import json, datetime, pathlib, hashlib, requests, sys
+import json, datetime, pathlib, hashlib, requests, sys, itertools
 
 API_URL   = "https://visiteskilstuna.se/rest-api/Evenemang"
 PAGE_SIZE = 100
 HEADERS   = {"Accept": "application/json", "User-Agent": "GitHub-Action/1.0"}
 
+def find_event_list(js, _depth=0):
+    """Går rekursivt igenom JSON och returnerar första listan av event-dictar."""
+    if isinstance(js, list):
+        if js and isinstance(js[0], dict) and "title" in js[0]:
+            return js
+        for item in js:
+            found = find_event_list(item, _depth+1)
+            if found:
+                return found
+    elif isinstance(js, dict):
+        for v in js.values():
+            found = find_event_list(v, _depth+1)
+            if found:
+                return found
+    return None
+
 def fmt_time(iso: str) -> str:
     return iso[11:16] if iso and len(iso) >= 16 else ""
-
-def parse_response(js, page: int):
-    """Returnerar listan med event eller kastar fel om okänt format."""
-    if isinstance(js, list):
-        return js
-    if isinstance(js, dict):
-        if "content" in js and isinstance(js["content"], list):
-            return js["content"]
-        for key in ("results", "items", "data", "hits"):
-            if key in js and isinstance(js[key], list):
-                return js[key]
-    raise RuntimeError(f"Oväntat JSON-format (sid {page})")
 
 def fetch_page(page: int):
     r = requests.get(
@@ -35,12 +37,11 @@ def fetch_page(page: int):
         timeout=30,
     )
     r.raise_for_status()
-    try:
-        js = r.json()
-    except ValueError:
-        print("RAW-svar (första 500 tecken):", r.text[:500], file=sys.stderr)
-        raise RuntimeError(f"Ogil­tigt JSON från API (sid {page})")
-    return parse_response(js, page)
+    js = r.json()
+    events = find_event_list(js)
+    if events is None:
+        raise RuntimeError(f"Kunde inte hitta event-lista i JSON (sid {page})")
+    return events
 
 def fetch_all():
     events, page = [], 0
@@ -49,8 +50,6 @@ def fetch_all():
         if not chunk:
             break
         for ev in chunk:
-            if not isinstance(ev, dict):
-                continue
             uid  = hashlib.sha1(str(ev.get("id") or ev.get("guid") or "").encode()).hexdigest()[:12]
             cats = ev.get("categories") or ev.get("category") or ev.get("tags") or []
             events.append({
