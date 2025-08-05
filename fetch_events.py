@@ -3,7 +3,7 @@
 Scrapar alla evenemangskort på Evenemangsguidens söksida.
 
 • Klickar ”Ladda fler” tills två hela rundor i rad inte ger fler kort
-• Efter varje klick väntar den högst 15 s (pollar var 0,5 s)
+• Efter varje klick väntar den högst 30 s (pollar var 0,5 s) på att kortantalet ökar
 • Sparar data/events_YYYY-MM-DD.json
 """
 import json, datetime, pathlib, hashlib, asyncio, time, re
@@ -24,37 +24,32 @@ async def scrape():
         prev_count, stable_rounds, clicks = 0, 0, 0
 
         while True:
-            # leta efter en klickbar knapp
+            # 1. Leta efter knappen ”Ladda fler”
             try:
-                btn = await page.wait_for_selector(
-                    "button:has-text('Ladda fler')", timeout=5000
-                )
+                btn = await page.wait_for_selector("button:has-text('Ladda fler')",
+                                                   timeout=5000)
             except PWTimeout:
-                break
+                break                     # ingen knapp på sidan
             if await btn.get_attribute("disabled") is not None:
-                break
+                break                     # knappen finns men är grå
 
+            # 2. Klicka och vänta in borttag + inladdning
             await btn.scroll_into_view_if_needed()
             await btn.click()
             clicks += 1
-            # när vi klickat försvinner knappen ett ögonblick
-            await page.wait_for_selector(
-                "button:has-text('Ladda fler')", state="detached"
-            )
+            await page.wait_for_selector("button:has-text('Ladda fler')",
+                                         state="detached")
 
-            # vänta max 15 s på att kortantalet växer
+            # 3. Vänta upp till 30 s på att antalet kort ökar
             t0 = time.time()
             while True:
-                curr_count = len(
-                    await page.query_selector_all(
-                        "article, li, div.hiq-event-card"
-                    )
-                )
+                curr_count = len(await page.query_selector_all(
+                    "article, li, div.hiq-event-card"))
                 if curr_count > prev_count:
                     prev_count = curr_count
                     stable_rounds = 0
                     break
-                if time.time() - t0 > 15:
+                if time.time() - t0 > 30:
                     stable_rounds += 1
                     break
                 await page.wait_for_timeout(500)
@@ -62,7 +57,7 @@ async def scrape():
             if stable_rounds >= 2:
                 break   # två rundor i rad utan fler kort → klart
 
-        # hämta slutlistan
+        # 4. Samla slutlig lista av kort
         cards = await page.query_selector_all("article, li, div.hiq-event-card")
         events = []
         for c in cards:
@@ -79,14 +74,12 @@ async def scrape():
             m = DATE_RX.search(raw)
             date = m.group(0) if m else ""
 
-            events.append(
-                {
-                    "id": hashlib.sha1(url.encode()).hexdigest()[:12],
-                    "title": title,
-                    "date": date,
-                    "url": url,
-                }
-            )
+            events.append({
+                "id":   hashlib.sha1(url.encode()).hexdigest()[:12],
+                "title": title,
+                "date":  date,
+                "url":   url,
+            })
 
         await browser.close()
 
