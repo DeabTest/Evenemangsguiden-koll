@@ -1,4 +1,5 @@
-name: Evenemangsguiden-koll
+name: evenemangsguiden-koll
+
 permissions:
   contents: write
   pages:    write
@@ -6,43 +7,47 @@ permissions:
 
 on:
   schedule:
-    - cron: '0 7 * * 1-5'
-  workflow_dispatch:
+    - cron: '0 7 * * 1-5'           # 07 UTC vardagar
+  workflow_dispatch:               # manuell körning
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: { python-version: '3.11' }
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
       - name: Install deps
         run: pip install -r requirements.txt
 
-      - name: Run API scraper        # ← tillbaks till ordinarie
+      - name: Run API scraper
         run: python fetch_events.py
 
-      # Build HTML, Commit, Deploy … (samma som tidigare)
       - name: Build HTML
         run: |
           python - <<'PY'
           import json, datetime, pathlib, subprocess, jinja2
-          today = datetime.date.today().isoformat()
-          cur   = pathlib.Path(f"data/events_{today}.json")
-          evs   = json.load(cur.open())
-          count = len(evs)
+          today   = datetime.date.today().isoformat()
+          curfile = pathlib.Path(f"data/events_{today}.json")
+          events  = json.load(curfile.open(encoding="utf-8"))
+          count   = len(events)
           try:
               prev_raw = subprocess.check_output(
-                  ["git", "show", f"HEAD:{cur}"], text=True)
+                  ["git", "show", f"HEAD:{curfile}"], text=True)
               prev_set = {e["id"] for e in json.loads(prev_raw)}
           except subprocess.CalledProcessError:
               prev_set = set()
-          for e in evs:
-              e["new"] = e["id"] not in prev_set
+          for ev in events:
+              ev["new"] = ev["id"] not in prev_set
           html = jinja2.Environment(loader=jinja2.FileSystemLoader(".")) \
                  .get_template("template.html") \
-                 .render(STAMP=today, COUNT=count, events=evs)
+                 .render(STAMP=today, COUNT=count, events=events)
           pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
           pub.joinpath("index.html").write_text(html, encoding="utf-8")
           PY
@@ -52,10 +57,15 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name  "github-actions[bot]"
           git add data/
-          git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')" || echo "no changes"
-      - uses: ad-m/github-push-action@v0.8.0
-        with: { github_token: ${{ secrets.GITHUB_TOKEN }} }
-      - uses: peaceiris/actions-gh-pages@v4
+          git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')" || echo "nothing to commit"
+
+      - name: Push
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
