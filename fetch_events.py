@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """
 Scrapar alla evenemangskort på Evenemangsguidens söksida, och
-extraherar korrekt datum, tid och plats.
+extraherar korrekt datum, tid och plats med rätt mellanslag.
 
 • Headless Playwright
 • Klickar “Ladda fler” tills knappen är borta eller disabled
 • Väntar 1,5 s efter varje klick
-• Rensar titeln från datum och tid
-• Plockar datum, tid och plats med regex
-• Markerar nya events via föregående fil
-• Sorterar och sparar data/events_YYYY-MM-DD.json
+• Extraherar datum, tid och plats via CSS och regex
+• Sorterar evenemangen kronologiskt
+• Sparar data/events_YYYY-MM-DD.json
 """
 import json
 import datetime
@@ -20,42 +19,33 @@ import re
 import sys
 from playwright.async_api import async_playwright, TimeoutError as PWTimeout
 
-# --- KONFIGURATION ---
 URL = (
     "https://evenemang.eskilstuna.se/"
     "evenemangsguiden/evenemangsguiden/sok-evenemang"
 )
-# Matchar t.ex. "05 aug" eller "04 okt - 05 okt"
-DATE_RX = re.compile(r"\d{2} [a-zåäö]{3}(?: [–-] \d{2} [a-zåäö]{3})?", re.IGNORECASE)
-TIME_RX = re.compile(r"\d{1,2}[.:]\d{2}")
-DATA_DIR = pathlib.Path("data")
-DATA_DIR.mkdir(exist_ok=True)
-TODAY = datetime.date.today().isoformat()
-OUTFILE = DATA_DIR / f"events_{TODAY}.json"
 
-def gen_id(href: str) -> str:
-    return hashlib.sha1(href.encode()).hexdigest()[:12]
+# Regex för tid, hh.mm eller h:mm
+TIME_RX = re.compile(r"(\d{1,2}[.:]\d{2})")
 
-def load_previous_ids() -> set:
-    files = sorted(DATA_DIR.glob("events_*.json"))
-    if len(files) < 2:
-        return set()
-    prev = json.loads(files[-2].read_text(encoding="utf-8"))
-    return {e["id"] for e in prev}
+# Svenska månadsförkortningar → månadnummer
+MONTH_MAP = {
+    "jan": 1,  "feb": 2,  "mar": 3,  "apr": 4,
+    "maj": 5,  "jun": 6,  "jul": 7,  "aug": 8,
+    "sep": 9,  "okt":10,  "nov":11,  "dec":12,
+}
 
-async def scrape_events() -> list[dict]:
+async def scrape():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()
         page = await browser.new_page()
         await page.goto(URL, wait_until="networkidle")
 
-        # Klicka “Ladda fler” tills gone/disabled
+        # Lazy-load: klicka “Ladda fler” tills borta eller disabled
         while True:
             try:
                 btn = await page.wait_for_selector("button:has-text('Ladda fler')", timeout=5000)
             except PWTimeout:
                 break
-            # Viktig fix: kolla is not None, inte truthiness
             if await btn.get_attribute("disabled") is not None:
                 break
             await btn.scroll_into_view_if_needed()
@@ -65,85 +55,84 @@ async def scrape_events() -> list[dict]:
 
         cards = await page.query_selector_all("article, li, div.hiq-event-card")
         events = []
+        today = datetime.date.today()
 
         for c in cards:
-            # Hitta länken
+            # Hitta datum-text i kortet
+            txt = await c.inner_text()
+
+            # DATE_RX: hitta första dd mon eller dd mon - dd mon
+            # Vi plockar alltid startdatum
+            date_match = re.search(r"(\d{1,2})\s*(jan|feb|mar|apr|maj|jun|jul|aug|sep|okt|nov|dec)", txt, re.IGNORECASE)
+            if date_match:
+                day = int(date_match.group(1))
+                mon_abbr = date_match.group(2).lower()
+                month = MONTH_MAP[mon_abbr]
+                year = today.year + (1 if month < today.month else 0)
+                date_iso = f"{year}-{month:02d}-{day:02d}"
+            else:
+                # Hoppa över om inget datum
+                continue
+
+            # Tid
+            time_match = TIME_RX.search(txt)
+            time_str = ""
+            if time_match:
+                # normalisera punkt till kolon
+                time_str = time_match.group(1).replace(".", ":")
+            
+            # Plats: text efter tid
+            location = ""
+            if time_match:
+                loc_raw = txt[time_match.end():].strip()
+                # ta bort inledande skiljetecken
+                location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", loc_raw)
+
+            # Titel & URL
             a = await c.query_selector("a")
             if not a:
                 continue
-            raw_title = (await a.inner_text()).strip()
-            href = (await a.get_attribute("href") or "").strip()
+            title = (await a.inner_text()).strip()
+            if not title:
+                continue
+            href = (await a.get_attribute("href")) or ""
             if href.startswith("/"):
                 href = "https://evenemang.eskilstuna.se" + href
 
-            # Skydda mot tomma rader
-            lines = [ln.strip() for ln in raw_title.splitlines() if ln.strip()]
-            if not lines:
-                continue
-
-            # Filtrera bort rader som bara är datum eller tid
-            title_lines = [
-                ln for ln in lines
-                if not DATE_RX.fullmatch(ln) and not TIME_RX.search(ln)
-            ]
-            title = title_lines[0] if title_lines else lines[0]
-
-            # Hela kortets text
-            text = await c.inner_text()
-
-            # Datum
-            m_date = DATE_RX.search(text)
-            date = m_date.group(0) if m_date else ""
-
-            # Tid
-            m_time = TIME_RX.search(text)
-            time_str = m_time.group(0) if m_time else ""
-
-            # Plats: första icke-datum/tid-rad efter tid
-            location = ""
-            if m_time:
-                tail = text[m_time.end():].splitlines()
-                for ln in tail:
-                    ln = ln.strip()
-                    if not ln or TIME_RX.search(ln) or DATE_RX.fullmatch(ln):
-                        continue
-                    location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", ln)
-                    break
-
-            # Filtrera Utställningar
+            # Filtrera bort Utställningar
             cat = await c.get_attribute("data-category") or ""
             if "Utställningar" in cat:
                 continue
 
+            # Generera ID
+            ev_id = hashlib.sha1(href.encode()).hexdigest()[:12]
+
             events.append({
-                "id":       gen_id(href),
+                "id":       ev_id,
                 "title":    title,
-                "date":     date,
-                "time":     time_str,
+                "date":     date_iso,
+                "time":     time_str or "00:00",
                 "location": location,
                 "url":      href,
             })
 
         await browser.close()
-        return events
 
-def mark_new(events: list[dict]) -> None:
-    prev_ids = load_previous_ids()
-    for ev in events:
-        ev["new"] = ev["id"] not in prev_ids
+    # Sortera kronologiskt
+    events.sort(key=lambda e: (e["date"], e["time"]))
 
-def main():
+    # Spara JSON
+    out_dir = pathlib.Path("data")
+    out_dir.mkdir(exist_ok=True)
+    today_str = today.isoformat()
+    path = out_dir / f"events_{today_str}.json"
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(events, f, ensure_ascii=False, indent=2)
+    print(f"Fetched {len(events)} events → {path}")
+
+if __name__ == "__main__":
     try:
-        events = asyncio.run(scrape_events())
-        mark_new(events)
-        # Sortera för förutsägbar ordning
-        events.sort(key=lambda e: (e["date"], e["time"], e["title"]))
-        with OUTFILE.open("w", encoding="utf-8") as f:
-            json.dump(events, f, ensure_ascii=False, indent=2)
-        print(f"Fetched {len(events)} events → {OUTFILE}")
+        asyncio.run(scrape())
     except Exception as e:
         print("Scraping-fel:", e, file=sys.stderr)
         sys.exit(1)
-
-if __name__ == "__main__":
-    main()
