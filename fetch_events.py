@@ -25,7 +25,8 @@ URL = (
     "https://evenemang.eskilstuna.se/"
     "evenemangsguiden/evenemangsguiden/sok-evenemang"
 )
-DATE_RX = re.compile(r"\d{2} [a-z]{3}(?: – \d{2} [a-z]{3})?", re.IGNORECASE)
+# Matchar t.ex. "05 aug" eller "04 okt - 05 okt"
+DATE_RX = re.compile(r"\d{2} [a-zåäö]{3}(?: [–-] \d{2} [a-zåäö]{3})?", re.IGNORECASE)
 TIME_RX = re.compile(r"\d{1,2}[.:]\d{2}")
 DATA_DIR = pathlib.Path("data")
 DATA_DIR.mkdir(exist_ok=True)
@@ -54,42 +55,41 @@ async def scrape_events() -> list[dict]:
                 btn = await page.wait_for_selector("button:has-text('Ladda fler')", timeout=5000)
             except PWTimeout:
                 break
-            if await btn.get_attribute("disabled"):
+            # Viktig fix: kolla is not None, inte truthiness
+            if await btn.get_attribute("disabled") is not None:
                 break
+            await btn.scroll_into_view_if_needed()
             await btn.click()
+            await page.wait_for_selector("button:has-text('Ladda fler')", state="detached")
             await page.wait_for_timeout(1500)
 
         cards = await page.query_selector_all("article, li, div.hiq-event-card")
         events = []
 
         for c in cards:
-            text = await c.inner_text()
-
-            # Hitta href
+            # Hitta länken
             a = await c.query_selector("a")
             if not a:
                 continue
+            raw_title = (await a.inner_text()).strip()
             href = (await a.get_attribute("href") or "").strip()
             if href.startswith("/"):
                 href = "https://evenemang.eskilstuna.se" + href
 
-            # Rå titel = allt i <a>
-            raw_title = (await a.inner_text()).strip()
-
-            # Rensa bort datum- och tidsrader från titeln
+            # Skydda mot tomma rader
             lines = [ln.strip() for ln in raw_title.splitlines() if ln.strip()]
             if not lines:
-                # inga rader alls → skippa
                 continue
+
+            # Filtrera bort rader som bara är datum eller tid
             title_lines = [
                 ln for ln in lines
                 if not DATE_RX.fullmatch(ln) and not TIME_RX.search(ln)
             ]
-            if title_lines:
-                title = title_lines[0]
-            else:
-                # inget kvar efter filtrering → ta första raden
-                title = lines[0]
+            title = title_lines[0] if title_lines else lines[0]
+
+            # Hela kortets text
+            text = await c.inner_text()
 
             # Datum
             m_date = DATE_RX.search(text)
@@ -99,7 +99,7 @@ async def scrape_events() -> list[dict]:
             m_time = TIME_RX.search(text)
             time_str = m_time.group(0) if m_time else ""
 
-            # Plats: första “icke-datum/tid”-raden efter tid
+            # Plats: första icke-datum/tid-rad efter tid
             location = ""
             if m_time:
                 tail = text[m_time.end():].splitlines()
@@ -115,15 +115,14 @@ async def scrape_events() -> list[dict]:
             if "Utställningar" in cat:
                 continue
 
-            ev = {
+            events.append({
                 "id":       gen_id(href),
                 "title":    title,
                 "date":     date,
                 "time":     time_str,
                 "location": location,
                 "url":      href,
-            }
-            events.append(ev)
+            })
 
         await browser.close()
         return events
@@ -137,7 +136,7 @@ def main():
     try:
         events = asyncio.run(scrape_events())
         mark_new(events)
-        # Sortera snyggt
+        # Sortera för förutsägbar ordning
         events.sort(key=lambda e: (e["date"], e["time"], e["title"]))
         with OUTFILE.open("w", encoding="utf-8") as f:
             json.dump(events, f, ensure_ascii=False, indent=2)
