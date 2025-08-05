@@ -78,11 +78,18 @@ async def scrape_events() -> list[dict]:
 
             # Rensa bort datum- och tidsrader från titeln
             lines = [ln.strip() for ln in raw_title.splitlines() if ln.strip()]
+            if not lines:
+                # inga rader alls → skippa
+                continue
             title_lines = [
                 ln for ln in lines
                 if not DATE_RX.fullmatch(ln) and not TIME_RX.search(ln)
             ]
-            title = title_lines[0] if title_lines else lines[0]
+            if title_lines:
+                title = title_lines[0]
+            else:
+                # inget kvar efter filtrering → ta första raden
+                title = lines[0]
 
             # Datum
             m_date = DATE_RX.search(text)
@@ -92,7 +99,7 @@ async def scrape_events() -> list[dict]:
             m_time = TIME_RX.search(text)
             time_str = m_time.group(0) if m_time else ""
 
-            # Plats: första ”icke-datum/tid”-raden efter tid
+            # Plats: första “icke-datum/tid”-raden efter tid
             location = ""
             if m_time:
                 tail = text[m_time.end():].splitlines()
@@ -100,7 +107,6 @@ async def scrape_events() -> list[dict]:
                     ln = ln.strip()
                     if not ln or TIME_RX.search(ln) or DATE_RX.fullmatch(ln):
                         continue
-                    # ta bort icke-bokstav i början
                     location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", ln)
                     break
 
