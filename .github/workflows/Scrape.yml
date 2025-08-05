@@ -1,11 +1,10 @@
 name: Eskilstuna events – API-inspektör
 
-# Vi behöver inga skriv-rättigheter när vi bara loggar JSON-svaret
-permissions:
-  contents: read
-
 on:
-  workflow_dispatch:      # körs manuellt från Actions-fliken
+  workflow_dispatch:         # startas manuellt från Actions-fliken
+
+permissions:
+  contents: read             # vi läser bara koden, pushar inget
 
 jobs:
   inspect:
@@ -15,12 +14,12 @@ jobs:
       # 1. Klona repo:t
       - uses: actions/checkout@v4
 
-      # 2. Python 3.11
+      # 2. Installera Python 3.11
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Installera bara requests (inspektorn kräver inget mer)
+      # 3. Installera beroende (requests)
       - name: Install requests
         run: pip install requests
 
