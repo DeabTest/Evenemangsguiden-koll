@@ -1,31 +1,32 @@
 #!/usr/bin/env python3
 """
-Scrapar alla evenemangskort på Evenemangsguidens söksida, och
-extraherar korrekt datum, tid och plats med rätt mellanslag.
+Scrapar alla evenemangskort från Evenemangsguidens söksida med DOM-baserad extraktion:
 
 • Headless Playwright
-• Klickar “Ladda fler” tills knappen är borta eller disabled
-• Väntar 1,5 s efter varje klick
-• Plockar titel via <a>
-• Plockar datum via DATE_RX, tid via TIME_RX
-• Plockar plats som text efter tid
-• Sparar data/events_YYYY-MM-DD.json
+• Klickar “Ladda fler” tills knappen är borta eller inaktiverad
+• Väntar 1,5 s efter varje klick för att korten ska hinna renderas
+• Extraherar datum, titel, tid och plats från dedikerade element
+• Sparar JSON i data/events_YYYY-MM-DD.json
 """
+import asyncio
 import json
 import datetime
 import pathlib
 import hashlib
-import asyncio
-import re
 import sys
+
 from playwright.async_api import async_playwright, TimeoutError as PWTimeout
 
 URL = (
     "https://evenemang.eskilstuna.se/"
     "evenemangsguiden/evenemangsguiden/sok-evenemang"
 )
-DATE_RX = re.compile(r"\d{4}-\d{2}-\d{2}")   # YYYY-MM-DD
-TIME_RX = re.compile(r"\d{1,2}[.:]\d{2}")     # hh:mm eller h.mm
+
+CARD_SELECTOR       = "li.hiq-event-card"
+DATE_SELECTOR       = "time.hiq-event-card__date"
+TITLE_SELECTOR      = "a.hiq-event-card__link"
+TIME_SELECTOR       = "time.hiq-event-card__time"
+LOCATION_SELECTOR   = "div.hiq-event-card__location"
 
 async def scrape():
     async with async_playwright() as pw:
@@ -33,7 +34,7 @@ async def scrape():
         page = await browser.new_page()
         await page.goto(URL, wait_until="networkidle")
 
-        # Lazy-load: klicka “Ladda fler” tills borta eller disabled
+        # Lazy-load: klicka "Ladda fler" tills knappen försvinner eller disabled
         while True:
             try:
                 btn = await page.wait_for_selector("button:has-text('Ladda fler')", timeout=5000)
@@ -43,47 +44,41 @@ async def scrape():
                 break
             await btn.scroll_into_view_if_needed()
             await btn.click()
+            # vänta tills nya kort laddats in
             await page.wait_for_selector("button:has-text('Ladda fler')", state="detached")
             await page.wait_for_timeout(1500)
 
-        cards = await page.query_selector_all("article, li, div.hiq-event-card")
+        cards = await page.query_selector_all(CARD_SELECTOR)
         events = []
 
         for c in cards:
-            text = await c.inner_text()
+            # Datum
+            date_el = await c.query_selector(DATE_SELECTOR)
+            date = (await date_el.text_content()).strip() if date_el else ""
 
             # Titel & URL
-            a = await c.query_selector("a")
-            if not a:
+            title_el = await c.query_selector(TITLE_SELECTOR)
+            if not title_el:
                 continue
-            title = (await a.inner_text()).strip()
-            if not title:
-                continue
-            href = (await a.get_attribute("href")) or ""
+            title = (await title_el.text_content()).strip()
+            href = (await title_el.get_attribute("href")) or ""
             if href.startswith("/"):
                 href = "https://evenemang.eskilstuna.se" + href
 
-            # Datum
-            m_date = DATE_RX.search(text)
-            date = m_date.group(0) if m_date else ""
-
             # Tid
-            m_time = TIME_RX.search(text)
-            time_str = m_time.group(0) if m_time else ""
+            time_el = await c.query_selector(TIME_SELECTOR)
+            time_str = (await time_el.text_content()).strip() if time_el else ""
 
-            # Plats: det som kommer efter tiden
-            location = ""
-            if m_time:
-                loc_part = text[m_time.end():].strip()
-                # Ta bort eventuell inledande icke-bokstav (t.ex. punkter eller mellanslag)
-                location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", loc_part)
+            # Plats
+            loc_el = await c.query_selector(LOCATION_SELECTOR)
+            location = (await loc_el.text_content()).strip() if loc_el else ""
 
-            # Filtrera bort Utställningar
+            # Filtrera bort Utställningar om relevant
             cat = await c.get_attribute("data-category") or ""
             if "Utställningar" in cat:
                 continue
 
-            # Generera ID
+            # Generera unikt ID från URL
             ev_id = hashlib.sha1(href.encode()).hexdigest()[:12]
 
             events.append({
@@ -98,10 +93,10 @@ async def scrape():
         await browser.close()
 
     # Spara JSON
-    today = datetime.date.today().isoformat()
+    stamp = datetime.date.today().isoformat()
     out_dir = pathlib.Path("data")
     out_dir.mkdir(exist_ok=True)
-    path = out_dir / f"events_{today}.json"
+    path = out_dir / f"events_{stamp}.json"
     with path.open("w", encoding="utf-8") as f:
         json.dump(events, f, ensure_ascii=False, indent=2)
     print(f"Fetched {len(events)} events → {path}")
