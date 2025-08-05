@@ -4,16 +4,23 @@
   <meta charset="utf-8">
   <title>Eskilstuna Evenemang – uppdaterad {{ STAMP_TIME }}</title>
   <style>
-    body{font-family:system-ui,Arial,sans-serif;margin:2rem;max-width:62rem}
-    h1{font-size:1.8rem;margin-bottom:1.2rem}
-    ul{list-style:none;padding:0}
-    li{margin:.6rem 0;padding:.4rem .2rem;border-bottom:1px solid #eee;display:flex;flex-wrap:wrap;align-items:center}
-    time.date   {font-weight:600;margin-right:.6rem;color:#005eb8}
-    time.time   {font-weight:400;margin-right:.6rem;color:#333}
-    span.location{margin-right:.6rem;color:#666}
-    a.title     {margin-right:.6rem;color:#005eb8;text-decoration:none}
-    a.title:hover{text-decoration:underline}
-    .new        {background:#ff0;padding:0 .4rem;border-radius:.25rem;font-size:.8rem;margin-left:auto}
+    body { font-family: system-ui, Arial, sans-serif; margin: 2rem; max-width: 62rem; }
+    h1   { font-size: 1.8rem; margin-bottom: 1.2rem; }
+    ul   { list-style: none; padding: 0; }
+    li   { 
+      margin: .6rem 0; 
+      padding: .4rem .2rem; 
+      border-bottom: 1px solid #eee; 
+      display: flex; 
+      flex-wrap: wrap; 
+      align-items: center;
+    }
+    time.date     { font-weight: 600; margin-right: .6rem; color: #005eb8; }
+    span.time     { font-weight: 400; margin-right: .6rem; color: #333; }
+    span.location { margin-right: .6rem; color: #666; }
+    a.title       { margin-right: .6rem; color: #005eb8; text-decoration: none; }
+    a.title:hover { text-decoration: underline; }
+    .new          { background: #ff0; padding: 0 .4rem; border-radius: .25rem; font-size: .8rem; margin-left: auto; }
   </style>
 </head>
 <body>
@@ -22,14 +29,19 @@
   <ul>
   {% for ev in events %}
     <li>
+      <!-- Datum först -->
       <time class="date" datetime="{{ ev.date }}">{{ ev.date }}</time>
+      <!-- Tid -->
       {% if ev.time %}
-        <time class="time">{{ ev.time }}</time>
+        <span class="time">{{ ev.time }}</span>
       {% endif %}
+      <!-- Plats -->
       {% if ev.location %}
         <span class="location">{{ ev.location }}</span>
       {% endif %}
+      <!-- Titel -->
       <a class="title" href="{{ ev.url }}">{{ ev.title }}</a>
+      <!-- Ny-badge -->
       {% if ev.new %}
         <span class="new">Nytt</span>
       {% endif %}
