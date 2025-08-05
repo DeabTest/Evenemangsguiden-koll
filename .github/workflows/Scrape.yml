@@ -15,36 +15,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Klona repo:t
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Sätt upp Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Installera dependencies + Chromium för Playwright
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
           playwright install chromium
 
-      # 4. Kör UI-scrapern (Playwright) som klickar “Ladda fler” och hämtar JSON
       - name: Run scraper
         run: python fetch_events.py
 
-      # 5. Bygg HTML-listan med “Nytt”-badges
       - name: Build HTML
         run: |
           python - <<'PY'
           import json, datetime, pathlib, subprocess, jinja2
-          today   = datetime.date.today().isoformat()
-          dataf   = pathlib.Path(f"data/events_{today}.json")
-          events  = json.load(dataf.open(encoding="utf-8"))
-          count   = len(events)
+          today = datetime.date.today().isoformat()
+          dataf = pathlib.Path(f"data/events_{today}.json")
+          events = json.load(dataf.open(encoding="utf-8"))
+          count = len(events)
           try:
               prev = subprocess.check_output(
                   ["git", "show", f"HEAD:{dataf}"], text=True
@@ -54,30 +49,27 @@ jobs:
               prev_ids = set()
           for ev in events:
               ev["new"] = ev["id"] not in prev_ids
-          html = (
-              jinja2.Environment(loader=jinja2.FileSystemLoader("."))
-                    .get_template("template.html")
-                    .render(STAMP=today, COUNT=count, events=events)
+          html = jinja2.Environment(
+              loader=jinja2.FileSystemLoader(".")
+            ).get_template("template.html").render(
+              STAMP=today, COUNT=count, events=events
           )
           pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
           pub.joinpath("index.html").write_text(html, encoding="utf-8")
           PY
 
-      # 6. Commit:a JSON-filerna (alltid) så att “Nytt” nollställs
       - name: Commit data
         run: |
           git config --global user.email "actions@github.com"
-          git config --global user.name  "github-actions[bot]"
+          git config --global user.name "github-actions[bot]"
           git add data/
           git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')" || echo "nothing to commit"
 
-      # 7. Pusha ändringarna
       - name: Push changes
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 8. Deploya till GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
