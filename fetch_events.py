@@ -110,11 +110,10 @@ async def scrape():
         json.dump(events, f, ensure_ascii=False, indent=2)
 
     # Skriv ut i formatet: 06 dec Titel 18.00 Plats
-    from datetime import datetime
     for ev in events:
         try:
-            dt = datetime.strptime(ev["date"], "%Y-%m-%d")
-            date_str = dt.strftime("%d %b").lower()  # 06 dec
+            dt = datetime.datetime.strptime(ev["date"], "%Y-%m-%d")
+            date_str = dt.strftime("%d %b").lower()
         except:
             date_str = ev["date"]
         print(f"{date_str} {ev['title']} {ev['time']} {ev['location']}")
