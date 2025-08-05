@@ -8,7 +8,7 @@ extraherar korrekt datum, tid och plats med rätt mellanslag.
 • Väntar 1,5 s efter varje klick
 • Plockar titel via <a>
 • Plockar datum via DATE_RX, tid via TIME_RX
-• Plockar plats som första platsliknande rad efter tid
+• Plockar plats som separat rad efter tiden
 • Sparar data/events_YYYY-MM-DD.json
 • Skriver ut evenemangen i formatet: 06 dec Titel 18.00 Plats
 """
@@ -72,14 +72,16 @@ async def scrape():
             m_time = TIME_RX.search(text)
             time_str = m_time.group(0) if m_time else ""
 
-            # Plats: första rad efter tid som ser ut som plats
+            # Plats: försök plocka separat rad efter tiden
             location = ""
             if m_time:
-                loc_part = text[m_time.end():].strip()
-                lines = [line.strip() for line in loc_part.splitlines() if line.strip()]
-                for line in lines:
-                    if len(line) > 2 and not TIME_RX.search(line):
-                        location = line
+                lines = [line.strip() for line in text.splitlines() if line.strip()]
+                for i, line in enumerate(lines):
+                    if m_time.group(0) in line:
+                        if i + 1 < len(lines):
+                            loc_candidate = lines[i + 1]
+                            if not TIME_RX.search(loc_candidate):
+                                location = loc_candidate
                         break
 
             # Filtrera bort Utställningar
