@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
-Scrapar alla evenemangskort på Evenemangsguidens söksida.
+Scrapar alla evenemangskort på Evenemangsguidens söksida, inklusive tid och plats.
 
 • Öppnar sidan i headless-Chromium (Playwright)
-• Klickar “Ladda fler” tills knappen är borta ELLER inaktiv
+• Klickar “Ladda fler” tills knappen är borta eller inaktiv
 • Vilar 1,5 s efter varje klick så sista korten hinner renderas
-• Plockar titel, datum och länk ur varje kort
+• Plockar titel, datum, tid, plats och länk ur varje kort
 • Sparar data/events_YYYY-MM-DD.json
 """
-
 import json
 import datetime
 import pathlib
@@ -21,8 +20,9 @@ URL = (
     "https://evenemang.eskilstuna.se/"
     "evenemangsguiden/evenemangsguiden/sok-evenemang"
 )
-DATE_RX = re.compile(r"\d{4}-\d{2}-\d{2}")  # YYYY-MM-DD
-
+DATE_RX = re.compile(r"\d{4}-\d{2}-\d{2}")   # YYYY-MM-DD
+TIME_RX = re.compile(r"\d{1,2}[:.]\d{2}")    # hh:mm or h.mm
+LOC_RX  = re.compile(r" – (.+)$")           # Platsen kommer ofta efter ett “– ”
 
 async def scrape():
     async with async_playwright() as pw:
@@ -30,66 +30,48 @@ async def scrape():
         page = await browser.new_page()
         await page.goto(URL, wait_until="networkidle")
 
-        cards = []
+        # Ladda lazy-load
         while True:
-            # Leta efter klickbar knapp max 5 s
             try:
                 btn = await page.wait_for_selector(
                     "button:has-text('Ladda fler')", timeout=5000
                 )
             except PWTimeout:
-                break  # ingen knapp längre
-
-            # Avbryt om knappen är avaktiverad (<button disabled>)
+                break
             if await btn.get_attribute("disabled") is not None:
                 break
-
             await btn.scroll_into_view_if_needed()
             await btn.click()
-
-            # Vänta tills knappen försvinner (laddning startar)
             await page.wait_for_selector(
                 "button:has-text('Ladda fler')", state="detached"
             )
-            # Extra buffert så korten hinner renderas
             await page.wait_for_timeout(1500)
 
-        # Samla alla kort efter sista laddningen
+        # Hämta alla kort
         cards = await page.query_selector_all("article, li, div.hiq-event-card")
-
         events = []
+
         for c in cards:
             anchor = await c.query_selector("a")
             if not anchor:
                 continue
+
+            # Titel
             title = (await anchor.inner_text()).strip()
             if not title:
                 continue
+
+            # URL
             url = await anchor.get_attribute("href") or ""
-            if url and not url.startswith("http"):
+            if url.startswith("/"):
                 url = "https://evenemang.eskilstuna.se" + url
+
+            # Rådata för regex-sökning
             raw = await c.inner_text()
-            m = DATE_RX.search(raw)
-            date = m.group(0) if m else ""
 
-            events.append(
-                {
-                    "id": hashlib.sha1(url.encode()).hexdigest()[:12],
-                    "title": title,
-                    "date": date,
-                    "url": url,
-                }
-            )
+            # Datum
+            m_date = DATE_RX.search(raw)
+            date = m_date.group(0) if m_date else ""
 
-        await browser.close()
-
-        stamp = datetime.date.today().isoformat()
-        out_dir = pathlib.Path("data")
-        out_dir.mkdir(exist_ok=True)
-        path = out_dir / f"events_{stamp}.json"
-        path.write_text(json.dumps(events, ensure_ascii=False, indent=2))
-        print(f"Fetched {len(events)} events → {path}")
-
-
-if __name__ == "__main__":
-    asyncio.run(scrape())
+           
+::contentReference[oaicite:0]{index=0}
