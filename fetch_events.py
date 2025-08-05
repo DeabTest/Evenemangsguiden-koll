@@ -2,12 +2,14 @@
 """
 Scrapar alla evenemangskort på Evenemangsguidens söksida, och
 extraherar korrekt datum, tid och plats.
+
 • Headless Playwright
 • Klickar “Ladda fler” tills knappen är borta eller disabled
 • Väntar 1,5 s efter varje klick
-• Plockar titel, datum, tid och plats
-• Markerar nya events
-• Sparar data/events_YYYY-MM-DD.json
+• Rensar titeln från datum och tid
+• Plockar datum, tid och plats med regex
+• Markerar nya events via föregående fil
+• Sorterar och sparar data/events_YYYY-MM-DD.json
 """
 import json
 import datetime
@@ -18,13 +20,13 @@ import re
 import sys
 from playwright.async_api import async_playwright, TimeoutError as PWTimeout
 
-# Konfiguration
+# --- KONFIGURATION ---
 URL = (
     "https://evenemang.eskilstuna.se/"
     "evenemangsguiden/evenemangsguiden/sok-evenemang"
 )
-DATE_RX = re.compile(r"(\d{2} [a-z]{3}(?: – \d{2} [a-z]{3})?)", re.IGNORECASE)  
-TIME_RX = re.compile(r"(\d{1,2}[.:]\d{2})")
+DATE_RX = re.compile(r"\d{2} [a-z]{3}(?: – \d{2} [a-z]{3})?", re.IGNORECASE)
+TIME_RX = re.compile(r"\d{1,2}[.:]\d{2}")
 DATA_DIR = pathlib.Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 TODAY = datetime.date.today().isoformat()
@@ -35,7 +37,7 @@ def gen_id(href: str) -> str:
 
 def load_previous_ids() -> set:
     files = sorted(DATA_DIR.glob("events_*.json"))
-    if len(files) <= 1:
+    if len(files) < 2:
         return set()
     prev = json.loads(files[-2].read_text(encoding="utf-8"))
     return {e["id"] for e in prev}
@@ -54,7 +56,6 @@ async def scrape_events() -> list[dict]:
                 break
             if await btn.get_attribute("disabled"):
                 break
-            await btn.scroll_into_view_if_needed()
             await btn.click()
             await page.wait_for_timeout(1500)
 
@@ -62,37 +63,50 @@ async def scrape_events() -> list[dict]:
         events = []
 
         for c in cards:
-            txt = await c.inner_text()
+            text = await c.inner_text()
 
-            # Titelrad (kan innehålla datum och ev radbrytningar)
-            title = (await (await c.query_selector("a")).inner_text()).strip()
-            if not title:
+            # Hitta href
+            a = await c.query_selector("a")
+            if not a:
                 continue
-            href = (await c.get_attribute("href") or "").strip()
+            href = (await a.get_attribute("href") or "").strip()
             if href.startswith("/"):
                 href = "https://evenemang.eskilstuna.se" + href
 
-            # Datum från titelrad
-            m_date = DATE_RX.search(txt)
-            date = m_date.group(1) if m_date else ""
+            # Rå titel = allt i <a>
+            raw_title = (await a.inner_text()).strip()
 
-            # Tid (första matchen)
-            m_time = TIME_RX.search(txt)
-            time_str = m_time.group(1) if m_time else ""
+            # Rensa bort datum- och tidsrader från titeln
+            lines = [ln.strip() for ln in raw_title.splitlines() if ln.strip()]
+            title_lines = [
+                ln for ln in lines
+                if not DATE_RX.fullmatch(ln) and not TIME_RX.search(ln)
+            ]
+            title = title_lines[0] if title_lines else lines[0]
 
-            # Plats: rad efter tid
-            loc = ""
+            # Datum
+            m_date = DATE_RX.search(text)
+            date = m_date.group(0) if m_date else ""
+
+            # Tid
+            m_time = TIME_RX.search(text)
+            time_str = m_time.group(0) if m_time else ""
+
+            # Plats: första ”icke-datum/tid”-raden efter tid
+            location = ""
             if m_time:
-                tail = txt[m_time.end():].splitlines()
-                for line in tail:
-                    l = line.strip()
-                    if not l or TIME_RX.search(l):
+                tail = text[m_time.end():].splitlines()
+                for ln in tail:
+                    ln = ln.strip()
+                    if not ln or TIME_RX.search(ln) or DATE_RX.fullmatch(ln):
                         continue
-                    loc = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", l)
+                    # ta bort icke-bokstav i början
+                    location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", ln)
                     break
 
-            # Filtrera utställningar
-            if "Utställningar" in (await c.get_attribute("data-category") or ""):
+            # Filtrera Utställningar
+            cat = await c.get_attribute("data-category") or ""
+            if "Utställningar" in cat:
                 continue
 
             ev = {
@@ -100,7 +114,7 @@ async def scrape_events() -> list[dict]:
                 "title":    title,
                 "date":     date,
                 "time":     time_str,
-                "location": loc,
+                "location": location,
                 "url":      href,
             }
             events.append(ev)
@@ -117,7 +131,7 @@ def main():
     try:
         events = asyncio.run(scrape_events())
         mark_new(events)
-        # Sortera på datum, tid, titel
+        # Sortera snyggt
         events.sort(key=lambda e: (e["date"], e["time"], e["title"]))
         with OUTFILE.open("w", encoding="utf-8") as f:
             json.dump(events, f, ensure_ascii=False, indent=2)
