@@ -1,13 +1,15 @@
 name: Eskilstuna events watcher
 
-# Workflow-tokenen behöver kunna pusha ny data och deploya Pages
+###############################################################################
+# GitHub-tokenen måste kunna pusha data och publicera GitHub Pages
 permissions:
   contents: write
   pages: write
   id-token: write
+###############################################################################
 
 on:
-  # Schemalagd körning – vardagar 07:00 UTC (08:00 svensk vintertid / 09:00 sommartid)
+  # Vardagar 07:00 UTC  (08:00 svensk vintertid / 09:00 sommartid)
   schedule:
     - cron: '0 7 * * 1-5'
   # Manuell start via Actions-fliken
@@ -18,37 +20,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #######################################################################
-      # 1. Checka ut repo:t
-      #######################################################################
+      #########################################################################
+      # 1 Checka ut repo:t
+      #########################################################################
       - name: Check out code
         uses: actions/checkout@v4
 
-      #######################################################################
-      # 2. Installera Python 3.11
-      #######################################################################
+      #########################################################################
+      # 2 Python 3.11
+      #########################################################################
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      #######################################################################
-      # 3. Installera beroenden + Playwright-Chromium
-      #######################################################################
+      #########################################################################
+      # 3 Installera Python-paket + Chromium-browser
+      #########################################################################
       - name: Install Python deps and browser
         run: |
           pip install -r requirements.txt
-          playwright install --with-deps chromium
+          playwright install chromium          # ← utan --with-deps
 
-      #######################################################################
-      # 4. Kör scrapern (Playwright)
-      #######################################################################
+      #########################################################################
+      # 4 Kör Playwright-scrapern
+      #########################################################################
       - name: Run scraper
         run: python fetch_events.py
 
-      #######################################################################
-      # 5. Bygg HTML-sidan från dagens JSON
-      #######################################################################
+      #########################################################################
+      # 5 Bygg HTML-sidan från dagens JSON
+      #########################################################################
       - name: Build HTML list
         run: |
           python - <<'PY'
@@ -61,6 +63,33 @@ jobs:
           pubdir.joinpath("index.html").write_text(html, encoding="utf-8")
           PY
 
-      #######################################################################
-      # 6. Commit + push om data/-katalogen ändrats
-      #########################
+      #########################################################################
+      # 6 Commit + push om data/ har ändrats
+      #########################################################################
+      - name: Commit data (if changed)
+        id: diff
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name  "github-actions[bot]"
+          if [[ $(git status --porcelain=data/ | wc -l) -gt 0 ]]; then
+            git add data/
+            git commit -m "data: update $(date -u +'%Y-%m-%d')"
+            echo "changed=yes" >> $GITHUB_OUTPUT
+          else
+            echo "changed=no"  >> $GITHUB_OUTPUT
+          fi
+
+      - name: Push commit
+        if: steps.diff.outputs.changed == 'yes'
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      #########################################################################
+      # 7 Publicera HTML på GitHub Pages
+      #########################################################################
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
