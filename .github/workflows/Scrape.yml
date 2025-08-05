@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run scraper
-        run: python fetch_events.py
+      - name: Run inspector  # tillfälligt
+        run: python inspect_events.py
 
       - name: Build HTML list
         run: |
