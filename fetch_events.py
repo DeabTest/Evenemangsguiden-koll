@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Scrapar alla evenemangskort (Evenemang-fliken) med Playwright.
+Scrapar alla evenemangskort på Evenemangsguidens söksida.
 
-• Klickar “Ladda fler” tills två försök i rad inte ger fler kort
-• Efter varje klick väntar upp till 6 s på att antalet kort växer
+• Klickar ”Ladda fler” tills två försök i rad inte ger fler kort
+• Vilar max 6 s mellan klick om sidan är långsam
 • Sparar data/events_YYYY-MM-DD.json
 """
 import json, datetime, pathlib, hashlib, asyncio, re, time
@@ -19,9 +19,7 @@ async def scrape():
         await page.goto(URL, wait_until="networkidle")
 
         prev_count, stable_rounds = 0, 0
-
         while True:
-            # hitta klickbar knapp, annars är vi klara
             try:
                 btn = await page.wait_for_selector("button:has-text('Ladda fler')", timeout=5000)
             except PWTimeout:
@@ -31,9 +29,8 @@ async def scrape():
 
             await btn.scroll_into_view_if_needed()
             await btn.click()
-
-            # vänta tills knappen försvinner (laddning start) & kort laddas in
             await page.wait_for_selector("button:has-text('Ladda fler')", state="detached")
+
             t0 = time.time()
             while True:
                 curr_count = len(await page.query_selector_all("article, li, div.hiq-event-card"))
@@ -41,15 +38,14 @@ async def scrape():
                     prev_count = curr_count
                     stable_rounds = 0
                     break
-                if time.time() - t0 > 6:      # max 6 s väntan
+                if time.time() - t0 > 6:
                     stable_rounds += 1
                     break
                 await page.wait_for_timeout(500)
 
             if stable_rounds >= 2:
-                break   # två klick i rad utan fler kort → klart
+                break  # två klick utan fler kort
 
-        # hämta slutliga kortlistan
         cards = await page.query_selector_all("article, li, div.hiq-event-card")
         events = []
         for c in cards:
@@ -67,7 +63,7 @@ async def scrape():
             date = m.group(0) if m else ""
 
             events.append({
-                "id":   hashlib.sha1(url.encode()).hexdigest()[:12],
+                "id": hashlib.sha1(url.encode()).hexdigest()[:12],
                 "title": title,
                 "date":  date,
                 "url":   url,
@@ -76,4 +72,10 @@ async def scrape():
         await browser.close()
 
         stamp = datetime.date.today().isoformat()
-        out = pathlib.Path("dat
+        out_dir = pathlib.Path("data"); out_dir.mkdir(exist_ok=True)
+        outfile = out_dir / f"events_{stamp}.json"
+        outfile.write_text(json.dumps(events, ensure_ascii=False, indent=2))
+        print(f"Fetched {len(events)} events → {outfile}")
+
+if __name__ == "__main__":
+    asyncio.run(scrape())
