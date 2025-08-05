@@ -8,8 +8,9 @@ extraherar korrekt datum, tid och plats med rätt mellanslag.
 • Väntar 1,5 s efter varje klick
 • Plockar titel via <a>
 • Plockar datum via DATE_RX, tid via TIME_RX
-• Plockar plats som text efter tid
+• Plockar plats som första platsliknande rad efter tid
 • Sparar data/events_YYYY-MM-DD.json
+• Skriver ut evenemangen i formatet: 06 dec Titel 18.00 Plats
 """
 import json
 import datetime
@@ -71,12 +72,15 @@ async def scrape():
             m_time = TIME_RX.search(text)
             time_str = m_time.group(0) if m_time else ""
 
-            # Plats: det som kommer efter tiden
+            # Plats: första rad efter tid som ser ut som plats
             location = ""
             if m_time:
                 loc_part = text[m_time.end():].strip()
-                # Ta bort eventuell inledande icke-bokstav (t.ex. punkter eller mellanslag)
-                location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", loc_part)
+                lines = [line.strip() for line in loc_part.splitlines() if line.strip()]
+                for line in lines:
+                    if len(line) > 2 and not TIME_RX.search(line):
+                        location = line
+                        break
 
             # Filtrera bort Utställningar
             cat = await c.get_attribute("data-category") or ""
@@ -104,7 +108,18 @@ async def scrape():
     path = out_dir / f"events_{today}.json"
     with path.open("w", encoding="utf-8") as f:
         json.dump(events, f, ensure_ascii=False, indent=2)
-    print(f"Fetched {len(events)} events → {path}")
+
+    # Skriv ut i formatet: 06 dec Titel 18.00 Plats
+    from datetime import datetime
+    for ev in events:
+        try:
+            dt = datetime.strptime(ev["date"], "%Y-%m-%d")
+            date_str = dt.strftime("%d %b").lower()  # 06 dec
+        except:
+            date_str = ev["date"]
+        print(f"{date_str} {ev['title']} {ev['time']} {ev['location']}")
+
+    print(f"\nFetched {len(events)} events → {path}")
 
 if __name__ == "__main__":
     try:
