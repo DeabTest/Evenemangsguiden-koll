@@ -7,10 +7,10 @@ permissions:
 
 on:
   schedule:
-    # Sommartid (CEST = UTC+2): 06–20 CEST → 04–18 UTC
-    - cron: '0 4-18 * * 1-5'
-    # Vintertid (CET = UTC+1): 06–20 CET → 05–19 UTC
-    - cron: '0 5-19 * * 1-5'
+    # Vintertid (CET, UTC+1): varje heltimme 06–20, mån-fre
+    - cron: '0 5-19 * 11-2 1-5'
+    # Sommartid (CEST, UTC+2): varje heltimme 06–20, mån-fre
+    - cron: '0 4-18 * 3-10 1-5'
   workflow_dispatch:
 
 jobs:
