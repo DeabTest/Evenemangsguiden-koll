@@ -45,8 +45,9 @@ def fetch_page(page: int):
     r.raise_for_status()
     try:
         js = r.json()
-    except ValueError:
-        raise RuntimeError(f"Ogil­tigt JSON (sid {page}) – fick {r.text[:120]}…")
+        except ValueError:
+        print("RAW-svar:", r.text[:500], file=sys.stderr)   # <-- NYTT
+        raise RuntimeError(f"Ogil­tigt JSON (sid {page})")
     return parse_response(js, page)
 
 def fetch_all():
@@ -91,3 +92,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
