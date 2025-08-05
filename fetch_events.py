@@ -58,41 +58,36 @@ async def scrape():
         today = datetime.date.today()
 
         for c in cards:
-            # Hitta datum-text i kortet
-            txt = await c.inner_text()
+            text = await c.inner_text()
 
-            # DATE_RX: hitta första dd mon eller dd mon - dd mon
-            # Vi plockar alltid startdatum
-            date_match = re.search(r"(\d{1,2})\s*(jan|feb|mar|apr|maj|jun|jul|aug|sep|okt|nov|dec)", txt, re.IGNORECASE)
-            if date_match:
-                day = int(date_match.group(1))
-                mon_abbr = date_match.group(2).lower()
-                month = MONTH_MAP[mon_abbr]
-                year = today.year + (1 if month < today.month else 0)
-                date_iso = f"{year}-{month:02d}-{day:02d}"
-            else:
-                # Hoppa över om inget datum
+            # Extract date
+            date_match = re.search(r"(\d{1,2})\s*(jan|feb|mar|apr|maj|jun|jul|aug|sep|okt|nov|dec)", text, re.IGNORECASE)
+            if not date_match:
                 continue
+            day = int(date_match.group(1))
+            mon_abbr = date_match.group(2).lower()
+            month = MONTH_MAP[mon_abbr]
+            year = today.year + (1 if month < today.month else 0)
+            date_iso = f"{year}-{month:02d}-{day:02d}"
 
-            # Tid
-            time_match = TIME_RX.search(txt)
-            time_str = ""
-            if time_match:
-                # normalisera punkt till kolon
-                time_str = time_match.group(1).replace(".", ":")
-            
-            # Plats: text efter tid
+            # Extract time
+            time_match = TIME_RX.search(text)
+            time_str = time_match.group(1).replace('.', ':') if time_match else "00:00"
+
+            # Extract location (text after time)
             location = ""
             if time_match:
-                loc_raw = txt[time_match.end():].strip()
-                # ta bort inledande skiljetecken
+                loc_raw = text[time_match.end():].strip()
                 location = re.sub(r"^[^A-Za-zÅÄÖåäö]+", "", loc_raw)
 
             # Titel & URL
             a = await c.query_selector("a")
             if not a:
                 continue
-            title = (await a.inner_text()).strip()
+            raw_title = await a.inner_text()
+            # Title kan innehålla datum och tid → bara mellans rabbning
+            lines = [l.strip() for l in raw_title.splitlines() if l.strip()]
+            title = lines[1] if len(lines) >= 2 else lines[0]
             if not title:
                 continue
             href = (await a.get_attribute("href")) or ""
@@ -111,7 +106,7 @@ async def scrape():
                 "id":       ev_id,
                 "title":    title,
                 "date":     date_iso,
-                "time":     time_str or "00:00",
+                "time":     time_str,
                 "location": location,
                 "url":      href,
             })
@@ -124,8 +119,7 @@ async def scrape():
     # Spara JSON
     out_dir = pathlib.Path("data")
     out_dir.mkdir(exist_ok=True)
-    today_str = today.isoformat()
-    path = out_dir / f"events_{today_str}.json"
+    path = out_dir / f"events_{today.isoformat()}.json"
     with path.open("w", encoding="utf-8") as f:
         json.dump(events, f, ensure_ascii=False, indent=2)
     print(f"Fetched {len(events)} events → {path}")
