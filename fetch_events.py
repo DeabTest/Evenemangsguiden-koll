@@ -4,13 +4,13 @@ Scrapar alla evenemangskort på Evenemangsguidens söksida, och
 extraherar korrekt datum, tid och plats med rätt mellanslag.
 
 • Headless Playwright
-• Klickar “Ladda fler” tills knappen är borta eller disabled
-• Väntar 1,5 s efter varje klick
+• Klickar “Ladda fler” tills inga nya kort dyker upp
+• Väntar 2 s efter varje klick
 • Plockar titel via <a>
 • Plockar datum via DATE_RX, tid via TIME_RX
-• Plockar plats som separat rad efter tiden
+• Plockar plats efter tid, rensat och med mellanslag
 • Sparar data/events_YYYY-MM-DD.json
-• Skriver ut evenemangen i formatet: 06 dec Titel 18.00 Plats
+• Skriver bara ut hur många event som hämtats
 """
 import json
 import datetime
@@ -34,19 +34,22 @@ async def scrape():
         page = await browser.new_page()
         await page.goto(URL, wait_until="networkidle")
 
-        # Lazy-load: klicka “Ladda fler” tills borta eller disabled
+        # Klicka “Ladda fler” tills inga nya kort dyker upp
+        previous_count = -1
         while True:
-            try:
-                btn = await page.wait_for_selector("button:has-text('Ladda fler')", timeout=5000)
-            except PWTimeout:
+            cards = await page.query_selector_all("article, li, div.hiq-event-card")
+            current_count = len(cards)
+            if current_count == previous_count:
                 break
-            if await btn.get_attribute("disabled") is not None:
+            previous_count = current_count
+            btn = await page.query_selector("button:has-text('Ladda fler')")
+            if not btn:
                 break
             await btn.scroll_into_view_if_needed()
             await btn.click()
-            await page.wait_for_selector("button:has-text('Ladda fler')", state="detached")
-            await page.wait_for_timeout(1500)
+            await page.wait_for_timeout(2000)  # ge tid att ladda nya kort
 
+        # Hämta kort
         cards = await page.query_selector_all("article, li, div.hiq-event-card")
         events = []
 
@@ -72,17 +75,20 @@ async def scrape():
             m_time = TIME_RX.search(text)
             time_str = m_time.group(0) if m_time else ""
 
-            # Plats: försök plocka separat rad efter tiden
+            # Plats: efter tiden, rensad
             location = ""
             if m_time:
-                lines = [line.strip() for line in text.splitlines() if line.strip()]
-                for i, line in enumerate(lines):
-                    if m_time.group(0) in line:
-                        if i + 1 < len(lines):
-                            loc_candidate = lines[i + 1]
-                            if not TIME_RX.search(loc_candidate):
-                                location = loc_candidate
+                after_time = text[m_time.end():].strip()
+                after_time = re.sub(r"^[^\wÅÄÖåäö]+", "", after_time)
+                words = after_time.split()
+                location_words = []
+                for word in words:
+                    if TIME_RX.search(word):
                         break
+                    location_words.append(word)
+                    if len(location_words) >= 6:
+                        break
+                location = " ".join(location_words)
 
             # Filtrera bort Utställningar
             cat = await c.get_attribute("data-category") or ""
@@ -111,16 +117,8 @@ async def scrape():
     with path.open("w", encoding="utf-8") as f:
         json.dump(events, f, ensure_ascii=False, indent=2)
 
-    # Skriv ut i formatet: 06 dec Titel 18.00 Plats
-    for ev in events:
-        try:
-            dt = datetime.datetime.strptime(ev["date"], "%Y-%m-%d")
-            date_str = dt.strftime("%d %b").lower()
-        except:
-            date_str = ev["date"]
-        print(f"{date_str} {ev['title']} {ev['time']} {ev['location']}")
-
-    print(f"\nFetched {len(events)} events → {path}")
+    # Endast sammanfattning i terminalen
+    print(f"Fetched {len(events)} events → {path}")
 
 if __name__ == "__main__":
     try:
