@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Scrapar alla evenemang genom att köra fetch() inifrån sidan i Playwright.
+Scrapar alla evenemang via webbläsar-fetch i Playwright – korrekt
+URL-enkodning av alla query-parametrar.
 
 • Navigerar till söksidan (samma origin = inga CORS-problem)
-• Kör JS som loopar page=0,1,2… med count=250 tills tom lista
-• Filtrerar bort Utställningar
+• Kör JS som anropar fetch() med URLSearchParams tills tom lista
+• Filtrerar bort “Utställningar”
 • Sparar data/events_YYYY-MM-DD.json
 """
 import asyncio
@@ -18,19 +19,20 @@ from playwright.async_api import async_playwright
 
 START_URL = "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/sok-evenemang"
 
+# JavaScript som körs inifrån sidan, med rätt URLSearchParams
 API_JS = """
 async () => {
   const all = [];
   let page = 0;
   const size = 250;
   while (true) {
-    // Bygg relativ URL mot samma origin
-    const url = `/rest-api/Evenemang/events?count=${size}` +
-                `&filters={}` +
-                `&page=${page}` +
-                `&query=` +
-                `&timestamp=${Date.now()}`;
-    const res = await fetch(url, { credentials: 'same-origin' });
+    const url = new URL('/rest-api/Evenemang/events', window.location.origin);
+    url.searchParams.set('count', size);
+    url.searchParams.set('filters', JSON.stringify({}));  // korrekt encoding
+    url.searchParams.set('page', page);
+    url.searchParams.set('query', '');
+    url.searchParams.set('timestamp', Date.now());
+    const res = await fetch(url.href, { credentials: 'same-origin' });
     if (!res.ok) {
       throw new Error(`API ${res.status} på page=${page}`);
     }
@@ -64,8 +66,9 @@ async def fetch_events():
     async with async_playwright() as pw:
         browser = await pw.chromium.launch()
         page = await browser.new_page()
-        # Navigera till sidan för att få rätt cookies/origin
+        # Navigera till söksidan för att få rätt cookies/session
         await page.goto(START_URL, wait_until="networkidle")
+        # Kör fetch-anropet inifrån sidan
         raw = await page.evaluate(API_JS)
         await browser.close()
     return [normalize(ev) for ev in raw if normalize(ev)]
