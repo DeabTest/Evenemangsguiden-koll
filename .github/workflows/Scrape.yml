@@ -7,96 +7,76 @@ permissions:
 
 on:
   schedule:
-    - cron: '0 7 * * 1-5'          # 07 UTC vardagar
-  workflow_dispatch:               # manuella körningar
+    - cron: '0 7 * * 1-5'     # 07:00 UTC vardagar
+  workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-    ##########################################################################
-    # 1. Hämta repo
-    ##########################################################################
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    ##########################################################################
-    # 2. Python 3.11
-    ##########################################################################
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-    ##########################################################################
-    # 3. Installera beroenden + headless-Chromium
-    ##########################################################################
-    - name: Install deps and browser
-      run: |
-        pip install -r requirements.txt
-        playwright install chromium
+      - name: Install deps and browser
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
 
-    ##########################################################################
-    # 4. Kör Playwright-scraper
-    ##########################################################################
-    - name: Run scraper
-      run: python fetch_events.py
+      - name: Run scraper
+        run: python fetch_events.py
 
-    ##########################################################################
-    # 5. Bygg HTML + markera NYTT
-    #    • Hämtar förra versionen av dagens fil via `git show HEAD:…`
-    ##########################################################################
-    - name: Build HTML list
-      run: |
-        python - <<'PY'
-        import json, datetime, pathlib, subprocess, jinja2, sys
-        stamp = datetime.date.today().isoformat()
-        curr_path = pathlib.Path(f"data/events_{stamp}.json")
-        curr      = json.load(curr_path.open(encoding="utf-8"))
+      - name: Build HTML list
+        run: |
+          python - <<'PY'
+          import json, datetime, pathlib, subprocess, jinja2
+          stamp = datetime.date.today().isoformat()
+          curr_path = pathlib.Path(f"data/events_{stamp}.json")
+          events = json.load(curr_path.open(encoding="utf-8"))
+          count  = len(events)
 
-        # Försök läsa förra versionen av dagens fil från HEAD-commit
-        try:
-            prev_raw = subprocess.check_output(
-                ["git", "show", f"HEAD:{curr_path}"], text=True
-            )
-            prev_set = {e["id"] for e in json.loads(prev_raw)}
-        except subprocess.CalledProcessError:
-            prev_set = set()   # ingen tidigare fil → allt är nytt
+          # Föregående version av dagens fil → markera “Nytt”
+          try:
+              prev_raw = subprocess.check_output(
+                  ["git", "show", f"HEAD:{curr_path}"], text=True
+              )
+              prev_set = {e["id"] for e in json.loads(prev_raw)}
+          except subprocess.CalledProcessError:
+              prev_set = set()
 
-        for ev in curr:
-            ev["new"] = ev["id"] not in prev_set
+          for ev in events:
+              ev["new"] = ev["id"] not in prev_set
 
-        env  = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
-        html = env.get_template("template.html").render(STAMP=stamp, events=curr)
+          tpl = jinja2.Environment(loader=jinja2.FileSystemLoader("."))\
+                .get_template("template.html")
+          html = tpl.render(STAMP=stamp, EVENTS=events, events=events, COUNT=count)
 
-        pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
-        pub.joinpath("index.html").write_text(html, encoding="utf-8")
-        PY
+          pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
+          pub.joinpath("index.html").write_text(html, encoding="utf-8")
+          PY
 
-    ##########################################################################
-    # 6. Commit + push om data ändrats
-    ##########################################################################
-    - name: Commit data (if changed)
-      id: diff
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name  "github-actions[bot]"
-        if [[ $(git status --porcelain=data/ | wc -l) -gt 0 ]]; then
-          git add data/
-          git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')"
-          echo "changed=yes" >> $GITHUB_OUTPUT
-        else
-          echo "changed=no"  >> $GITHUB_OUTPUT
-        fi
+      - name: Commit data (if changed)
+        id: diff
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name  "github-actions[bot]"
+          if [[ $(git status --porcelain=data/ | wc -l) -gt 0 ]]; then
+            git add data/
+            git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')"
+            echo "changed=yes" >> $GITHUB_OUTPUT
+          else
+            echo "changed=no"  >> $GITHUB_OUTPUT
+          fi
 
-    - if: steps.diff.outputs.changed == 'yes'
-      uses: ad-m/github-push-action@v0.8.0
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - if: steps.diff.outputs.changed == 'yes'
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-    ##########################################################################
-    # 7. Publicera på GitHub Pages
-    ##########################################################################
-    - uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
