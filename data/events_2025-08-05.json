@@ -42,16 +42,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.73f882f41980736fe33d757"
   },
   {
-    "id": "7a1f42e2cae3",
-    "title": "06 aug\nTesta handboll med Guif (6-12 år) - Skogsängen\n10.00Skogsängsskolan",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f776ff2d"
-  },
-  {
     "id": "957bccf067f8",
     "title": "06 aug\nSommarlovshandboll med Gökstens BK - Gökstensskolan\n10.00Gökstensskolan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6064365"
+  },
+  {
+    "id": "7a1f42e2cae3",
+    "title": "06 aug\nTesta handboll med Guif (6-12 år) - Skogsängen\n10.00Skogsängsskolan",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f776ff2d"
   },
   {
     "id": "06736fe39638",
@@ -78,12 +78,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92fe57"
   },
   {
-    "id": "cfae2c785aff",
-    "title": "06 aug\nLässatsningen och Biblioteksbussen besöker Mälarbaden\n13.00Mälarbaden",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7228899"
-  },
-  {
     "id": "9e543023f692",
     "title": "06 aug\nWalk and Talk\n13.00Tomaskyrkan",
     "date": "",
@@ -94,6 +88,12 @@
     "title": "06 aug\nProva på brottning (6-10 år)\n13.00MunktellArenan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e9249ff"
+  },
+  {
+    "id": "cfae2c785aff",
+    "title": "06 aug\nLässatsningen och Biblioteksbussen besöker Mälarbaden\n13.00Mälarbaden",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7228899"
   },
   {
     "id": "faf1a9f0d638",
@@ -198,16 +198,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92fe77"
   },
   {
-    "id": "db0dcc74bceb",
-    "title": "07 aug\nLässatsningen och Biblioteksbussen besöker Sundbyholm\n13.00Sundbyholms gästhamn",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc722a98f"
-  },
-  {
     "id": "95b508ea7461",
     "title": "07 aug\nProva på brottning (6-10 år)\n13.00MunktellArenan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e924a10"
+  },
+  {
+    "id": "db0dcc74bceb",
+    "title": "07 aug\nLässatsningen och Biblioteksbussen besöker Sundbyholm\n13.00Sundbyholms gästhamn",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc722a98f"
   },
   {
     "id": "02416f55334c",
@@ -252,12 +252,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.73f882f41980736fe33d777"
   },
   {
-    "id": "2cbb90e5db5d",
-    "title": "08 aug\nTesta handboll med Guif (6-12 år) - Fröslunda\n11.00Fröslunda",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f776fbf3"
-  },
-  {
     "id": "1c02dedf65e8",
     "title": "08 aug\nSommarlovshandboll med Gökstens BK - Strömsholmen\n11.00Strömsholmen",
     "date": "",
@@ -268,6 +262,12 @@
     "title": "08 aug\nSommaröppet i konstverkstan\n11.00Eskilstuna konstmuseum",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b602673"
+  },
+  {
+    "id": "2cbb90e5db5d",
+    "title": "08 aug\nTesta handboll med Guif (6-12 år) - Fröslunda\n11.00Fröslunda",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f776fbf3"
   },
   {
     "id": "fe4b5bb6b451",
@@ -288,16 +288,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72e036d"
   },
   {
-    "id": "538171495000",
-    "title": "08 aug\nAnsiktsmålning\n13.00Fristadstorget",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.390ce503198072dd18431c8"
-  },
-  {
     "id": "3b9655645e2b",
     "title": "08 aug\nVisning av Rademachersmedjorna\n13.00Rademachersmedjorna",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92fe97"
+  },
+  {
+    "id": "538171495000",
+    "title": "08 aug\nAnsiktsmålning\n13.00Fristadstorget",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.390ce503198072dd18431c8"
   },
   {
     "id": "251cc984e39f",
@@ -378,16 +378,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92feb7"
   },
   {
-    "id": "06c89555bf3e",
-    "title": "09 aug\nVisning av Rademachersmedjorna\n15.00Rademachersmedjorna",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92fec7"
-  },
-  {
     "id": "0eede065d41e",
     "title": "09 aug\nMinigolf med Kurdiska föreningen\n15.00MunktellArenan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9e7e61"
+  },
+  {
+    "id": "06c89555bf3e",
+    "title": "09 aug\nVisning av Rademachersmedjorna\n15.00Rademachersmedjorna",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92fec7"
   },
   {
     "id": "f21e0313c7ef",
@@ -426,16 +426,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92fee7"
   },
   {
-    "id": "6469b6211811",
-    "title": "10 aug\nGuidning vid Sörmlandsgården\n14.00Sörmlandsgården",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.389f0167197e9e33bfbd450"
-  },
-  {
     "id": "e5e64c670765",
     "title": "10 aug\nFotboll med Kurdiska föreningen\n14.00Ekängens IP",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9e820d"
+  },
+  {
+    "id": "6469b6211811",
+    "title": "10 aug\nGuidning vid Sörmlandsgården\n14.00Sörmlandsgården",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.389f0167197e9e33bfbd450"
   },
   {
     "id": "0016bac3aa6f",
@@ -474,16 +474,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f3776db0"
   },
   {
-    "id": "f35158b9704d",
-    "title": "11 aug\nBiblioteksbussen med Brum och Fnisse besöker torget\n13.00Fristadstorget",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.390ce503198072dd1841c39"
-  },
-  {
     "id": "ac04013e5be3",
     "title": "11 aug\nProva på brottning (6-10 år)\n13.00MunktellArenan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e924a32"
+  },
+  {
+    "id": "f35158b9704d",
+    "title": "11 aug\nBiblioteksbussen med Brum och Fnisse besöker torget\n13.00Fristadstorget",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.390ce503198072dd1841c39"
   },
   {
     "id": "23c39f609263",
@@ -510,16 +510,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f77124a0"
   },
   {
-    "id": "2b7428891a56",
-    "title": "12 aug\nMusik och quiz med Clas\n11.00Bryggan vid Sundbyholms gästhamn",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f3712acc"
-  },
-  {
     "id": "549f500c992f",
     "title": "12 aug\nVisning på lätt svenska\n11.00Rademachersmedjorna",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.39b2f6d21975d52967d3b1a8"
+  },
+  {
+    "id": "2b7428891a56",
+    "title": "12 aug\nMusik och quiz med Clas\n11.00Bryggan vid Sundbyholms gästhamn",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f3712acc"
   },
   {
     "id": "bcde0ac08b58",
@@ -630,16 +630,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92ffdd"
   },
   {
-    "id": "21ca3323255f",
-    "title": "13 aug\nLässatsningen och Biblioteksbussen besöker Viptorp\n13.00Viptorp",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc722a9bf"
-  },
-  {
     "id": "0633e95a57f9",
     "title": "13 aug\nProva på brottning (6-10 år)\n13.00MunktellArenan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e924a54"
+  },
+  {
+    "id": "21ca3323255f",
+    "title": "13 aug\nLässatsningen och Biblioteksbussen besöker Viptorp\n13.00Viptorp",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc722a9bf"
   },
   {
     "id": "58cfaef8918a",
@@ -672,12 +672,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.389f0167197e9e33bfbd403"
   },
   {
-    "id": "ae8fa8e01c8e",
-    "title": "14 aug\nProva på truppgymnastik\n10.00Skjulstahallen",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7281585"
-  },
-  {
     "id": "89cc05503f5c",
     "title": "14 aug\nSommarlovshandboll med Gökstens BK - Ärstaskolan\n10.00Ärstaskolan",
     "date": "",
@@ -688,6 +682,12 @@
     "title": "14 aug\nSmid och slöjda med Sörmlands museum\n10.00Rademachersmedjorna",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f77124c0"
+  },
+  {
+    "id": "ae8fa8e01c8e",
+    "title": "14 aug\nProva på truppgymnastik\n10.00Skjulstahallen",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7281585"
   },
   {
     "id": "b15dc1bcd6e1",
@@ -726,16 +726,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa93006d"
   },
   {
-    "id": "613a28189419",
-    "title": "14 aug\nLässatsningen och Biblioteksbussen besöker Skogsängen\n13.00Skogsängen centrum",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc722a9db"
-  },
-  {
     "id": "aa7ee07c2884",
     "title": "14 aug\nProva på brottning (6-10 år)\n13.00MunktellArenan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e924a65"
+  },
+  {
+    "id": "613a28189419",
+    "title": "14 aug\nLässatsningen och Biblioteksbussen besöker Skogsängen\n13.00Skogsängen centrum",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc722a9db"
   },
   {
     "id": "a72f1da1659a",
@@ -744,16 +744,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa92fffd"
   },
   {
-    "id": "6f6eecc4b708",
-    "title": "14 aug\nSoft space - en dansföreställning\n15.00Lokomotivet",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e0422db7"
-  },
-  {
     "id": "4167e96af3ae",
     "title": "14 aug\nProva på brottning (10-18 år)\n15.00MunktellArenan",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e924957"
+  },
+  {
+    "id": "6f6eecc4b708",
+    "title": "14 aug\nSoft space - en dansföreställning\n15.00Lokomotivet",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e0422db7"
   },
   {
     "id": "6bbeefc0e0fa",
@@ -894,22 +894,34 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6026d7"
   },
   {
-    "id": "84928791064e",
-    "title": "16 aug\nVisning av Rademachersmedjorna\n13.00Rademachersmedjorna",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa93002d"
-  },
-  {
     "id": "50d059c34578",
     "title": "16 aug\nSagostund med sommartema\n13.00Stadsbiblioteket",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408c49"
   },
   {
+    "id": "84928791064e",
+    "title": "16 aug\nVisning av Rademachersmedjorna\n13.00Rademachersmedjorna",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa93002d"
+  },
+  {
     "id": "16fbf830b1e0",
     "title": "16 aug\nProva på ridning\n14.45Nyby Torshälla ridklubb",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e92c85e"
+  },
+  {
+    "id": "8a9abbbb4962",
+    "title": "16 aug\nBowling med Kurdiska föreningen\n15.00Eskilstuna Bowlingcenter",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9e7c30"
+  },
+  {
+    "id": "c598f5be31cd",
+    "title": "16 aug\nSommarlovshandboll med Gökstens BK - Krusgårdsparken\n15.00Krusgårdsparken, Torshälla",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b606476b"
   },
   {
     "id": "20a4719e91e5",
@@ -924,28 +936,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa93003d"
   },
   {
-    "id": "d9c99336c1d7",
-    "title": "16 aug\nEPA-träff på Summervibe\n15.00Strömsholmen",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.389f0167197e9e33bfb16b91"
-  },
-  {
     "id": "08bc8e34e440",
     "title": "16 aug\nSummervibe 2025\n15.00Strömsholmen",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.58289bab196f130cb0ce3679"
   },
   {
-    "id": "8a9abbbb4962",
-    "title": "16 aug\nBowling med Kurdiska föreningen\n15.00Eskilstuna Bowlingcenter",
+    "id": "d9c99336c1d7",
+    "title": "16 aug\nEPA-träff på Summervibe\n15.00Strömsholmen",
     "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9e7c30"
-  },
-  {
-    "id": "c598f5be31cd",
-    "title": "16 aug\nSommarlovshandboll med Gökstens BK - Krusgårdsparken\n15.00Krusgårdsparken, Torshälla",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b606476b"
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.389f0167197e9e33bfb16b91"
   },
   {
     "id": "3800f488b89e",
@@ -996,16 +996,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa93004d"
   },
   {
-    "id": "b97bcaddb131",
-    "title": "17 aug\nHantverksdag\n14.00Sörmlandsgården",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6e69f9f61982b3a0729f35"
-  },
-  {
     "id": "dc843719679c",
     "title": "17 aug\nSommaravslutning med Kurdiska föreningen\n14.00Kurdiska föreningen",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9e8532"
+  },
+  {
+    "id": "b97bcaddb131",
+    "title": "17 aug\nHantverksdag\n14.00Sörmlandsgården",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6e69f9f61982b3a0729f35"
   },
   {
     "id": "e76b78ffd505",
@@ -1404,12 +1404,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3336fff51870826353b149bc"
   },
   {
-    "id": "21b6ffb2809c",
-    "title": "13 sep\nHöstmarknad på Rademachersmedjorna\n10.00Rademachersmedjorna",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f61519f19807418cec11897"
-  },
-  {
     "id": "0a6e3ddc9914",
     "title": "13 sep\n50 år av konst\n10.00Form och Färgverkstaden, Rademachersmedjorna",
     "date": "",
@@ -1420,6 +1414,12 @@
     "title": "13 sep\nTorshälla marknad\n10.00Östra torget, Torshälla",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f240861717"
+  },
+  {
+    "id": "21b6ffb2809c",
+    "title": "13 sep\nHöstmarknad på Rademachersmedjorna\n10.00Rademachersmedjorna",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f61519f19807418cec11897"
   },
   {
     "id": "061703c2d7ee",
@@ -1452,6 +1452,12 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b230b3197d0d3bc128f054"
   },
   {
+    "id": "73155bd8a71a",
+    "title": "13 sep\nKulturnattens familjefest\n15.00Fristadstorget",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24082ee90"
+  },
+  {
     "id": "b2d4877a1de3",
     "title": "13 sep\nMinishow och workshop med Key Town Eskilstuna\n15.00Lokomotivet",
     "date": "",
@@ -1462,12 +1468,6 @@
     "title": "13 sep\nKäpphäst-hoppning\n15.00Fristadstorget",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f081b93"
-  },
-  {
-    "id": "73155bd8a71a",
-    "title": "13 sep\nKulturnattens familjefest\n15.00Fristadstorget",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24082ee90"
   },
   {
     "id": "471485ee13d1",
@@ -1482,16 +1482,10 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7e6f9210197f1aaa3e5ec9b5"
   },
   {
-    "id": "9244f9206218",
-    "title": "13 sep\nVernissage: Höstsalong\n16.00Galleri Borgenhag Holmqvist",
+    "id": "5acfb4bc87c5",
+    "title": "13 sep\nDansa med Teaterföreningen Sigurd\n16.00Fristadstorget",
     "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ed65e4"
-  },
-  {
-    "id": "e18849f2c444",
-    "title": "13 sep\nUpptäck Lilla stadsmuseet\n16.00Eskilstuna stadsmuseum",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f0f409"
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24082eba2"
   },
   {
     "id": "923a08d18b83",
@@ -1512,16 +1506,22 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1b5661931967cb902144b35"
   },
   {
+    "id": "9244f9206218",
+    "title": "13 sep\nVernissage: Höstsalong\n16.00Galleri Borgenhag Holmqvist",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ed65e4"
+  },
+  {
+    "id": "e18849f2c444",
+    "title": "13 sep\nUpptäck Lilla stadsmuseet\n16.00Eskilstuna stadsmuseum",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f0f409"
+  },
+  {
     "id": "7b341da1aa50",
     "title": "13 sep\nHaneberg Har Fest - grillkväll med Fatboy\n16.00Haneberg Säteri",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f1160187320db"
-  },
-  {
-    "id": "5acfb4bc87c5",
-    "title": "13 sep\nDansa med Teaterföreningen Sigurd\n16.00Fristadstorget",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24082eba2"
   },
   {
     "id": "e8eb5c28b3a5",
@@ -1536,22 +1536,28 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047a763"
   },
   {
-    "id": "3d3e151bc8eb",
-    "title": "13 sep\nMysryslig bilderboksbio\n16.30Stadsbiblioteket",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047abce"
-  },
-  {
     "id": "4c9e92a3b2ea",
     "title": "13 sep\nAllsång med ClownClubben\n16.30Fristadstorget",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24082e8b3"
   },
   {
-    "id": "27dc9dcd6e63",
-    "title": "13 sep\nPolitiker - en utställning\n17.00Eskilstuna folkhögskola",
+    "id": "3d3e151bc8eb",
+    "title": "13 sep\nMysryslig bilderboksbio\n16.30Stadsbiblioteket",
     "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ede54e"
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047abce"
+  },
+  {
+    "id": "c9359047ccfb",
+    "title": "13 sep\nWorkshop i cosplay\n17.00Eskilstuna folkhögskola",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa94fe"
+  },
+  {
+    "id": "10f60bf3dff3",
+    "title": "13 sep\nVärldskultur på Contrast\n17.00Contrast",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f240865199"
   },
   {
     "id": "8d17d76928a9",
@@ -1578,22 +1584,10 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b3fe0ed197c7efd9f8a98e8"
   },
   {
-    "id": "c9359047ccfb",
-    "title": "13 sep\nWorkshop i cosplay\n17.00Eskilstuna folkhögskola",
+    "id": "27dc9dcd6e63",
+    "title": "13 sep\nPolitiker - en utställning\n17.00Eskilstuna folkhögskola",
     "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa94fe"
-  },
-  {
-    "id": "10f60bf3dff3",
-    "title": "13 sep\nVärldskultur på Contrast\n17.00Contrast",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f240865199"
-  },
-  {
-    "id": "11d9e4c515ca",
-    "title": "13 sep\nRock- och popscenen\n17.00Lokomotivet",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5cacde9f195e9a3402c9299d"
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ede54e"
   },
   {
     "id": "0df74c8d0489",
@@ -1602,16 +1596,34 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24086c80b"
   },
   {
+    "id": "11d9e4c515ca",
+    "title": "13 sep\nRock- och popscenen\n17.00Lokomotivet",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5cacde9f195e9a3402c9299d"
+  },
+  {
     "id": "25b3e27c5004",
     "title": "13 sep\nUnderfundiga texter och berörande toner\n17.30Eskilstuna konstmuseum",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.10769b01197236dbd57e2468"
   },
   {
-    "id": "3854ed71017c",
-    "title": "13 sep\nVirve - Live\n18.00Eskilstuna folkhögskola",
+    "id": "4cfe2e3610ef",
+    "title": "13 sep\nOrgelhyss\n18.00Klosters kyrka",
     "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa9ef78"
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.39b2f6d21975d52967d335a1"
+  },
+  {
+    "id": "f6add6f06994",
+    "title": "13 sep\nÅngmaskinskörning\n18.00Eskilstuna stadsmuseum",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f240855da9"
+  },
+  {
+    "id": "06a713fd36f0",
+    "title": "13 sep\nDuo Timo Alakotila & Johanna Juhola\n18.00Scenkonst Sörmland",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6044f84"
   },
   {
     "id": "7c307e2394f7",
@@ -1632,28 +1644,16 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f116018776fc8"
   },
   {
+    "id": "3854ed71017c",
+    "title": "13 sep\nVirve - Live\n18.00Eskilstuna folkhögskola",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa9ef78"
+  },
+  {
     "id": "8f0522f6e69c",
     "title": "13 sep\nEpic Divas\n18.00Fristadstorget",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7e6f9210197f1aaa3e5ee43f"
-  },
-  {
-    "id": "06a713fd36f0",
-    "title": "13 sep\nDuo Timo Alakotila & Johanna Juhola\n18.00Scenkonst Sörmland",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6044f84"
-  },
-  {
-    "id": "4cfe2e3610ef",
-    "title": "13 sep\nOrgelhyss\n18.00Klosters kyrka",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.39b2f6d21975d52967d335a1"
-  },
-  {
-    "id": "f6add6f06994",
-    "title": "13 sep\nÅngmaskinskörning\n18.00Eskilstuna stadsmuseum",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f240855da9"
   },
   {
     "id": "8e07a4d3cf66",
@@ -1666,6 +1666,12 @@
     "title": "13 sep\nPopmusik och marsch med Skyttemusikkåren\n18.50Munktellmuseet",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.557c162197bf9bfa0710a30"
+  },
+  {
+    "id": "b531c5c78349",
+    "title": "13 sep\nHUVET - live på Eskilstuna folkhögskola\n19.00Eskilstuna folkhögskola",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.58289bab196f130cb0cc3ac6"
   },
   {
     "id": "adedc9a09601",
@@ -1686,18 +1692,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.442530db197a1eab2d984550"
   },
   {
-    "id": "b531c5c78349",
-    "title": "13 sep\nHUVET - live på Eskilstuna folkhögskola\n19.00Eskilstuna folkhögskola",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.58289bab196f130cb0cc3ac6"
-  },
-  {
-    "id": "da872ede2296",
-    "title": "13 sep\nOutlied\n19.00Fristadstorget",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f5eb05197fa05d6573a4c"
-  },
-  {
     "id": "77af28276528",
     "title": "13 sep\nSkräckläsning – kom om du vågar\n19.00Stadsbiblioteket",
     "date": "",
@@ -1708,6 +1702,12 @@
     "title": "13 sep\nTomas Gospel sjunger favoriter\n19.00Klosters kyrka",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e9b895"
+  },
+  {
+    "id": "da872ede2296",
+    "title": "13 sep\nOutlied\n19.00Fristadstorget",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f5eb05197fa05d6573a4c"
   },
   {
     "id": "7d39f8aee0e9",
@@ -1728,6 +1728,18 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.557c162197bf9bfa078b9f"
   },
   {
+    "id": "4e2afffa6140",
+    "title": "13 sep\nVasas flora och fauna\n20.00Scenkonst Sörmland",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6044fe0"
+  },
+  {
+    "id": "1bcfca0c39a6",
+    "title": "13 sep\nRap med Xahin\n20.00Stadsbiblioteket",
+    "date": "",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e0482057"
+  },
+  {
     "id": "1519a17e6648",
     "title": "13 sep\nMöte med konsten\n20.00Eskilstuna konstmuseum",
     "date": "",
@@ -1740,10 +1752,10 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f0f206"
   },
   {
-    "id": "1bcfca0c39a6",
-    "title": "13 sep\nRap med Xahin\n20.00Stadsbiblioteket",
+    "id": "d52291f15c65",
+    "title": "13 sep\nSkräckläsning – kom om du vågar\n20.00Stadsbiblioteket",
     "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e0482057"
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047ac89"
   },
   {
     "id": "1cdbeeadc0a5",
@@ -1752,16 +1764,10 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f5eb05197fa05d6571fa1"
   },
   {
-    "id": "4e2afffa6140",
-    "title": "13 sep\nVasas flora och fauna\n20.00Scenkonst Sörmland",
+    "id": "84988271c256",
+    "title": "13 sep\nGo Bach to sleep\n21.00Klosters kyrka",
     "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6044fe0"
-  },
-  {
-    "id": "d52291f15c65",
-    "title": "13 sep\nSkräckläsning – kom om du vågar\n20.00Stadsbiblioteket",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047ac89"
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e93dd32"
   },
   {
     "id": "e00f37aba193",
@@ -1774,12 +1780,6 @@
     "title": "13 sep\nStone Riven\n21.00Fristadstorget",
     "date": "",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.390ce503198072dd1842094"
-  },
-  {
-    "id": "84988271c256",
-    "title": "13 sep\nGo Bach to sleep\n21.00Klosters kyrka",
-    "date": "",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e93dd32"
   },
   {
     "id": "c3999a1df583",
