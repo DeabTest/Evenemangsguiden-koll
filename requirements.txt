@@ -1,2 +1,3 @@
-requests==2.32.0
-Jinja2==3.1.3
+playwright>=1.39.0      # Webbläsar-automation för fetch() inifrån sidan :contentReference[oaicite:0]{index=0}
+Jinja2>=3.1.3           # Mallmotor för att rendera HTML-listan :contentReference[oaicite:1]{index=1}
+requests>=2.32.0        # (om du fortfarande använder requests i något steg) :contentReference[oaicite:2]{index=2}
