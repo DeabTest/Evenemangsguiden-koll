@@ -1,54 +1,45 @@
-name: Evenemangsguiden-koll          # ← namnet som visas i Actions-fliken
+name: Evenemangsguiden-koll
 
 permissions:
   contents: write
-  pages: write
+  pages:    write
   id-token: write
 
 on:
   schedule:
-    - cron: '0 7 * * 1-5'            # 07:00 UTC vardagar
-  workflow_dispatch:                 # manuella körningar
+    - cron: '0 7 * * 1-5'      # 07:00 UTC vardagar
+  workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checka ut repo
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2. Installera Python 3.11
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
 
-      # 3. Installera Python-paket + Chromium
-      - name: Install deps and browser
-        run: |
-          pip install -r requirements.txt
-          playwright install chromium
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
 
-      # 4. Kör Playwright-scrapern
-      - name: Run scraper
+      - name: Run API scraper
         run: python fetch_events.py
 
-      # 5. Bygg HTML, räkna poster och markera ”Nytt”
       - name: Build HTML list
         run: |
           python - <<'PY'
           import json, datetime, pathlib, subprocess, jinja2
-          today = datetime.date.today().isoformat()
-          cur_file = pathlib.Path(f"data/events_{today}.json")
-          events = json.load(cur_file.open(encoding="utf-8"))
-          count = len(events)
+          today  = datetime.date.today()
+          stamp  = today.isoformat()
+          cur    = pathlib.Path(f"data/events_{stamp}.json")
+          events = json.load(cur.open(encoding="utf-8"))
+          count  = len(events)
 
+          # Föregående commit av dagens fil för ”Nytt”
           try:
               prev_raw = subprocess.check_output(
-                  ["git", "show", f"HEAD:{cur_file}"], text=True
-              )
+                  ["git", "show", f"HEAD:{cur}"], text=True)
               prev_set = {e["id"] for e in json.loads(prev_raw)}
           except subprocess.CalledProcessError:
               prev_set = set()
@@ -58,35 +49,23 @@ jobs:
 
           html = jinja2.Environment(loader=jinja2.FileSystemLoader(".")) \
                  .get_template("template.html") \
-                 .render(STAMP=today, COUNT=count, events=events)
+                 .render(STAMP=stamp, COUNT=count, events=events)
 
           pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
           pub.joinpath("index.html").write_text(html, encoding="utf-8")
           PY
 
-      # 6. Commit-a JSON om den ändrats
-      - name: Commit data (if changed)
-        id: commit
+      - name: Commit data (always)
         run: |
           git config --global user.email "actions@github.com"
-          git config --global user.name "github-actions[bot]"
-          if [[ $(git status --porcelain=data/ | wc -l) -gt 0 ]]; then
-            git add data/
-            git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')"
-            echo "changed=yes" >> $GITHUB_OUTPUT
-          else
-            echo "changed=no" >> $GITHUB_OUTPUT
-          fi
+          git config --global user.name  "github-actions[bot]"
+          git add data/
+          git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')" || echo "no changes"
 
-      - name: Push commit
-        if: steps.commit.outputs.changed == 'yes'
-        uses: ad-m/github-push-action@v0.8.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ad-m/github-push-action@v0.8.0
+        with: { github_token: ${{ secrets.GITHUB_TOKEN }} }
 
-      # 7. Deploy till GitHub Pages
-      - name: Deploy Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
