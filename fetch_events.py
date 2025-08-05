@@ -1,94 +1,95 @@
 #!/usr/bin/env python3
 """
-UI-scraping av Evenemangsguiden:
+Scrapar alla evenemangskort på Evenemangsguidens söksida.
 
-1) Navigerar till söksidan
-2) Klickar “Ladda fler” tills knappen försvinner
-3) Scrollar för att trigga rendering
-4) Extraherar datum, titel & URL från varje kort
-5) Filtrerar bort Utställningar
-6) Sparar data/events_YYYY-MM-DD.json
+• Öppnar sidan i headless-Chromium (Playwright)
+• Klickar “Ladda fler” tills knappen är borta ELLER inaktiv
+• Vilar 1,5 s efter varje klick så sista korten hinner renderas
+• Plockar titel, datum och länk ur varje kort
+• Sparar data/events_YYYY-MM-DD.json
 """
-import hashlib
+
 import json
 import datetime
 import pathlib
-import sys
+import hashlib
+import asyncio
+import re
+from playwright.async_api import async_playwright, TimeoutError as PWTimeout
 
-from playwright.sync_api import sync_playwright
+URL = (
+    "https://evenemang.eskilstuna.se/"
+    "evenemangsguiden/evenemangsguiden/sok-evenemang"
+)
+DATE_RX = re.compile(r"\d{4}-\d{2}-\d{2}")  # YYYY-MM-DD
 
-START_URL          = "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/sok-evenemang"
-LOAD_MORE_SELECTOR = "button:has-text('Ladda fler')"
-CARD_SELECTOR      = "article, li, .hiq-event-card"
 
-def fetch_events():
-    results = []
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
-        page.goto(START_URL, wait_until="networkidle")
+async def scrape():
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch()
+        page = await browser.new_page()
+        await page.goto(URL, wait_until="networkidle")
 
-        # Klicka “Ladda fler” tills knappen försvinner
+        cards = []
         while True:
-            btn = page.query_selector(LOAD_MORE_SELECTOR)
-            if not btn:
+            # Leta efter klickbar knapp max 5 s
+            try:
+                btn = await page.wait_for_selector(
+                    "button:has-text('Ladda fler')", timeout=5000
+                )
+            except PWTimeout:
+                break  # ingen knapp längre
+
+            # Avbryt om knappen är avaktiverad (<button disabled>)
+            if await btn.get_attribute("disabled") is not None:
                 break
-            btn.click()
-            page.wait_for_timeout(2000)
-            page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            page.wait_for_timeout(2000)
 
-        # Extrahera event-korten
-        cards = page.query_selector_all(CARD_SELECTOR)
-        for el in cards:
-            a       = el.query_selector("a")
-            time_el = el.query_selector("time")
-            title   = a.text_content().strip() if a else ""
-            url     = a.get_attribute("href")           if a else ""
-            date    = (time_el.get_attribute("datetime") or time_el.text_content().strip()) if time_el else ""
+            await btn.scroll_into_view_if_needed()
+            await btn.click()
 
-            # Filtrera bort Utställningar
-            category = el.get_attribute("data-category") or ""
-            if "Utställningar" in category:
+            # Vänta tills knappen försvinner (laddning startar)
+            await page.wait_for_selector(
+                "button:has-text('Ladda fler')", state="detached"
+            )
+            # Extra buffert så korten hinner renderas
+            await page.wait_for_timeout(1500)
+
+        # Samla alla kort efter sista laddningen
+        cards = await page.query_selector_all("article, li, div.hiq-event-card")
+
+        events = []
+        for c in cards:
+            anchor = await c.query_selector("a")
+            if not anchor:
                 continue
-
-            if not (title and url and date):
+            title = (await anchor.inner_text()).strip()
+            if not title:
                 continue
-
-            # Gör URL absolut om det behövs
-            if url.startswith("/"):
+            url = await anchor.get_attribute("href") or ""
+            if url and not url.startswith("http"):
                 url = "https://evenemang.eskilstuna.se" + url
+            raw = await c.inner_text()
+            m = DATE_RX.search(raw)
+            date = m.group(0) if m else ""
 
-            ev_id = hashlib.sha1(url.encode()).hexdigest()[:12]
-            results.append({
-                "id":    ev_id,
-                "title": title,
-                "date":  date,
-                "url":   url,
-            })
+            events.append(
+                {
+                    "id": hashlib.sha1(url.encode()).hexdigest()[:12],
+                    "title": title,
+                    "date": date,
+                    "url": url,
+                }
+            )
 
-        browser.close()
+        await browser.close()
 
-    # Ta bort dubbletter
-    seen, dedup = set(), []
-    for ev in results:
-        if ev["id"] not in seen:
-            seen.add(ev["id"])
-            dedup.append(ev)
-    return dedup
+        stamp = datetime.date.today().isoformat()
+        out_dir = pathlib.Path("data")
+        out_dir.mkdir(exist_ok=True)
+        path = out_dir / f"events_{stamp}.json"
+        path.write_text(json.dumps(events, ensure_ascii=False, indent=2))
+        print(f"Fetched {len(events)} events → {path}")
 
-def main():
-    try:
-        events = fetch_events()
-    except Exception as e:
-        print("Scraping-fel:", e, file=sys.stderr)
-        sys.exit(1)
-
-    today = datetime.date.today().isoformat()
-    outdir = pathlib.Path("data"); outdir.mkdir(exist_ok=True)
-    path = outdir / f"events_{today}.json"
-    path.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Fetched {len(events)} events → {path}")
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(scrape())
