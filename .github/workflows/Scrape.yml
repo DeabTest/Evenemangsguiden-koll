@@ -1,7 +1,7 @@
 name: Eskilstuna events watcher
 
 on:
-  # Kör 07:00 UTC varje vardag  (08:00 svensk normaltid, 09:00 sommartid)
+  # Kör 07:00 UTC varje vardag  (08:00 svensk vintertid, 09:00 sommartid)
   schedule:
     - cron: '0 7 * * 1-5'
   # Gör det möjligt att starta manuellt från GitHub-gränssnittet
@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          playwright install --with-deps chromium
+          playwright install chromium          # <— utan --with-deps
 
       # 4. Kör scraperskriptet
       - name: Run scraper
