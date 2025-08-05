@@ -1,18 +1,13 @@
 name: Eskilstuna events watcher
 
-###############################################################################
-# GitHub-tokenen måste kunna pusha data och publicera GitHub Pages
 permissions:
   contents: write
-  pages: write
+  pages:    write
   id-token: write
-###############################################################################
 
 on:
-  # Vardagar 07:00 UTC  (08:00 svensk vintertid / 09:00 sommartid)
   schedule:
-    - cron: '0 7 * * 1-5'
-  # Manuell start via Actions-fliken
+    - cron: '0 7 * * 1-5'      # 07 UTC vardagar
   workflow_dispatch:
 
 jobs:
@@ -20,52 +15,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #########################################################################
-      # 1 Checka ut repo:t
-      #########################################################################
-      - name: Check out code
-        uses: actions/checkout@v4
+      # 1. Checka ut repo:t
+      - uses: actions/checkout@v4
 
-      #########################################################################
-      # 2 Python 3.11
-      #########################################################################
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      # 2. Python 3.11
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      #########################################################################
-      # 3 Installera Python-paket + Chromium-browser
-      #########################################################################
-      - name: Install Python deps and browser
+      # 3. Installera Python-paket + Playwright-browser
+      - name: Install deps and browser
         run: |
           pip install -r requirements.txt
-          playwright install chromium          # ← utan --with-deps
+          playwright install chromium
 
-      #########################################################################
-      # 4 Kör Playwright-scrapern
-      #########################################################################
+      # 4. Kör scrapern
       - name: Run scraper
         run: python fetch_events.py
 
-      #########################################################################
-      # 5 Bygg HTML-sidan från dagens JSON
-      #########################################################################
+      # 5. Bygg HTML med “Nytt”-markering
       - name: Build HTML list
         run: |
           python - <<'PY'
-          import json, datetime, pathlib, jinja2
-          stamp  = datetime.date.today().isoformat()
-          events = json.load(open(f"data/events_{stamp}.json", encoding="utf-8"))
-          env    = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
-          html   = env.get_template("template.html").render(STAMP=stamp, events=events)
-          pubdir = pathlib.Path("public"); pubdir.mkdir(exist_ok=True)
-          pubdir.joinpath("index.html").write_text(html, encoding="utf-8")
+          import json, datetime, pathlib, glob, jinja2
+          stamp = datetime.date.today().isoformat()
+          curr  = json.load(open(f"data/events_{stamp}.json", encoding="utf-8"))
+
+          prev_set = set()
+          prev_files = sorted(glob.glob("data/events_*.json"))
+          if len(prev_files) > 1:
+              prev_set = {e["id"] for e in json.load(open(prev_files[-2], encoding="utf-8"))}
+
+          for ev in curr:
+              ev["new"] = ev["id"] not in prev_set
+
+          html = jinja2.Environment(loader=jinja2.FileSystemLoader("."))\
+                 .get_template("template.html").render(STAMP=stamp, events=curr)
+
+          pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
+          pub.joinpath("index.html").write_text(html, encoding="utf-8")
           PY
 
-      #########################################################################
-      # 6 Commit + push om data/ har ändrats
-      #########################################################################
+      # 6. Commit data om något ändrats
       - name: Commit data (if changed)
         id: diff
         run: |
@@ -79,17 +70,13 @@ jobs:
             echo "changed=no"  >> $GITHUB_OUTPUT
           fi
 
-      - name: Push commit
-        if: steps.diff.outputs.changed == 'yes'
+      - if: steps.diff.outputs.changed == 'yes'
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      #########################################################################
-      # 7 Publicera HTML på GitHub Pages
-      #########################################################################
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      # 7. Deploy till GitHub Pages
+      - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
