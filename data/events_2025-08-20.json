@@ -488,20 +488,20 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.13e400161900c6ebebe8164"
   },
   {
-    "id": "f263b714cfe9",
-    "title": "Kulturlördag i Gamla Torshälla",
-    "date": "2025-09-06",
-    "time": "10:00",
-    "location": "Torshälla",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408613c1"
-  },
-  {
     "id": "4cdb4ce9ffc1",
     "title": "Torshälla konstrunda",
     "date": "2025-09-06",
     "time": "10:00",
     "location": "Gamla Torshälla",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4ed7c0cd18a2119f12f50747"
+  },
+  {
+    "id": "f263b714cfe9",
+    "title": "Kulturlördag i Gamla Torshälla",
+    "date": "2025-09-06",
+    "time": "10:00",
+    "location": "Torshälla",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408613c1"
   },
   {
     "id": "66257adf0c9f",
@@ -582,6 +582,14 @@
     "time": "11:00",
     "location": "Strömsholmen",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.48a08dc11984f66b2952475"
+  },
+  {
+    "id": "5357146e97e0",
+    "title": "Vernissage: Drömmar - finsk animation",
+    "date": "2025-09-07",
+    "time": "16:00",
+    "location": "Eskilstuna konstmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.22d14f67198c5c5bbdc9bb"
   },
   {
     "id": "7703e3aed5b8",
@@ -1032,6 +1040,14 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ede54e"
   },
   {
+    "id": "eabb31140e8b",
+    "title": "GG-kören",
+    "date": "2025-09-13",
+    "time": "17:00",
+    "location": "Bibliotekstorget",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230ad78"
+  },
+  {
     "id": "25b3e27c5004",
     "title": "Underfundiga texter och berörande toner",
     "date": "2025-09-13",
@@ -1470,6 +1486,14 @@
     "time": "18:30",
     "location": "Volvo CE Arena Eskilstuna",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3ce084a4198bb83a0bdbc0c"
+  },
+  {
+    "id": "7306e28d55ac",
+    "title": "Arméns musikkår lunchkonsert",
+    "date": "2025-09-23",
+    "time": "13:45",
+    "location": "Fristadstorget",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.22d14f67198c5c5bbdc1095"
   },
   {
     "id": "e2a0efa89cba",
