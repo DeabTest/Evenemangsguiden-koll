@@ -3534,5 +3534,29 @@
     "date": "2025-09-07",
     "time": "09:00",
     "place": ""
+  },
+  "2f335943cb72": {
+    "first_seen": "2025-08-26",
+    "title": "Föreläsning om Alzheimers sjukdom",
+    "link": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a2f733",
+    "date": "2025-09-17",
+    "time": "15:00",
+    "place": ""
+  },
+  "f3ad84854d94": {
+    "first_seen": "2025-08-26",
+    "title": "Filmkväll på stadsmuseet",
+    "link": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.296ed344198e61116ac7d3",
+    "date": "2025-09-17",
+    "time": "17:00",
+    "place": ""
+  },
+  "d11a576a85ba": {
+    "first_seen": "2025-08-26",
+    "title": "Filmkväll på stadsmuseet.",
+    "link": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.296ed344198e61116ac78d",
+    "date": "2025-09-24",
+    "time": "17:00",
+    "place": ""
   }
 }
