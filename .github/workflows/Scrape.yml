@@ -93,11 +93,121 @@ jobs:
           pub.joinpath("index.html").write_text(html, encoding="utf-8")
           PY
 
+      # --- NYTT: Bygg/uppdatera first_seen.json baserat på dagens events ---
+      - name: Update first_seen registry
+        run: |
+          python - <<'PY'
+          import json, glob, datetime, pathlib, hashlib
+
+          DATA = pathlib.Path("data")
+          DATA.mkdir(parents=True, exist_ok=True)
+
+          # Hitta senaste events_YYYY-MM-DD.json
+          files = sorted(glob.glob("data/events_*.json"))
+          if not files:
+              print("No events file found, skipping.")
+              raise SystemExit(0)
+          latest = pathlib.Path(files[-1])
+
+          # Läs/Initiera first_seen.json
+          first_seen_path = DATA / "first_seen.json"
+          if first_seen_path.exists():
+              first_seen = json.loads(first_seen_path.read_text(encoding="utf-8"))
+          else:
+              first_seen = {}
+
+          # Läs dagens event-lista
+          events = json.loads(latest.read_text(encoding="utf-8"))
+
+          # Stabilt ID: använd e['id'] om den finns, annars hash av nyckelfält
+          def eid(e):
+              if e.get("id"):
+                  return str(e["id"])
+              key = (
+                  (e.get("title") or "") + "|" +
+                  (e.get("date") or "") + "|" +
+                  (e.get("time") or "") + "|" +
+                  (e.get("place") or "") + "|" +
+                  (e.get("link") or e.get("url") or "")
+              )
+              return hashlib.sha1(key.encode("utf-8")).hexdigest()
+
+          today = datetime.date.today().isoformat()
+          added = 0
+
+          for e in events:
+              _id = eid(e)
+              if _id not in first_seen:
+                  first_seen[_id] = {
+                      "first_seen": today,                 # YYYY-MM-DD när vi såg den första gången
+                      "title": e.get("title",""),
+                      "link": e.get("link") or e.get("url") or "",
+                      "date": e.get("date",""),
+                      "time": e.get("time",""),
+                      "place": e.get("place",""),
+                  }
+                  added += 1
+
+          # Spara uppdaterad logg
+          first_seen_path.write_text(
+              json.dumps(first_seen, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
+          print(f"first_seen updated with {added} new items")
+          PY
+
+      # --- NYTT: Publicera first_seen.json och en enkel gårdagsöversikt ---
+      - name: Publish first_seen.json and yesterday overview
+        run: |
+          python - <<'PY'
+          import json, datetime, pathlib, html
+
+          data_path = pathlib.Path("data/first_seen.json")
+          public = pathlib.Path("public"); public.mkdir(exist_ok=True)
+
+          if data_path.exists():
+              # Kopiera JSON till public/
+              public.joinpath("first_seen.json").write_text(
+                  data_path.read_text(encoding="utf-8"),
+                  encoding="utf-8"
+              )
+
+              # Bygg enkel yesterday.html
+              data = json.loads(data_path.read_text(encoding="utf-8"))
+              y = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+              items = [v for v in data.values() if v.get("first_seen")==y]
+              items.sort(key=lambda x: (x.get("date",""), x.get("title","")))
+
+              rows = []
+              for e in items:
+                  title = html.escape(e.get("title",""))
+                  link  = e.get("link") or ""
+                  date  = html.escape(e.get("date",""))
+                  time  = html.escape(e.get("time",""))
+                  place = html.escape(e.get("place",""))
+                  title_html = f'<a href="{link}">{title}</a>' if link else title
+                  meta = " • ".join([v for v in [date, time, place] if v])
+                  rows.append(f"<li>{title_html}{(' — ' + meta) if meta else ''}</li>")
+
+              html_doc = f"""<!doctype html>
+<meta charset="utf-8">
+<title>Nya evenemang {y}</title>
+<h1>Nya evenemang {y}</h1>
+<p>Antal: {len(items)}</p>
+<ul>
+{''.join(rows)}
+</ul>
+"""
+              public.joinpath("yesterday.html").write_text(html_doc, encoding="utf-8")
+          else:
+              print("No first_seen.json yet; skipping publish.")
+          PY
+
       - name: Commit data
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "github-actions[bot]"
-          git add data/
+          git add data/ public/
           git commit -m "data: update $(date -u +'%Y-%m-%dT%H:%M')" || echo "nothing to commit"
 
       - name: Push changes
