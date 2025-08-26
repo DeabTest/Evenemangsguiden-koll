@@ -2,14 +2,14 @@ name: Evenemangsguiden-koll
 
 permissions:
   contents: write
-  pages:    write
+  pages: write
   id-token: write
 
 on:
   schedule:
-    # Vintertid (CET = UTC+1): 06–20 lokal → 05–19 UTC, månader jan, feb, nov, dec
+    # Vintertid (CET = UTC+1): 06–20 lokal -> 05–19 UTC, månader jan, feb, nov, dec
     - cron: '0 5-19 * 1,2,11,12 1-5'
-    # Sommartid (CEST = UTC+2): 06–20 lokal → 04–18 UTC, månader mar–okt
+    # Sommartid (CEST = UTC+2): 06–20 lokal -> 04–18 UTC, månader mar–okt
     - cron: '0 4-18 * 3-10 1-5'
   workflow_dispatch:
 
@@ -37,159 +37,161 @@ jobs:
 
       - name: Build HTML list
         run: |
-          python - <<'PY'
-          import json
-          import datetime
-          import pathlib
-          import subprocess
-          import jinja2
-          import zoneinfo
+          python3 - <<'PY'
+import json
+import datetime
+import pathlib
+import subprocess
+import jinja2
+import zoneinfo
 
-          # 1) Tidsstämpel i Europe/Stockholm
-          tz = zoneinfo.ZoneInfo("Europe/Stockholm")
-          now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M")
+# 1) Tidsstämpel i Europe/Stockholm
+tz = zoneinfo.ZoneInfo("Europe/Stockholm")
+now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M")
 
-          # 2) Datum för filnamn
-          today = datetime.date.today().isoformat()
-          yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+# 2) Datum for filnamn
+today = datetime.date.today().isoformat()
+yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
 
-          data_dir = pathlib.Path("data")
-          cur_file = data_dir / f"events_{today}.json"
+data_dir = pathlib.Path("data")
+cur_file = data_dir / f"events_{today}.json"
 
-          # 3) Läs dagens data
-          events = json.load(cur_file.open(encoding="utf-8"))
+# 3) Läs dagens data
+events = json.load(cur_file.open(encoding="utf-8"))
 
-          # 4) Jämför mot senaste commit om finns, annars gårdagens fil
-          try:
-              prev_raw = subprocess.check_output(
-                  ["git", "show", f"HEAD:data/events_{today}.json"],
-                  text=True
-              )
-              prev_ids = {e["id"] for e in json.loads(prev_raw)}
-          except subprocess.CalledProcessError:
-              prev_file = data_dir / f"events_{yesterday}.json"
-              if prev_file.exists():
-                  prev_ids = {e["id"] for e in json.load(prev_file.open(encoding="utf-8"))}
-              else:
-                  prev_ids = set()
+# 4) Jämför mot senaste commit om finns, annars gårdagens fil
+try:
+    prev_raw = subprocess.check_output(
+        ["git", "show", f"HEAD:data/events_{today}.json"],
+        text=True
+    )
+    prev_ids = {e["id"] for e in json.loads(prev_raw)}
+except subprocess.CalledProcessError:
+    prev_file = data_dir / f"events_{yesterday}.json"
+    if prev_file.exists():
+        prev_ids = {e["id"] for e in json.load(prev_file.open(encoding="utf-8"))}
+    else:
+        prev_ids = set()
 
-          # 5) Märk nya
-          for ev in events:
-              ev["new"] = ev["id"] not in prev_ids
+# 5) Märk nya
+for ev in events:
+    ev["new"] = ev["id"] not in prev_ids
 
-          # 6) Rendera HTML
-          tpl = jinja2.Environment(
-              loader=jinja2.FileSystemLoader("."),
-              autoescape=True
-          ).get_template("template.html")
-          html = tpl.render(
-              STAMP_TIME=now,
-              COUNT=len(events),
-              events=events
-          )
+# 6) Rendera HTML
+tpl = jinja2.Environment(
+    loader=jinja2.FileSystemLoader("."),
+    autoescape=True
+).get_template("template.html")
+html = tpl.render(
+    STAMP_TIME=now,
+    COUNT=len(events),
+    events=events
+)
 
-          # 7) Spara till public/index.html
-          pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
-          pub.joinpath("index.html").write_text(html, encoding="utf-8")
-          PY
+# 7) Spara till public/index.html
+pub = pathlib.Path("public")
+pub.mkdir(exist_ok=True)
+pub.joinpath("index.html").write_text(html, encoding="utf-8")
+PY
 
-      # --- NYTT: Bygg/uppdatera first_seen.json baserat på dagens events ---
+      # NYTT: bygg/uppdatera first_seen.json
       - name: Update first_seen registry
         run: |
-          python - <<'PY'
-          import json, glob, datetime, pathlib, hashlib
+          python3 - <<'PY'
+import json, glob, datetime, pathlib, hashlib
 
-          DATA = pathlib.Path("data")
-          DATA.mkdir(parents=True, exist_ok=True)
+DATA = pathlib.Path("data")
+DATA.mkdir(parents=True, exist_ok=True)
 
-          # Hitta senaste events_YYYY-MM-DD.json
-          files = sorted(glob.glob("data/events_*.json"))
-          if not files:
-              print("No events file found, skipping.")
-              raise SystemExit(0)
-          latest = pathlib.Path(files[-1])
+# Hitta senaste events_YYYY-MM-DD.json
+files = sorted(glob.glob("data/events_*.json"))
+if not files:
+    print("No events file found, skipping.")
+    raise SystemExit(0)
+latest = pathlib.Path(files[-1])
 
-          # Läs/Initiera first_seen.json
-          first_seen_path = DATA / "first_seen.json"
-          if first_seen_path.exists():
-              first_seen = json.loads(first_seen_path.read_text(encoding="utf-8"))
-          else:
-              first_seen = {}
+# Läs/Initiera first_seen.json
+first_seen_path = DATA / "first_seen.json"
+if first_seen_path.exists():
+    first_seen = json.loads(first_seen_path.read_text(encoding="utf-8"))
+else:
+    first_seen = {}
 
-          # Läs dagens event-lista
-          events = json.loads(latest.read_text(encoding="utf-8"))
+# Läs dagens event-lista
+events = json.loads(latest.read_text(encoding="utf-8"))
 
-          # Stabilt ID: använd e['id'] om den finns, annars hash av nyckelfält
-          def eid(e):
-              if e.get("id"):
-                  return str(e["id"])
-              key = (
-                  (e.get("title") or "") + "|" +
-                  (e.get("date") or "") + "|" +
-                  (e.get("time") or "") + "|" +
-                  (e.get("place") or "") + "|" +
-                  (e.get("link") or e.get("url") or "")
-              )
-              return hashlib.sha1(key.encode("utf-8")).hexdigest()
+# Stabilt ID: använd e['id'] om den finns, annars hash av nyckelfalt
+def eid(e):
+    if e.get("id"):
+        return str(e["id"])
+    key = (
+        (e.get("title") or "") + "|" +
+        (e.get("date") or "") + "|" +
+        (e.get("time") or "") + "|" +
+        (e.get("place") or "") + "|" +
+        (e.get("link") or e.get("url") or "")
+    )
+    return hashlib.sha1(key.encode("utf-8")).hexdigest()
 
-          today = datetime.date.today().isoformat()
-          added = 0
+today = datetime.date.today().isoformat()
+added = 0
 
-          for e in events:
-              _id = eid(e)
-              if _id not in first_seen:
-                  first_seen[_id] = {
-                      "first_seen": today,                 # YYYY-MM-DD när vi såg den första gången
-                      "title": e.get("title",""),
-                      "link": e.get("link") or e.get("url") or "",
-                      "date": e.get("date",""),
-                      "time": e.get("time",""),
-                      "place": e.get("place",""),
-                  }
-                  added += 1
+for e in events:
+    _id = eid(e)
+    if _id not in first_seen:
+        first_seen[_id] = {
+            "first_seen": today,
+            "title": e.get("title",""),
+            "link": e.get("link") or e.get("url") or "",
+            "date": e.get("date",""),
+            "time": e.get("time",""),
+            "place": e.get("place",""),
+        }
+        added += 1
 
-          # Spara uppdaterad logg
-          first_seen_path.write_text(
-              json.dumps(first_seen, ensure_ascii=False, indent=2),
-              encoding="utf-8"
-          )
-          print(f"first_seen updated with {added} new items")
-          PY
+# Spara uppdaterad logg
+first_seen_path.write_text(
+    json.dumps(first_seen, ensure_ascii=False, indent=2),
+    encoding="utf-8"
+)
+print(f"first_seen updated with {added} new items")
+PY
 
-      # --- NYTT: Publicera first_seen.json och en enkel gårdagsöversikt ---
+      # NYTT: publicera first_seen.json och enkel yesterday.html
       - name: Publish first_seen.json and yesterday overview
         run: |
-          python - <<'PY'
-          import json, datetime, pathlib, html
+          python3 - <<'PY'
+import json, datetime, pathlib, html
 
-          data_path = pathlib.Path("data/first_seen.json")
-          public = pathlib.Path("public"); public.mkdir(exist_ok=True)
+data_path = pathlib.Path("data/first_seen.json")
+public = pathlib.Path("public")
+public.mkdir(exist_ok=True)
 
-          if data_path.exists():
-              # Kopiera JSON till public/
-              public.joinpath("first_seen.json").write_text(
-                  data_path.read_text(encoding="utf-8"),
-                  encoding="utf-8"
-              )
+if data_path.exists():
+    # Kopiera JSON till public/
+    public.joinpath("first_seen.json").write_text(
+        data_path.read_text(encoding="utf-8"),
+        encoding="utf-8"
+    )
 
-              # Bygg enkel yesterday.html
-              data = json.loads(data_path.read_text(encoding="utf-8"))
-              y = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
-              items = [v for v in data.values() if v.get("first_seen")==y]
-              items.sort(key=lambda x: (x.get("date",""), x.get("title","")))
+    # Bygg enkel yesterday.html
+    data = json.loads(data_path.read_text(encoding="utf-8"))
+    y = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+    items = [v for v in data.values() if v.get("first_seen")==y]
+    items.sort(key=lambda x: (x.get("date",""), x.get("title","")))
 
-              rows = []
-              for e in items:
-                  title = html.escape(e.get("title",""))
-                  link  = e.get("link") or ""
-                  date  = html.escape(e.get("date",""))
-                  time  = html.escape(e.get("time",""))
-                  place = html.escape(e.get("place",""))
-                  title_html = f'<a href="{link}">{title}</a>' if link else title
-                  meta = " • ".join([v for v in [date, time, place] if v])
-                  rows.append(f"<li>{title_html}{(' — ' + meta) if meta else ''}</li>")
+    rows = []
+    for e in items:
+        title = html.escape(e.get("title",""))
+        link  = e.get("link") or ""
+        date  = html.escape(e.get("date",""))
+        time  = html.escape(e.get("time",""))
+        place = html.escape(e.get("place",""))
+        title_html = f'<a href="{link}">{title}</a>' if link else title
+        meta = " • ".join([v for v in [date, time, place] if v])
+        rows.append(f"<li>{title_html}{(' — ' + meta) if meta else ''}</li>")
 
-              html_doc = f"""<!doctype html>
+    html_doc = f"""<!doctype html>
 <meta charset="utf-8">
 <title>Nya evenemang {y}</title>
 <h1>Nya evenemang {y}</h1>
@@ -198,10 +200,10 @@ jobs:
 {''.join(rows)}
 </ul>
 """
-              public.joinpath("yesterday.html").write_text(html_doc, encoding="utf-8")
-          else:
-              print("No first_seen.json yet; skipping publish.")
-          PY
+    public.joinpath("yesterday.html").write_text(html_doc, encoding="utf-8")
+else:
+    print("No first_seen.json yet; skipping publish.")
+PY
 
       - name: Commit data
         run: |
