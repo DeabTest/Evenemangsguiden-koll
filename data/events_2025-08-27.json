@@ -296,20 +296,20 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa9812e9"
   },
   {
-    "id": "17deb49779a4",
-    "title": "Sir Reg & Tralltrollen",
-    "date": "2025-09-05",
-    "time": "19:00",
-    "location": "Kulturhuset Saga Torshälla",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.211c06c3194d33c73e4e7057"
-  },
-  {
     "id": "a98b231b6edf",
     "title": "Dansfesten - för dig som gillar att dansa",
     "date": "2025-09-05",
     "time": "19:00",
     "location": "Lokomotivet",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f61519f19807418cec3f88"
+  },
+  {
+    "id": "17deb49779a4",
+    "title": "Sir Reg & Tralltrollen",
+    "date": "2025-09-05",
+    "time": "19:00",
+    "location": "Kulturhuset Saga Torshälla",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.211c06c3194d33c73e4e7057"
   },
   {
     "id": "dbfde060a067",
@@ -336,14 +336,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.13e400161900c6ebebe8164"
   },
   {
-    "id": "f263b714cfe9",
-    "title": "Kulturlördag i Gamla Torshälla",
-    "date": "2025-09-06",
-    "time": "10:00",
-    "location": "Torshälla",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408613c1"
-  },
-  {
     "id": "4cdb4ce9ffc1",
     "title": "Torshälla konstrunda",
     "date": "2025-09-06",
@@ -358,6 +350,14 @@
     "time": "10:00",
     "location": "Eskilstuna stadsmuseum",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.58dc89d0198c5d22b5b111ae"
+  },
+  {
+    "id": "f263b714cfe9",
+    "title": "Kulturlördag i Gamla Torshälla",
+    "date": "2025-09-06",
+    "time": "10:00",
+    "location": "Torshälla",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408613c1"
   },
   {
     "id": "66257adf0c9f",
@@ -688,14 +688,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.442530db197a1eab2d9a9088"
   },
   {
-    "id": "e13d74ee0eaa",
-    "title": "Drömmar - finsk animationsvisning",
-    "date": "2025-09-13",
-    "time": "12:00",
-    "location": "Eskilstuna konstmuseum",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.442530db197a1eab2d96b22"
-  },
-  {
     "id": "05d91ef523e5",
     "title": "Kulturnatt på Eskilstuna konstmuseum",
     "date": "2025-09-13",
@@ -712,20 +704,20 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b46615d19873693c4718a28"
   },
   {
+    "id": "e13d74ee0eaa",
+    "title": "Drömmar - finsk animationsvisning",
+    "date": "2025-09-13",
+    "time": "12:00",
+    "location": "Eskilstuna konstmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.442530db197a1eab2d96b22"
+  },
+  {
     "id": "7312480f94a0",
     "title": "Iltapäivätanssit / Danseftermiddag",
     "date": "2025-09-13",
     "time": "13:00",
     "location": "Mötesplats Strigeln",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b230b3197d0d3bc128f054"
-  },
-  {
-    "id": "73155bd8a71a",
-    "title": "Kulturnattens familjefest",
-    "date": "2025-09-13",
-    "time": "15:00",
-    "location": "Fristadstorget",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24082ee90"
   },
   {
     "id": "fd4b399b6bcf",
@@ -744,6 +736,14 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.21757dda1989776690212a14"
   },
   {
+    "id": "73155bd8a71a",
+    "title": "Kulturnattens familjefest",
+    "date": "2025-09-13",
+    "time": "15:00",
+    "location": "Fristadstorget",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f24082ee90"
+  },
+  {
     "id": "471485ee13d1",
     "title": "Show med Desse och Putte",
     "date": "2025-09-13",
@@ -758,6 +758,46 @@
     "time": "15:45",
     "location": "Fristadstorget",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7e6f9210197f1aaa3e5ec9b5"
+  },
+  {
+    "id": "e8eb5c28b3a5",
+    "title": "Ljudinstallation \"Loggbok\" av Vera V Almgren",
+    "date": "2025-09-13",
+    "time": "16:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.67d8bbfb198737497611c16"
+  },
+  {
+    "id": "810407be2b11",
+    "title": "Kvällsöppet på Munktellmuseet",
+    "date": "2025-09-13",
+    "time": "16:00",
+    "location": "Munktellmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.70a16f11989760bc2c1e717"
+  },
+  {
+    "id": "ce00f003a6b9",
+    "title": "Finissage: Tina Lundgren",
+    "date": "2025-09-13",
+    "time": "16:00",
+    "location": "Galleri Boussard",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.13b05888198735e07f7c783"
+  },
+  {
+    "id": "f9824cd31b75",
+    "title": "AFC Eskilstuna - Gefle IF FF",
+    "date": "2025-09-13",
+    "time": "16:00",
+    "location": "Tunavallen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1b5661931967cb902144b35"
+  },
+  {
+    "id": "9244f9206218",
+    "title": "Vernissage: Höstsalong",
+    "date": "2025-09-13",
+    "time": "16:00",
+    "location": "Galleri Borgenhag Holmqvist",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ed65e4"
   },
   {
     "id": "5acfb4bc87c5",
@@ -792,46 +832,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f1160187320db"
   },
   {
-    "id": "e8eb5c28b3a5",
-    "title": "Ljudinstallation \"Loggbok\" av Vera V Almgren",
-    "date": "2025-09-13",
-    "time": "16:00",
-    "location": "Lokomotivet",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.67d8bbfb198737497611c16"
-  },
-  {
-    "id": "810407be2b11",
-    "title": "Kvällsöppet på Munktellmuseet",
-    "date": "2025-09-13",
-    "time": "16:00",
-    "location": "Munktellmuseet",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.70a16f11989760bc2c1e717"
-  },
-  {
-    "id": "ce00f003a6b9",
-    "title": "Finissage: Tina Lundgren",
-    "date": "2025-09-13",
-    "time": "16:00",
-    "location": "Galleri Boussard",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.13b05888198735e07f7c783"
-  },
-  {
-    "id": "9244f9206218",
-    "title": "Vernissage: Höstsalong",
-    "date": "2025-09-13",
-    "time": "16:00",
-    "location": "Galleri Borgenhag Holmqvist",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ed65e4"
-  },
-  {
-    "id": "f9824cd31b75",
-    "title": "AFC Eskilstuna - Gefle IF FF",
-    "date": "2025-09-13",
-    "time": "16:00",
-    "location": "Tunavallen",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1b5661931967cb902144b35"
-  },
-  {
     "id": "921a78435af8",
     "title": "Babydisco",
     "date": "2025-09-13",
@@ -862,6 +862,46 @@
     "time": "16:30",
     "location": "Stadsbiblioteket",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047abce"
+  },
+  {
+    "id": "2d6acaf11ebc",
+    "title": "Utställning: Iona Ristilä - HÅL",
+    "date": "2025-09-13",
+    "time": "17:00",
+    "location": "Eskilstuna folkhögskola",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b3fe0ed197c7efd9f8a98e8"
+  },
+  {
+    "id": "27dc9dcd6e63",
+    "title": "Politiker - en utställning",
+    "date": "2025-09-13",
+    "time": "17:00",
+    "location": "Eskilstuna folkhögskola",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ede54e"
+  },
+  {
+    "id": "8bac26541f55",
+    "title": "Musik med Åsa Folkhögskola",
+    "date": "2025-09-13",
+    "time": "17:00",
+    "location": "Munktellmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2a6eae7c198bb8fe9288ff9"
+  },
+  {
+    "id": "7c373ba135f8",
+    "title": "Litterärt café med Vaktel förlag",
+    "date": "2025-09-13",
+    "time": "17:00",
+    "location": "Norr Bar & Restaurang",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.299e7ae81989780f0bb2bd26"
+  },
+  {
+    "id": "e0b3a098494a",
+    "title": "Höstglöd – Kultur som värmer",
+    "date": "2025-09-13",
+    "time": "17:00",
+    "location": "Mötesplats Årby",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.70a16f11989760bc2c1961a"
   },
   {
     "id": "c9359047ccfb",
@@ -920,46 +960,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.10769b01197236dbd57e0c34"
   },
   {
-    "id": "2d6acaf11ebc",
-    "title": "Utställning: Iona Ristilä - HÅL",
-    "date": "2025-09-13",
-    "time": "17:00",
-    "location": "Eskilstuna folkhögskola",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b3fe0ed197c7efd9f8a98e8"
-  },
-  {
-    "id": "27dc9dcd6e63",
-    "title": "Politiker - en utställning",
-    "date": "2025-09-13",
-    "time": "17:00",
-    "location": "Eskilstuna folkhögskola",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c4ef454197a2048c9ede54e"
-  },
-  {
-    "id": "8bac26541f55",
-    "title": "Musik med Åsa Folkhögskola",
-    "date": "2025-09-13",
-    "time": "17:00",
-    "location": "Munktellmuseet",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2a6eae7c198bb8fe9288ff9"
-  },
-  {
-    "id": "7c373ba135f8",
-    "title": "Litterärt café med Vaktel förlag",
-    "date": "2025-09-13",
-    "time": "17:00",
-    "location": "Norr Bar & Restaurang",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.299e7ae81989780f0bb2bd26"
-  },
-  {
-    "id": "e0b3a098494a",
-    "title": "Höstglöd – Kultur som värmer",
-    "date": "2025-09-13",
-    "time": "17:00",
-    "location": "Mötesplats Årby",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.70a16f11989760bc2c1961a"
-  },
-  {
     "id": "eabb31140e8b",
     "title": "GG-kören sjunger visor",
     "date": "2025-09-13",
@@ -974,6 +974,30 @@
     "time": "17:30",
     "location": "Eskilstuna konstmuseum",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.10769b01197236dbd57e2468"
+  },
+  {
+    "id": "8f0522f6e69c",
+    "title": "Epic Divas",
+    "date": "2025-09-13",
+    "time": "18:00",
+    "location": "Fristadstorget",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7e6f9210197f1aaa3e5ee43f"
+  },
+  {
+    "id": "7d39f8aee0e9",
+    "title": "Musik med Sandevärn Trio",
+    "date": "2025-09-13",
+    "time": "18:00",
+    "location": "Innergården vid Eskilstuna stadsmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.26dee281197c877759448b68"
+  },
+  {
+    "id": "8e07a4d3cf66",
+    "title": "Dansuppvisning med Let’s Move",
+    "date": "2025-09-13",
+    "time": "18:00",
+    "location": "Bibliotekstorget",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.557c162197bf9bfa0710a98"
   },
   {
     "id": "3854ed71017c",
@@ -1032,30 +1056,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f116018776fc8"
   },
   {
-    "id": "8f0522f6e69c",
-    "title": "Epic Divas",
-    "date": "2025-09-13",
-    "time": "18:00",
-    "location": "Fristadstorget",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7e6f9210197f1aaa3e5ee43f"
-  },
-  {
-    "id": "7d39f8aee0e9",
-    "title": "Musik med Sandevärn Trio",
-    "date": "2025-09-13",
-    "time": "18:00",
-    "location": "Innergården vid Eskilstuna stadsmuseum",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.26dee281197c877759448b68"
-  },
-  {
-    "id": "8e07a4d3cf66",
-    "title": "Dansuppvisning med Let’s Move",
-    "date": "2025-09-13",
-    "time": "18:00",
-    "location": "Bibliotekstorget",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.557c162197bf9bfa0710a98"
-  },
-  {
     "id": "3688d2ff2757",
     "title": "Popmusik och marsch med Skyttemusikkåren",
     "date": "2025-09-13",
@@ -1070,6 +1070,30 @@
     "time": "18:50",
     "location": "Innergården vid Eskilstuna stadsmuseum",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.557c162197bf9bfa078b9f"
+  },
+  {
+    "id": "da872ede2296",
+    "title": "Outlied",
+    "date": "2025-09-13",
+    "time": "19:00",
+    "location": "Fristadstorget",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f5eb05197fa05d6573a4c"
+  },
+  {
+    "id": "adedc9a09601",
+    "title": "Möte med konsten",
+    "date": "2025-09-13",
+    "time": "19:00",
+    "location": "Eskilstuna konstmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.442530db197a1eab2d9a76e8"
+  },
+  {
+    "id": "83dd4299fa04",
+    "title": "Jamkväll med Kulturskolan",
+    "date": "2025-09-13",
+    "time": "19:00",
+    "location": "Munktellmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2a6eae7c198bb8fe9289076"
   },
   {
     "id": "ca562bc4496e",
@@ -1112,30 +1136,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.58289bab196f130cb0cc3ac6"
   },
   {
-    "id": "da872ede2296",
-    "title": "Outlied",
-    "date": "2025-09-13",
-    "time": "19:00",
-    "location": "Fristadstorget",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f5eb05197fa05d6573a4c"
-  },
-  {
-    "id": "adedc9a09601",
-    "title": "Möte med konsten",
-    "date": "2025-09-13",
-    "time": "19:00",
-    "location": "Eskilstuna konstmuseum",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.442530db197a1eab2d9a76e8"
-  },
-  {
-    "id": "83dd4299fa04",
-    "title": "Jamkväll med Kulturskolan",
-    "date": "2025-09-13",
-    "time": "19:00",
-    "location": "Munktellmuseet",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2a6eae7c198bb8fe9289076"
-  },
-  {
     "id": "25879776c1c2",
     "title": "Eskilstuna Moderna Operan",
     "date": "2025-09-13",
@@ -1150,38 +1150,6 @@
     "time": "19:15",
     "location": "Stadsbiblioteket",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f772347"
-  },
-  {
-    "id": "c17475fe0943",
-    "title": "Visning av 'Eskilstuna 1800-1860'",
-    "date": "2025-09-13",
-    "time": "20:00",
-    "location": "Eskilstuna stadsmuseum",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f0f206"
-  },
-  {
-    "id": "4e2afffa6140",
-    "title": "Vasas flora och fauna",
-    "date": "2025-09-13",
-    "time": "20:00",
-    "location": "Scenkonst Sörmland",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6044fe0"
-  },
-  {
-    "id": "d52291f15c65",
-    "title": "Skräckläsning – kom om du vågar",
-    "date": "2025-09-13",
-    "time": "20:00",
-    "location": "Stadsbiblioteket",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047ac89"
-  },
-  {
-    "id": "1bcfca0c39a6",
-    "title": "Rap med Xahin",
-    "date": "2025-09-13",
-    "time": "20:00",
-    "location": "Stadsbiblioteket",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e0482057"
   },
   {
     "id": "1cdbeeadc0a5",
@@ -1216,12 +1184,52 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.13b05888198735e07f7fe05"
   },
   {
+    "id": "c17475fe0943",
+    "title": "Visning av 'Eskilstuna 1800-1860'",
+    "date": "2025-09-13",
+    "time": "20:00",
+    "location": "Eskilstuna stadsmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f0f206"
+  },
+  {
+    "id": "4e2afffa6140",
+    "title": "Vasas flora och fauna",
+    "date": "2025-09-13",
+    "time": "20:00",
+    "location": "Scenkonst Sörmland",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1bdddd131975d463b6044fe0"
+  },
+  {
+    "id": "d52291f15c65",
+    "title": "Skräckläsning – kom om du vågar",
+    "date": "2025-09-13",
+    "time": "20:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e047ac89"
+  },
+  {
+    "id": "1bcfca0c39a6",
+    "title": "Rap med Xahin",
+    "date": "2025-09-13",
+    "time": "20:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e0482057"
+  },
+  {
     "id": "ae0b613fd6df",
     "title": "Prova på burlesque",
     "date": "2025-09-13",
     "time": "20:30",
     "location": "Eskilstuna Teater, Lilla Scenen",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.21757dda198977669023033"
+  },
+  {
+    "id": "9e64162a0244",
+    "title": "Stone Riven",
+    "date": "2025-09-13",
+    "time": "21:00",
+    "location": "Fristadstorget",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.390ce503198072dd1842094"
   },
   {
     "id": "84988271c256",
@@ -1238,14 +1246,6 @@
     "time": "21:00",
     "location": "Stadsbiblioteket",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4a6c3dea1969f7d7e0482086"
-  },
-  {
-    "id": "9e64162a0244",
-    "title": "Stone Riven",
-    "date": "2025-09-13",
-    "time": "21:00",
-    "location": "Fristadstorget",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.390ce503198072dd1842094"
   },
   {
     "id": "c3999a1df583",
@@ -1696,20 +1696,20 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.22d14f67198c5c5bbdc126d2"
   },
   {
-    "id": "088cafc2308d",
-    "title": "Från matteångest till AI-examen – så lär du dig matematik med självförtroende och kreativitet",
-    "date": "2025-09-26",
-    "time": "13:00",
-    "location": "Mälardalens universitet, Campus Eskilstuna",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3ce084a4198bb83a0bd1af"
-  },
-  {
     "id": "07f19d6ff08c",
     "title": "Bli bra på pengar – och få koll på hur du kan bli miljonär",
     "date": "2025-09-26",
     "time": "13:00",
     "location": "Mälardalens universitet, Campus Eskilstuna",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951ebf0bb"
+  },
+  {
+    "id": "088cafc2308d",
+    "title": "Från matteångest till AI-examen – så lär du dig matematik med självförtroende och kreativitet",
+    "date": "2025-09-26",
+    "time": "13:00",
+    "location": "Mälardalens universitet, Campus Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3ce084a4198bb83a0bd1af"
   },
   {
     "id": "3509136b255b",
@@ -1736,22 +1736,6 @@
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951ebf0cb"
   },
   {
-    "id": "5dde712c6359",
-    "title": "Vernissage - 100 år av barns bilder: bibliotek och böcker",
-    "date": "2025-09-26",
-    "time": "15:00",
-    "location": "Stadsbiblioteket",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72614d8"
-  },
-  {
-    "id": "bd7353a8e3fd",
-    "title": "Biblioteket och Teatern 100 år - vernissage och invigning av jubileumsveckorna",
-    "date": "2025-09-26",
-    "time": "15:00",
-    "location": "Stadsbiblioteket",
-    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7261281"
-  },
-  {
     "id": "74fbd99e5e5f",
     "title": "24 timmar i backen - för och med diabetes",
     "date": "2025-09-26",
@@ -1766,6 +1750,22 @@
     "time": "15:00",
     "location": "Stadsbiblioteket",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa98131c"
+  },
+  {
+    "id": "5dde712c6359",
+    "title": "Vernissage - 100 år av barns bilder: bibliotek och böcker",
+    "date": "2025-09-26",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72614d8"
+  },
+  {
+    "id": "bd7353a8e3fd",
+    "title": "Biblioteket och Teatern 100 år - vernissage och invigning av jubileumsveckorna",
+    "date": "2025-09-26",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7261281"
   },
   {
     "id": "f1c4eee61478",
@@ -2014,5 +2014,1061 @@
     "time": "17:30",
     "location": "Stadsbiblioteket",
     "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7262420"
+  },
+  {
+    "id": "0b6f1db9fe43",
+    "title": "Konstfredag för vuxna",
+    "date": "2025-10-03",
+    "time": "13:00",
+    "location": "Eskilstuna konstmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.67d8bbfb19873749761210d"
+  },
+  {
+    "id": "14a8d7a76f46",
+    "title": "Fredagsmys",
+    "date": "2025-10-03",
+    "time": "14:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc726267d"
+  },
+  {
+    "id": "5dfb23d92f3e",
+    "title": "Mordgåta och middag",
+    "date": "2025-10-03",
+    "time": "18:00",
+    "location": "Vinäger by Plaza",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.48a08dc11984f66b295ae5"
+  },
+  {
+    "id": "3ff7ab92a1bb",
+    "title": "Melissa Horn",
+    "date": "2025-10-03",
+    "time": "18:30",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f371270c"
+  },
+  {
+    "id": "a55b06db49b7",
+    "title": "Henrik Nyblom testar skämt",
+    "date": "2025-10-03",
+    "time": "19:30",
+    "location": "Biografbaren",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.290202ee1982b4f969e2743"
+  },
+  {
+    "id": "3943ec0e6caf",
+    "title": "Scenkonstdagar",
+    "date": "2025-10-04",
+    "time": "00:00",
+    "location": "Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5b02ca1e1984f51c53631345"
+  },
+  {
+    "id": "57c864390cb1",
+    "title": "KlimatHoppMötet i Eskilstuna",
+    "date": "2025-10-04",
+    "time": "10:00",
+    "location": "Ställverket, Eskilstuna folkhögskola",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.22d14f67198c5c5bbdc3df55"
+  },
+  {
+    "id": "b4e474730f79",
+    "title": "Litteraturlördag med Katarina Widholm och Marie Hermanson",
+    "date": "2025-10-04",
+    "time": "14:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f116018712a94"
+  },
+  {
+    "id": "d2efe342f95d",
+    "title": "Ölprovning",
+    "date": "2025-10-04",
+    "time": "14:00",
+    "location": "Eskilstuna Ölkultur",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.70a16f11989760bc2c10f0e"
+  },
+  {
+    "id": "ca06ef049a36",
+    "title": "Urpremiär: Imorgon",
+    "date": "2025-10-04",
+    "time": "15:00",
+    "location": "Eskilstuna Teater, Lilla Scenen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f61519f19807418cec3b46"
+  },
+  {
+    "id": "676f9ea5fe7a",
+    "title": "Tom Fredriksson - Det här var väl en jäkla dum idé 2",
+    "date": "2025-10-04",
+    "time": "18:00",
+    "location": "Vinäger by Plaza",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5cacde9f195e9a3402ca5ef0"
+  },
+  {
+    "id": "8ba4dcfef761",
+    "title": "Bakluckeloppis",
+    "date": "2025-10-05",
+    "time": "09:00",
+    "location": "Tuna Park",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5f31030119618bfccc88d9a7"
+  },
+  {
+    "id": "84c66c0a5254",
+    "title": "Böckerna",
+    "date": "2025-10-05",
+    "time": "14:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa9453c1"
+  },
+  {
+    "id": "d102bc62be83",
+    "title": "Bach Jazz - önskekonsert i repris",
+    "date": "2025-10-05",
+    "time": "17:00",
+    "location": "Biografbaren",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.61c7c1f119618e08ad8221c"
+  },
+  {
+    "id": "179fa29e3c9a",
+    "title": "Språkcafé",
+    "date": "2025-10-06",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb2607"
+  },
+  {
+    "id": "58be8045c7ac",
+    "title": "Stadsvandring: En historia om arkitekturen i stadskärnan",
+    "date": "2025-10-06",
+    "time": "17:30",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72626f9"
+  },
+  {
+    "id": "5cd86e3d7fbf",
+    "title": "Författarbesök: Alex Schulman",
+    "date": "2025-10-07",
+    "time": "18:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f116018712ae2"
+  },
+  {
+    "id": "9aafe672bc3d",
+    "title": "Öppna sinnen - öppna dörrar",
+    "date": "2025-10-08",
+    "time": "10:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a29b97"
+  },
+  {
+    "id": "d44d72baeddf",
+    "title": "Läxhjälp",
+    "date": "2025-10-08",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb227d"
+  },
+  {
+    "id": "db59c138b01f",
+    "title": "Medborgardialog med Torshälla stads nämnd",
+    "date": "2025-10-08",
+    "time": "16:00",
+    "location": "Kvarnen, Torshälla",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.264aef07193dec3ae1e704b3"
+  },
+  {
+    "id": "edeaba5be9da",
+    "title": "Beata Arnberg om Kerstin Thorvall",
+    "date": "2025-10-08",
+    "time": "18:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc726273d"
+  },
+  {
+    "id": "8844c993fb55",
+    "title": "Kreativa seniorer",
+    "date": "2025-10-09",
+    "time": "10:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b46615d19873693c4718d9b"
+  },
+  {
+    "id": "29f5be759ec3",
+    "title": "Bokcirkel: noveller från 1925",
+    "date": "2025-10-09",
+    "time": "11:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f774c992"
+  },
+  {
+    "id": "fd3f392dda7b",
+    "title": "Författarbesök: Joanna Rubin Dranger",
+    "date": "2025-10-09",
+    "time": "17:30",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7262c7a"
+  },
+  {
+    "id": "fdfe7a8a15a1",
+    "title": "Filmstudion: Chimären",
+    "date": "2025-10-09",
+    "time": "18:00",
+    "location": "Biostaden Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.12bd0bd91984f5c6118233b4"
+  },
+  {
+    "id": "59909d7393e9",
+    "title": "ABF-akademin: \"Jane Austen - 250 år\"",
+    "date": "2025-10-10",
+    "time": "10:00",
+    "location": "ABF-huset",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408b005"
+  },
+  {
+    "id": "cd61bc25dbcc",
+    "title": "Fredagsmys",
+    "date": "2025-10-10",
+    "time": "14:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc726268e"
+  },
+  {
+    "id": "247c0943b4fb",
+    "title": "Jag har inte tid",
+    "date": "2025-10-10",
+    "time": "20:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1025cf381955faa6e4fb3651"
+  },
+  {
+    "id": "c800367db69e",
+    "title": "Fristaden Open",
+    "date": "2025-10-11",
+    "time": "08:30",
+    "location": "Volvo CE Arena Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.62ba2581196b4eac75f2ecd2"
+  },
+  {
+    "id": "242bc2cf037c",
+    "title": "Verkstadshäng - för alla",
+    "date": "2025-10-11",
+    "time": "12:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b46615d19873693c4718a38"
+  },
+  {
+    "id": "44d68d9687ce",
+    "title": "Vem ska trösta Knyttet?",
+    "date": "2025-10-11",
+    "time": "13:00",
+    "location": "Eskilstuna Teater, Lilla Scenen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f61519f19807418cec9eab"
+  },
+  {
+    "id": "35581eeaee65",
+    "title": "Måste författare kunna stava? Magnus Ljunggren om Riddarskolan, dyslexi och fördomar",
+    "date": "2025-10-11",
+    "time": "14:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc7262cd7"
+  },
+  {
+    "id": "1d9521b9dbb2",
+    "title": "Premiär: The Wedding Singer",
+    "date": "2025-10-11",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f77117db"
+  },
+  {
+    "id": "731eb6c7b30f",
+    "title": "AFC Eskilstuna - IFK Stocksund",
+    "date": "2025-10-11",
+    "time": "16:00",
+    "location": "Tunavallen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1b5661931967cb902144c9c"
+  },
+  {
+    "id": "0b13b4f3c47e",
+    "title": "Kaisa Vilhuinen -kirjallisuuspalkinnonjako/ -litteraturprisutdelning",
+    "date": "2025-10-12",
+    "time": "14:30",
+    "location": "Eskilstuna Teater, Lilla Scenen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408251f"
+  },
+  {
+    "id": "764c1192dd6b",
+    "title": "Pontus Lindman - Fragment",
+    "date": "2025-10-12",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5027d45c19618cb21f432b2"
+  },
+  {
+    "id": "17be9f426d81",
+    "title": "Språkcafé",
+    "date": "2025-10-13",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb2618"
+  },
+  {
+    "id": "41919a0ebda8",
+    "title": "Emma Severinsson: 100 år av mode",
+    "date": "2025-10-14",
+    "time": "17:30",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72d1d90"
+  },
+  {
+    "id": "9cfca864818b",
+    "title": "Victory Affärsdag",
+    "date": "2025-10-15",
+    "time": "09:00",
+    "location": "Mälardalens universitet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f1160187355d6"
+  },
+  {
+    "id": "b76c976751ac",
+    "title": "Öppna sinnen - öppna dörrar",
+    "date": "2025-10-15",
+    "time": "10:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a29bb2"
+  },
+  {
+    "id": "bd64af0d8b66",
+    "title": "Läs och skapa - After school",
+    "date": "2025-10-15",
+    "time": "14:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb1068b"
+  },
+  {
+    "id": "2470e41e927b",
+    "title": "Läxhjälp",
+    "date": "2025-10-15",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb228e"
+  },
+  {
+    "id": "25b21853d457",
+    "title": "Föreläsning: Judarnas historia i Sverige",
+    "date": "2025-10-15",
+    "time": "17:30",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72d1db9"
+  },
+  {
+    "id": "d5b6216b48c7",
+    "title": "Stickcafé",
+    "date": "2025-10-16",
+    "time": "10:00",
+    "location": "Torshälla bibliotek, Kvarnen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f373b433"
+  },
+  {
+    "id": "62b2a981b881",
+    "title": "Bokcirkel: noveller från 1925",
+    "date": "2025-10-16",
+    "time": "11:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f774c982"
+  },
+  {
+    "id": "1752b3e72e1a",
+    "title": "Dialogmöte om framtidens vård och omsorg",
+    "date": "2025-10-16",
+    "time": "13:00",
+    "location": "Fullmäktigesalen i Stadshuset",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb27e14"
+  },
+  {
+    "id": "fe79773b24f2",
+    "title": "Lotta Olsson pratar 20-talsdeckare",
+    "date": "2025-10-16",
+    "time": "17:30",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72d37ee"
+  },
+  {
+    "id": "d9c664b08a16",
+    "title": "Skandinavienpremiär: The Cave",
+    "date": "2025-10-16",
+    "time": "19:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.62ba2581196b4eac75f41a29"
+  },
+  {
+    "id": "736d61820f21",
+    "title": "Lisa Nilsson - Uteblivna vi",
+    "date": "2025-10-16",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5027d45c19618cb21f4f6a"
+  },
+  {
+    "id": "8872285d87a9",
+    "title": "Jubileumshelg - Firarfredag!",
+    "date": "2025-10-17",
+    "time": "12:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72d505d"
+  },
+  {
+    "id": "b1557e015059",
+    "title": "Konstfredag för vuxna",
+    "date": "2025-10-17",
+    "time": "13:00",
+    "location": "Eskilstuna konstmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.67d8bbfb19873749761211e"
+  },
+  {
+    "id": "a1e8076559e9",
+    "title": "Fredagsmys",
+    "date": "2025-10-17",
+    "time": "14:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc726269f"
+  },
+  {
+    "id": "7ae1778dc26f",
+    "title": "Jubileumshelg - VR och legoverkstad",
+    "date": "2025-10-17",
+    "time": "16:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.2c4ebf9c196f109dc72d50fa"
+  },
+  {
+    "id": "124cc2f62b02",
+    "title": "Nattbastu",
+    "date": "2025-10-17",
+    "time": "20:00",
+    "location": "Skjulstabastun",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f05c3d"
+  },
+  {
+    "id": "aac0a71ba3e6",
+    "title": "The Wedding Singer",
+    "date": "2025-10-18",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f77117ec"
+  },
+  {
+    "id": "a777a700c90c",
+    "title": "Jubileumshelg - Festa som för 100 år sedan",
+    "date": "2025-10-18",
+    "time": "16:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f116018712bdb"
+  },
+  {
+    "id": "1f9d25f58849",
+    "title": "LiveQuiz",
+    "date": "2025-10-18",
+    "time": "18:00",
+    "location": "Scenkonst Sörmland",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5f31030119618bfccc87a687"
+  },
+  {
+    "id": "903c69f4e962",
+    "title": "Cleo",
+    "date": "2025-10-18",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6b0d73291975d3a48e945b31"
+  },
+  {
+    "id": "c83adf1f161f",
+    "title": "Jubileumshelg - Jubileumskalas för barn 0-5 år",
+    "date": "2025-10-19",
+    "time": "13:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f116018712b25"
+  },
+  {
+    "id": "5eded9fb9322",
+    "title": "Språkcafé",
+    "date": "2025-10-20",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb2629"
+  },
+  {
+    "id": "d94907fa4552",
+    "title": "B.U.S. - Bedårande utan stress",
+    "date": "2025-10-21",
+    "time": "19:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5fbec62319686c701de757e"
+  },
+  {
+    "id": "0f3d079c8894",
+    "title": "Öppna sinnen - öppna dörrar",
+    "date": "2025-10-22",
+    "time": "10:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a29bc3"
+  },
+  {
+    "id": "6f8c107a0792",
+    "title": "Lunchkonsert - Trio X",
+    "date": "2025-10-22",
+    "time": "11:00",
+    "location": "Scenkonst Sörmland",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5f31030119618bfccc87a2ea"
+  },
+  {
+    "id": "aada46ce09f1",
+    "title": "Läxhjälp",
+    "date": "2025-10-22",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb229f"
+  },
+  {
+    "id": "b5920c34996f",
+    "title": "Kreativa seniorer",
+    "date": "2025-10-23",
+    "time": "10:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b46615d19873693c4718dab"
+  },
+  {
+    "id": "30e985a5fe1a",
+    "title": "Torshälla tidning - människor och minnen ur en lokaltidning",
+    "date": "2025-10-23",
+    "time": "13:00",
+    "location": "Torshälla bibliotek, Kvarnen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f373b31f"
+  },
+  {
+    "id": "586cfb4d86d2",
+    "title": "Stolt Värdskap 2025",
+    "date": "2025-10-23",
+    "time": "15:00",
+    "location": "Elite Stadshotellet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7f67a2d31932452793c51648"
+  },
+  {
+    "id": "a6217b116a6d",
+    "title": "Filmstudion: Det andra offret",
+    "date": "2025-10-23",
+    "time": "18:00",
+    "location": "Biostaden Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.12bd0bd91984f5c6118235b4"
+  },
+  {
+    "id": "09cd297d3075",
+    "title": "Jakob Hellman",
+    "date": "2025-10-23",
+    "time": "18:30",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.6dfa5c521927097b99c6dd7f"
+  },
+  {
+    "id": "eeed13487b3d",
+    "title": "Banna Sona Band",
+    "date": "2025-10-23",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f7765b77"
+  },
+  {
+    "id": "9f22e965cb0f",
+    "title": "Stickcafé för unga",
+    "date": "2025-10-24",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa98132d"
+  },
+  {
+    "id": "40f0708944d4",
+    "title": "Höstlovsfestival",
+    "date": "2025-10-25",
+    "time": "10:00",
+    "location": "Scenkonst Sörmland",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5f31030119618bfccc89a8fd"
+  },
+  {
+    "id": "064c88a2f2c6",
+    "title": "Moveat Eskilstuna",
+    "date": "2025-10-25",
+    "time": "11:00",
+    "location": "Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f06c2d3"
+  },
+  {
+    "id": "8b830d689ed7",
+    "title": "The Wedding Singer",
+    "date": "2025-10-25",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f77117fd"
+  },
+  {
+    "id": "11bf2017bbad",
+    "title": "AFC Eskilstuna - FC Stockholm",
+    "date": "2025-10-25",
+    "time": "16:00",
+    "location": "Tunavallen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1b5661931967cb902144cb6"
+  },
+  {
+    "id": "b37e8b3de33b",
+    "title": "Musik i Tunafors: Howling Dale",
+    "date": "2025-10-25",
+    "time": "19:00",
+    "location": "Fors kyrka",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.13b05888198735e07f7b3a"
+  },
+  {
+    "id": "af10127fa09f",
+    "title": "Blå - en gång till...",
+    "date": "2025-10-25",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.c70b68f1986704f78ce3116"
+  },
+  {
+    "id": "c42a5df7021c",
+    "title": "Musik i Tunafors - Tobbe Dahl & Co",
+    "date": "2025-10-25",
+    "time": "19:00",
+    "location": "Fors kyrka",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a119b9"
+  },
+  {
+    "id": "65fff8c84d46",
+    "title": "När blir det snart?",
+    "date": "2025-10-26",
+    "time": "13:00",
+    "location": "Eskilstuna Teater, Lilla Scenen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.48a08dc11984f66b29512391"
+  },
+  {
+    "id": "5ac40cddfca3",
+    "title": "Doug Seegers möter Eva Eastwood",
+    "date": "2025-10-26",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f77179b"
+  },
+  {
+    "id": "78903f113a37",
+    "title": "Språkcafé",
+    "date": "2025-10-27",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb263a"
+  },
+  {
+    "id": "a241a7e24852",
+    "title": "Filmklubben Blå kvarnen: \"Hairspray\"",
+    "date": "2025-10-27",
+    "time": "18:00",
+    "location": "S:t Andreas kyrka",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.12bd0bd91984f5c611819728"
+  },
+  {
+    "id": "6b50feea1a60",
+    "title": "Öppna sinnen - öppna dörrar",
+    "date": "2025-10-29",
+    "time": "10:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a29bd4"
+  },
+  {
+    "id": "2ceea60fa9d0",
+    "title": "Läxhjälp",
+    "date": "2025-10-29",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb22b0"
+  },
+  {
+    "id": "c4d2dcc7e37f",
+    "title": "Stickcafé",
+    "date": "2025-10-30",
+    "time": "10:00",
+    "location": "Torshälla bibliotek, Kvarnen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f373b442"
+  },
+  {
+    "id": "c31d6e08abe3",
+    "title": "Medborgare Nûjen",
+    "date": "2025-10-30",
+    "time": "19:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7955f7c119540c692ad731d4"
+  },
+  {
+    "id": "814d6bb701d6",
+    "title": "Stickcafé för unga",
+    "date": "2025-10-31",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa98133e"
+  },
+  {
+    "id": "100184507b49",
+    "title": "The Hellacopters",
+    "date": "2025-10-31",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f371272c"
+  },
+  {
+    "id": "f321d4f1f6c4",
+    "title": "Sundbyholm Dryck- och Delikatessmässa 2025",
+    "date": "2025-11-01",
+    "time": "12:30",
+    "location": "Sundbyholms travbana",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f072884"
+  },
+  {
+    "id": "204c91bccb5f",
+    "title": "The Wedding Singer",
+    "date": "2025-11-01",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f771180e"
+  },
+  {
+    "id": "9282b59567c1",
+    "title": "Handbollslandskamp Sverige-Spanien",
+    "date": "2025-11-01",
+    "time": "15:30",
+    "location": "Volvo CE Arena Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.39b2f6d21975d52967d62ad5"
+  },
+  {
+    "id": "b34aa65bca8f",
+    "title": "Piste, piste, piste",
+    "date": "2025-11-02",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.442530db197a1eab2d9bf64a"
+  },
+  {
+    "id": "b6fba06e7bf7",
+    "title": "Språkcafé",
+    "date": "2025-11-03",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb264b"
+  },
+  {
+    "id": "2daaacb3d022",
+    "title": "Öppna sinnen - öppna dörrar",
+    "date": "2025-11-05",
+    "time": "10:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a29be5"
+  },
+  {
+    "id": "a7798f97883b",
+    "title": "Läxhjälp",
+    "date": "2025-11-05",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb22c1"
+  },
+  {
+    "id": "5504cd57dbbb",
+    "title": "Kreativa seniorer",
+    "date": "2025-11-06",
+    "time": "10:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b46615d19873693c4718dbb"
+  },
+  {
+    "id": "399b4a1328d7",
+    "title": "Filmstudion: Gondola",
+    "date": "2025-11-06",
+    "time": "18:00",
+    "location": "Biostaden Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.12bd0bd91984f5c6118235e9"
+  },
+  {
+    "id": "4f85d2b0a6d7",
+    "title": "Grand Kyiv Ballet - Snödrottningen",
+    "date": "2025-11-06",
+    "time": "18:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f77365d1"
+  },
+  {
+    "id": "38a1f2988d2e",
+    "title": "Samtal med ABF:s skrivargrupp",
+    "date": "2025-11-07",
+    "time": "10:00",
+    "location": "ABF-huset",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.33a6389c196f116018764ef2"
+  },
+  {
+    "id": "e3b11b8618ea",
+    "title": "Mordgåta och middag",
+    "date": "2025-11-07",
+    "time": "18:00",
+    "location": "Vinäger by Plaza",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.48a08dc11984f66b295af6"
+  },
+  {
+    "id": "53d6b5ecc8c8",
+    "title": "Nån måste göra det",
+    "date": "2025-11-07",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.54067f63195c5608a82db291"
+  },
+  {
+    "id": "f9809c836b47",
+    "title": "FLASH - Tribute to Queen",
+    "date": "2025-11-07",
+    "time": "19:30",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3a808b301975d2f2408ac08"
+  },
+  {
+    "id": "2f1f63e0c15b",
+    "title": "Verkstadshäng - för alla",
+    "date": "2025-11-08",
+    "time": "12:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b46615d19873693c4718a48"
+  },
+  {
+    "id": "20ae2e1a5aaa",
+    "title": "The Wedding Singer",
+    "date": "2025-11-08",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f771181f"
+  },
+  {
+    "id": "b1f56cdfebde",
+    "title": "Greczula",
+    "date": "2025-11-08",
+    "time": "17:00",
+    "location": "Eskilstuna Ölkultur",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.21757dda198977669021ba39"
+  },
+  {
+    "id": "ea787a939f1a",
+    "title": "Diyari Mahmoud - Jalla, väx upp!",
+    "date": "2025-11-08",
+    "time": "19:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.29afabfd195adb71b69ac3fb"
+  },
+  {
+    "id": "bae418c0e3d7",
+    "title": "INSTÄLLT! Pelle Svanslös och bråkstaken Måns",
+    "date": "2025-11-09",
+    "time": "13:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.61c7c1f119618e08ad875559"
+  },
+  {
+    "id": "e8e56231d5e0",
+    "title": "AFC Eskilstuna - Team TG FF",
+    "date": "2025-11-09",
+    "time": "15:00",
+    "location": "Tunavallen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.1b5661931967cb902144cc6"
+  },
+  {
+    "id": "7be47a7320d4",
+    "title": "Språkcafé",
+    "date": "2025-11-10",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb266d"
+  },
+  {
+    "id": "98c912b559e0",
+    "title": "Öppna sinnen - öppna dörrar",
+    "date": "2025-11-12",
+    "time": "10:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a29bf6"
+  },
+  {
+    "id": "17f7c1893c47",
+    "title": "Lunchkonsert - Alvina Herbinger Rygne",
+    "date": "2025-11-12",
+    "time": "11:00",
+    "location": "Scenkonst Sörmland",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5f31030119618bfccc87a366"
+  },
+  {
+    "id": "d94f588d409c",
+    "title": "Läs och skapa - After school",
+    "date": "2025-11-12",
+    "time": "14:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb1069b"
+  },
+  {
+    "id": "27a42a5cc47d",
+    "title": "Läxhjälp",
+    "date": "2025-11-12",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb22d2"
+  },
+  {
+    "id": "a8ea273f112b",
+    "title": "Stickcafé",
+    "date": "2025-11-13",
+    "time": "10:00",
+    "location": "Torshälla bibliotek, Kvarnen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5c5c4c911969f629f373b451"
+  },
+  {
+    "id": "d49eafeabf60",
+    "title": "Niklas Strömstedt - Tyck Om Mig",
+    "date": "2025-11-13",
+    "time": "19:30",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5cf527c3195ade320ad29b8f"
+  },
+  {
+    "id": "1c5df49db534",
+    "title": "Konstfredag för vuxna",
+    "date": "2025-11-14",
+    "time": "13:00",
+    "location": "Eskilstuna konstmuseum",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.67d8bbfb19873749761212f"
+  },
+  {
+    "id": "b3184ca15546",
+    "title": "Stickcafé för unga",
+    "date": "2025-11-14",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa98134f"
+  },
+  {
+    "id": "f4780e7cb999",
+    "title": "Breeders' Crown med V75®",
+    "date": "2025-11-15",
+    "time": "12:30",
+    "location": "Sundbyholms travbana",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.71f9b44b197a1f8c2f072a56"
+  },
+  {
+    "id": "dce3dc0e49c4",
+    "title": "Exklusiv ölprovning",
+    "date": "2025-11-15",
+    "time": "14:00",
+    "location": "Eskilstuna Ölkultur",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb1221c"
+  },
+  {
+    "id": "6262d1286f47",
+    "title": "Urpremiär: Flöden - om smältande isar och hydrologiska tillstånd",
+    "date": "2025-11-15",
+    "time": "15:00",
+    "location": "Lokomotivet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.f61519f19807418cec3cb9"
+  },
+  {
+    "id": "012d06dc1990",
+    "title": "The Wedding Singer",
+    "date": "2025-11-15",
+    "time": "15:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.721cde5196f1233f7711830"
+  },
+  {
+    "id": "d9b296677fc4",
+    "title": "LiveQuiz",
+    "date": "2025-11-15",
+    "time": "18:00",
+    "location": "Scenkonst Sörmland",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5f31030119618bfccc87a698"
+  },
+  {
+    "id": "5e99f41ba844",
+    "title": "Eskilsgalan 2025",
+    "date": "2025-11-15",
+    "time": "18:00",
+    "location": "Elite Stadshotellet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.3f1cb93519324466c586ea09"
+  },
+  {
+    "id": "74b296573dd4",
+    "title": "Det kommer tigrar",
+    "date": "2025-11-16",
+    "time": "13:00",
+    "location": "Eskilstuna Teater, Lilla Scenen",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.48a08dc11984f66b2954fa76"
+  },
+  {
+    "id": "86c0060050c3",
+    "title": "Språkcafé",
+    "date": "2025-11-17",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb26a0"
+  },
+  {
+    "id": "114929be1670",
+    "title": "Ancrage",
+    "date": "2025-11-17",
+    "time": "19:00",
+    "location": "Eskilstuna Teater",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.5fbec62319686c701de7661"
+  },
+  {
+    "id": "c836d6bb90f7",
+    "title": "Bebisvisning",
+    "date": "2025-11-18",
+    "time": "09:30",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb1022d"
+  },
+  {
+    "id": "9e47990e87e9",
+    "title": "Öppna sinnen - öppna dörrar",
+    "date": "2025-11-19",
+    "time": "10:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.14c93595198c5ad230a29c07"
+  },
+  {
+    "id": "ca61fed58c21",
+    "title": "Läxhjälp",
+    "date": "2025-11-19",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.74dfd849198c5b951eb22e3"
+  },
+  {
+    "id": "91e416fa0d62",
+    "title": "Kreativa seniorer",
+    "date": "2025-11-20",
+    "time": "10:00",
+    "location": "Ebelingmuseet",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.4b46615d19873693c4718dcb"
+  },
+  {
+    "id": "ceea3f661097",
+    "title": "Filmstudion: Munken och geväret",
+    "date": "2025-11-20",
+    "time": "18:00",
+    "location": "Biostaden Eskilstuna",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.12bd0bd91984f5c611823635"
+  },
+  {
+    "id": "1ef3dbb5862c",
+    "title": "Stickcafé för unga",
+    "date": "2025-11-21",
+    "time": "15:00",
+    "location": "Stadsbiblioteket",
+    "url": "https://evenemang.eskilstuna.se/evenemangsguiden/evenemangsguiden/evenemang.4.48cbfd3a175c8680bba59cfd.html?id=5.7dd96bfa197a1d93fa981360"
   }
 ]
