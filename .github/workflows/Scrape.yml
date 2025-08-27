@@ -35,67 +35,15 @@ jobs:
       - name: Run scraper
         run: python fetch_events.py
 
-      # Bygg din befintliga HTML-lista (lämnar detta block orört)
-      - name: Build HTML list
-        run: |
-          python3 - <<'PY'
-          import json
-          import datetime
-          import pathlib
-          import subprocess
-          import jinja2
-          import zoneinfo
+      - name: Build HTML list (index.html)
+        run: python build_html_list.py
 
-          tz = zoneinfo.ZoneInfo("Europe/Stockholm")
-          now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M")
-
-          today = datetime.date.today().isoformat()
-          yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
-
-          data_dir = pathlib.Path("data")
-          cur_file = data_dir / f"events_{today}.json"
-
-          events = json.load(cur_file.open(encoding="utf-8"))
-
-          try:
-              prev_raw = subprocess.check_output(
-                  ["git", "show", f"HEAD:data/events_{today}.json"],
-                  text=True
-              )
-              prev_ids = {e["id"] for e in json.loads(prev_raw)}
-          except subprocess.CalledProcessError:
-              prev_file = data_dir / f"events_{yesterday}.json"
-              if prev_file.exists():
-                  prev_ids = {e["id"] for e in json.load(prev_file.open(encoding="utf-8"))}
-              else:
-                  prev_ids = set()
-
-          for ev in events:
-              ev["new"] = ev["id"] not in prev_ids
-
-          tpl = jinja2.Environment(
-              loader=jinja2.FileSystemLoader("."),
-              autoescape=True
-          ).get_template("template.html")
-          html = tpl.render(
-              STAMP_TIME=now,
-              COUNT=len(events),
-              events=events
-          )
-
-          pub = pathlib.Path("public"); pub.mkdir(exist_ok=True)
-          pub.joinpath("index.html").write_text(html, encoding="utf-8")
-          PY
-
-      # NYTT: uppdatera first_seen.json (kör skript i repo-rooten)
       - name: Update first_seen registry
         run: python update_first_seen.py
 
-      # NYTT: bygg yesterday.html och publicera first_seen.json (kör skript i repo-rooten)
       - name: Build yesterday overview
         run: python build_yesterday.py
 
-      # Liten debug så vi ser att filer finns innan commit/deploy
       - name: Debug: list public and data
         run: |
           echo "--- public ---"
