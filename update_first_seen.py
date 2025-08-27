@@ -4,20 +4,24 @@ import json, glob, datetime, pathlib, hashlib, sys
 DATA = pathlib.Path("data")
 DATA.mkdir(parents=True, exist_ok=True)
 
+# Hitta senaste events_YYYY-MM-DD.json
 files = sorted(glob.glob("data/events_*.json"))
 if not files:
     print("No events file found, skipping.")
     sys.exit(0)
 latest = pathlib.Path(files[-1])
 
+# Läs/Initiera first_seen.json
 first_seen_path = DATA / "first_seen.json"
 if first_seen_path.exists():
     first_seen = json.loads(first_seen_path.read_text(encoding="utf-8"))
 else:
     first_seen = {}
 
+# Läs dagens event-lista
 events = json.loads(latest.read_text(encoding="utf-8"))
 
+# Stabilt ID: använd e['id'] om den finns, annars hash av nyckelfält
 def eid(e):
     if e.get("id"):
         return str(e["id"])
@@ -46,6 +50,7 @@ for e in events:
         }
         added += 1
 
+# Spara uppdaterad logg
 first_seen_path.write_text(
     json.dumps(first_seen, ensure_ascii=False, indent=2),
     encoding="utf-8"
