@@ -9,11 +9,13 @@ if not data_path.exists():
     print("No first_seen.json yet; skipping publish.")
     sys.exit(0)
 
+# Kopiera JSON till public/
 public.joinpath("first_seen.json").write_text(
     data_path.read_text(encoding="utf-8"),
     encoding="utf-8"
 )
 
+# Bygg enkel yesterday.html
 data = json.loads(data_path.read_text(encoding="utf-8"))
 y = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
 items = [v for v in data.values() if v.get("first_seen") == y]
