@@ -8,15 +8,14 @@ permissions:
 on:
   schedule:
     # Vintertid (CET = UTC+1): 06–20 lokal -> 05–19 UTC (jan, feb, nov, dec)
-    - cron: '0 5-19 * 1,2,11,12 1-5'
+    - cron: "0 5-19 * 1,2,11,12 1-5"
     # Sommartid (CEST = UTC+2): 06–20 lokal -> 04–18 UTC (mar–okt)
-    - cron: '0 4-18 * 3-10 1-5'
+    - cron: "0 4-18 * 3-10 1-5"
   workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,7 +23,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -35,7 +34,7 @@ jobs:
       - name: Run scraper
         run: python fetch_events.py
 
-      - name: Build HTML list (index.html)
+      - name: Build HTML list
         run: python build_html_list.py
 
       - name: Update first_seen registry
@@ -43,13 +42,6 @@ jobs:
 
       - name: Build yesterday overview
         run: python build_yesterday.py
-
-      - name: Debug: list public and data
-        run: |
-          echo "--- public ---"
-          ls -la public || true
-          echo "--- data ---"
-          ls -la data || true
 
       - name: Commit data
         run: |
@@ -68,5 +60,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          # Om din Pages är satt till main istället för gh-pages, lägg till:
-          # publish_branch: main
