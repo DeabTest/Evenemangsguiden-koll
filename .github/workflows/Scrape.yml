@@ -16,6 +16,11 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    env:
+      # Håll nya delar avstängda (kan sättas till 'true' senare)
+      ENABLE_FIRST_SEEN: "false"
+      PYTHONUNBUFFERED: "1"
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,19 +34,38 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+          # Säkerställ alla Playwright-beroenden på Ubuntu
+          npx playwright install-deps chromium
           playwright install chromium
 
       - name: Run scraper
-        run: python fetch_events.py
+        run: |
+          set -e
+          python fetch_events.py
 
-      - name: Build HTML list
+      - name: Sanity check (events file)
+        run: |
+          python sanity_check_events.py
+
+      - name: Build HTML list (index.html)
         run: python build_html_list.py
 
+      # --- Parkera first_seen tills vidare (påslås när skrapet är stabilt) ---
       - name: Update first_seen registry
+        if: env.ENABLE_FIRST_SEEN == 'true'
         run: python update_first_seen.py
 
       - name: Build yesterday overview
+        if: env.ENABLE_FIRST_SEEN == 'true'
         run: python build_yesterday.py
+      # ----------------------------------------------------------------------
+
+      - name: Debug: list public and data
+        run: |
+          echo "--- public ---"
+          ls -la public || true
+          echo "--- data ---"
+          ls -la data || true
 
       - name: Commit data
         run: |
@@ -60,3 +84,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          # Om din Pages är satt till main istället för gh-pages:
+          # publish_branch: main
